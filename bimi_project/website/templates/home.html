@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home | BiMi{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+<div class="container hero-grid">
+
+<div class="hero-left">
+
+<div class="badge">
+<p>Global Trade. Smarter Growth.</p>
+</div>
+
+<h1>
+Trade Smarter, Source Better - With Bimi Worldwide.
+</h1>
+
+<p class="desc">
+Discover the world’s best products to trade smarter, and reach global markets with confidence - because your journey to international success starts and succeeds with BIMI Worldwide by your side.
+</p>
+
+<a href="/about/" class="btn-cta">LEARN MORE →</a>
+
+</div>
+
+<div class="hero-right">
+<div class="video-wrapper">
+<video src="{% static 'videos/home-hero-1.mp4' %}" autoplay muted playsinline></video>
+</div>
+</div>
+
+</div>
+</section>
+
+<!--================section-3==================================-->
+<section class="full-image-section">
+    <img src="{% static "images/graph.png"%}" alt="Showcase Image">
+</section>
+
+<!--================section-3==================================-->
+<section class="products-section">
+
+<div class="container">
+
+<h2 class="products-title">
+Products We Have Proven <span>Experience In</span>
+</h2>
+
+
+<div class="products-slider">
+
+<div class="products-track">
+
+<div class="product-item">
+<i class="fa-solid fa-seedling"></i>
+<p>Agriculture</p>
+</div>
+
+<div class="product-item">
+<i class="fa-solid fa-couch"></i>
+<p>Furniture</p>
+</div>
+
+<div class="product-item">
+<i class="fa-solid fa-hand-holding-heart"></i>
+<p>Handicrafts</p>
+</div>
+
+<div class="product-item">
+<i class="fa-solid fa-rug"></i>
+<p>Rugs</p>
+</div>
+
+<div class="product-item">
+<i class="fa-solid fa-box"></i>
+<p>Packaging</p>
+</div>
+
+<div class="product-item">
+<i class="fa-solid fa-car-battery"></i>
+<p>Battery</p>
+</div>
+
+<!-- duplicate for infinite scroll -->
+
+<div class="product-item">
+<i class="fa-solid fa-seedling"></i>
+<p>Agriculture</p>
+</div>
+
+<div class="product-item">
+<i class="fa-solid fa-couch"></i>
+<p>Furniture</p>
+</div>
+
+<div class="product-item">
+<i class="fa-solid fa-hand-holding-heart"></i>
+<p>Handicrafts</p>
+</div>
+
+<div class="product-item">
+<i class="fa-solid fa-rug"></i>
+<p>Rugs</p>
+</div>
+
+<div class="product-item">
+<i class="fa-solid fa-box"></i>
+<p>Packaging</p>
+</div>
+
+<div class="product-item">
+<i class="fa-solid fa-car-battery"></i>
+<p>Battery</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!--===========client-section==============-->
+
+<section class="clients-section">
+  <div class="clients-container">
+
+    <div class="clients-head">
+      <h2 class="clients-title">
+        Trusted by <span>Global Partners</span>
+      </h2>
+      <p class="clients-subtitle">
+        Businesses worldwide rely on BIMI Worldwide for trusted sourcing,
+        logistics coordination, and seamless global trade execution.
+      </p>
+    </div>
+
+    <div class="clients-layout">
+      
+      <div class="clients-visual">
+        <div class="image-frame">
+          <img src="{% static 'images/handshake-1.png' %}" alt="Global Partnership">
+        </div>
+      </div>
+
+      <div class="clients-logos">
+
+        <div class="logos-row scroll-left">
+          <div class="logos-track">
+            <img src="{% static 'images/client-logo.png' %}" alt="Client">
+            <img src="{% static 'images/client-logo.png' %}" alt="Client">
+            <img src="{% static 'images/client-logo.png' %}" alt="Client">
+            <img src="{% static 'images/client-logo.png' %}" alt="Client">
+            <img src="{% static 'images/client-logo.png' %}" alt="Client">
+            <img src="{% static 'images/client-logo.png' %}" alt="Client">
+          </div>
+        </div>
+
+        <div class="logos-row scroll-right">
+          <div class="logos-track">
+            <img src="{% static 'images/client-logo.png' %}" alt="Client">
+            <img src="{% static 'images/client-logo.png' %}" alt="Client">
+            <img src="{% static 'images/client-logo.png' %}" alt="Client">
+            <img src="{% static 'images/client-logo.png' %}" alt="Client">
+            <img src="{% static 'images/client-logo.png' %}" alt="Client">
+            <img src="{% static 'images/client-logo.png' %}" alt="Client">
+          </div>
+        </div>
+
+        <div class="logos-row scroll-left">
+          <div class="logos-track">
+            <img src="{% static 'images/client-logo.png' %}" alt="Client">
+            <img src="{% static 'images/client-logo.png' %}" alt="Client">
+            <img src="{% static 'images/client-logo.png' %}" alt="Client">
+            <img src="{% static 'images/client-logo.png' %}" alt="Client">
+            <img src="{% static 'images/client-logo.png' %}" alt="Client">
+            <img src="{% static 'images/client-logo.png' %}" alt="Client">
+          </div>
+        </div>
+
+      </div> 
+
+    </div> 
+  </div>
+</section>
+
+
+<!--================Call To Action=====================-->
+
+<section class="premium-cta">
+  <div class="cta-container">
+    
+    <h2 class="cta-title">
+      Ready to Expand Your Global Trade Network?
+    </h2>
+
+    <p class="cta-subtitle">
+      Partner with BIMI Worldwide for seamless sourcing, trusted logistics,
+      and intelligent international trade solutions tailored to your business.
+    </p>
+
+    <div class="cta-actions">
+      <a href="#" class="cta-btn primary">Request a Call</a>
+      <a href="#" class="cta-btn outline">Explore Our Products</a>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

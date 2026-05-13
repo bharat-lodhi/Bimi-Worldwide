@@ -1,0 +1,187 @@
+{% extends 'custom_admin/dashboard.html' %}
+
+{% block content %}
+
+<div class="container py-5" style="max-width:700px;">
+
+    <div class="card shadow border-0">
+
+        <div class="card-body p-4">
+
+            <h3 class="mb-4">
+                Edit Category
+            </h3>
+
+            <form method="POST"
+                  enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Category Name
+                    </label>
+
+                    <input type="text"
+                           name="name"
+                           value="{{ category.name }}"
+                           class="form-control">
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Short Description
+                    </label>
+
+                    <textarea name="short_description"
+                              id="editor"
+                              class="form-control">{{ category.short_description }}</textarea>
+
+                </div>
+
+                <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+
+                <script>
+                ClassicEditor
+                    .create(document.querySelector('#editor'), {
+
+                        toolbar: [
+                            
+                            'heading',
+                            '|',
+                            'bold',
+                            'italic',
+                            'link',
+                            'bulletedList',
+                            'numberedList',
+                            '|',
+                            'insertTable',
+                            'blockQuote',
+                            'undo',
+                            'redo',
+                            '|',
+                            'htmlEmbed'
+                        ]
+
+                    })
+                    .then(editor => {
+
+                        editor.ui.view.editable.element.style.minHeight = '150px';
+
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+                </script>
+
+                <style>
+                .ck-editor__editable_inline {
+                    min-height: 150px !important;
+                }
+                </style>
+
+                <div class="mb-3">
+
+                    <img src="{{ category.image.url }}"
+                         class="img-fluid rounded mb-3"
+                         style="height:180px; object-fit:cover;">
+
+                    <input type="file"
+                           name="image"
+                           class="form-control">
+
+                </div>
+
+                <button type="submit"
+                        class="btn btn-dark w-100">
+                    Update Category
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+{% comment %} {% extends 'custom_admin/dashboard.html' %}
+
+{% block content %}
+
+<div class="container py-5" style="max-width:700px;">
+
+    <div class="card shadow border-0">
+
+        <div class="card-body p-4">
+
+            <h3 class="mb-4">
+                Edit Category
+            </h3>
+
+            <form method="POST"
+                  enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Category Name
+                    </label>
+
+                    <input type="text"
+                           name="name"
+                           value="{{ category.name }}"
+                           class="form-control">
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Short Description
+                    </label>
+
+                    <textarea name="short_description"
+                              class="form-control"
+                              rows="4">{{ category.short_description }}</textarea>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <img src="{{ category.image.url }}"
+                         class="img-fluid rounded mb-3"
+                         style="height:180px; object-fit:cover;">
+
+                    <input type="file"
+                           name="image"
+                           class="form-control">
+
+                </div>
+
+                <button type="submit"
+                        class="btn btn-dark w-100">
+                    Update Category
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %} {% endcomment %}

@@ -1,0 +1,92 @@
+{% extends 'custom_admin/dashboard.html' %}
+
+{% block content %}
+
+<div class="container mt-5" style="max-width:700px;">
+
+    <div class="card shadow border-0">
+        <div class="card-body">
+
+            <h3 class="mb-4">Add Category</h3>
+
+            <form method="POST" enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label>Name</label>
+                    <input type="text"
+                           name="name"
+                           class="form-control">
+                </div>
+
+
+<div class="mb-3">
+    <label>Short Description</label>
+
+    <textarea name="short_description"
+              id="editor"
+              class="form-control"></textarea>
+</div>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+
+<script>
+ClassicEditor
+    .create(document.querySelector('#editor'), {
+
+        toolbar: [
+            
+            'heading',
+            '|',
+            'bold',
+            'italic',
+            'link',
+            'bulletedList',
+            'numberedList',
+            '|',
+            'insertTable',
+            'blockQuote',
+            'undo',
+            'redo',
+            '|',
+            'htmlEmbed'
+        ]
+
+    })
+    .then(editor => {
+
+        editor.ui.view.editable.element.style.minHeight = '150px';
+
+    })
+    .catch(error => {
+        console.error(error);
+    });
+</script>
+
+<style>
+.ck-editor__editable_inline {
+    min-height: 150px !important;
+}
+</style>
+
+                <div class="mb-3">
+                    <label>Image</label>
+                    <input type="file"
+                           name="image"
+                           class="form-control">
+                </div>
+
+                <button type="submit"
+                        class="btn btn-dark w-100">
+                    Add Category
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,97 @@
+{% load static %}
+
+<header class="header">
+
+<div class="container nav">
+
+<div class="logo">
+
+<img src="{% static 'images/logo.png' %}" class="logo-default">
+
+<img src="{% static 'images/logo-2.png' %}" class="logo-scroll">
+
+</div>
+
+<nav class="menu">
+
+<a href="{% url 'home' %}" class="active">Home</a>
+
+<a href="{% url 'about' %}">About Us</a>
+
+<a href="{% url 'products_category' %}">Products</a>
+
+<a href="{% url 'blog_list' %}">Blogs</a>
+
+<a href="#">Contact</a>
+
+</nav>
+
+<a href="#" class="btn-demo" id="openPopup">Request Call</a>
+
+<div class="nav-toggle" id="navToggle">
+
+<span></span>
+
+</div>
+
+</div>
+
+<nav class="mobile-menu" id="mobileMenu">
+
+<b><a href="{% url 'home' %}" class="active">Home</a></b>
+
+<b><a href="{% url 'about' %}">About Us</a></b>
+
+<b><a href="{% url 'products_category' %}">Products</a></b>
+
+<b><a href="{% url 'blog_list' %}">Blogs</a></b>
+
+<b><a href="#">Contact</a></b>
+
+</nav>
+
+</header>
+
+
+<!-- Popup html-->
+ <div class="popup-overlay" id="popupForm">
+
+<div class="popup-box">
+
+<span class="popup-close" id="closePopup">&times;</span>
+
+<h3>Request a Call</h3>
+
+<form>
+
+<input type="text" placeholder="Your Name" required>
+
+<input type="email" placeholder="Email Address" required>
+
+<input type="tel" placeholder="Contact Number" required>
+
+<input type="text" placeholder="Company Name">
+
+<select required>
+
+<option value="">Product Interested In</option>
+<option>Agriculture</option>
+<option>Furniture</option>
+<option>Handicrafts</option>
+<option>Rugs</option>
+<option>Packaging</option>
+<option>Battery</option>
+
+</select>
+
+<input type="text" placeholder="Suitable Time">
+
+<button type="submit">Submit Request</button>
+
+</form>
+
+</div>
+
+</div>
+
+<!-- ================= HEADER / NAVBAR END ================= -->

@@ -1,0 +1,306 @@
+{% extends 'custom_admin/dashboard.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid py-4 px-4">
+
+    <!-- DJANGO MESSAGES -->
+    {% if messages %}
+    <div class="row mb-4">
+        <div class="col-12">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show border-0 shadow-sm rounded-3" role="alert">
+                <i class="fas {% if message.tags == 'success' %}fa-check-circle{% else %}fa-exclamation-circle{% endif %} me-2"></i>
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- TOP HEADER & BREADCRUMBS -->
+    <div class="row align-items-center g-3 mb-5">
+        <div class="col-md-6">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-2">
+                    <li class="breadcrumb-item"><a href="javascript:history.back()" class="text-decoration-none text-primary">Subcategories</a></li>
+                    <li class="breadcrumb-item active">{{ subcategory.name }}</li>
+                </ol>
+            </nav>
+            <h2 class="fw-bold text-dark mb-1">{{ subcategory.name }} Products</h2>
+            <p class="text-muted small mb-0">Under Category: <span class="badge bg-light text-dark border">{{ subcategory.category.name }}</span></p>
+        </div>
+        
+        <div class="col-md-6 text-md-end">
+            <a href="{% url 'add_subcategory' %}?real_sub={{ subcategory.id }}" class="btn btn-primary px-4 py-2 rounded-3 shadow-sm fw-bold">
+                <i class="fas fa-plus me-1"></i> Add Product
+            </a>
+        </div>
+    </div>
+
+    <!-- SEARCH AREA -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <form method="GET" action="{% url 'real_subcategory_products' subcategory.id %}" class="input-group shadow-sm rounded-3 overflow-hidden border">
+                <span class="input-group-text bg-white border-0"><i class="fas fa-search text-muted"></i></span>
+                <input type="text" name="search" class="form-control border-0 py-2" 
+                       placeholder="Search products in this list..." value="{{ search|default:'' }}">
+                <button class="btn btn-dark px-4" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- SEARCH RESULT INFO -->
+    {% if search %}
+    <div class="mb-4 d-flex align-items-center justify-content-between bg-white p-3 rounded-3 border shadow-sm">
+        <span class="text-muted">Showing results for: <strong class="text-dark">"{{ search }}"</strong> ({{ page_obj.paginator.count }} found)</span>
+        <a href="{% url 'real_subcategory_products' subcategory.id %}" class="btn btn-sm btn-outline-danger rounded-pill px-3">Clear Search ✕</a>
+    </div>
+    {% endif %}
+
+    <!-- PRODUCTS GRID -->
+    <div class="row g-4">
+        {% for product in page_obj %}
+        <div class="col-xl-3 col-lg-4 col-md-6">
+            <div class="category-card shadow-sm border-0 h-100 bg-white position-relative overflow-hidden d-flex flex-column">
+                
+                <!-- Action Dropdown -->
+                <div class="dropdown position-absolute top-0 end-0 m-3" style="z-index: 5;">
+                    <button class="btn btn-white btn-sm rounded-circle shadow" type="button" data-bs-toggle="dropdown" style="width:32px; height:32px; background: white;">
+                        <i class="fas fa-ellipsis-v text-dark"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg">
+                        <li><a class="dropdown-item py-2" href="{% url 'edit_subcategory' product.id %}"><i class="fas fa-edit me-2 text-primary"></i> Edit Product</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item py-2 text-danger" href="{% url 'delete_subcategory' product.id %}" onclick="return confirm('Delete this product?')"><i class="fas fa-trash me-2"></i> Remove</a></li>
+                    </ul>
+                </div>
+
+                <!-- Product Image -->
+                <div class="card-img-wrapper">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    {% else %}
+                        <div class="img-placeholder bg-light d-flex align-items-center justify-content-center h-100">
+                            <i class="fas fa-box fa-3x text-light opacity-50"></i>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Card Body -->
+                <div class="card-body p-4 d-flex flex-column">
+                    <h5 class="fw-bold text-dark mb-2">{{ product.name|truncatechars:35 }}</h5>
+                    <div class="text-muted small mb-4 flex-grow-1">
+                        {{ product.short_description|striptags|truncatechars:100 }}
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <div class="bg-white p-5 rounded-4 shadow-sm border mx-auto" style="max-width: 500px;">
+                <i class="fas fa-box-open fa-4x text-light mb-3"></i>
+                <h4 class="text-muted fw-bold">No Products Found</h4>
+                <p class="text-muted small">This list is currently empty. Add products to populate this subcategory.</p>
+                <a href="{% url 'add_subcategory' %}?real_sub={{ subcategory.id }}" class="btn btn-primary px-4 mt-2">Add New Product</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- PAGINATION -->
+    {% if page_obj.has_other_pages %}
+    <nav class="mt-5">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li class="page-item mx-1">
+                <a class="page-link border-0 shadow-sm rounded-3 text-dark" href="?page={{ page_obj.previous_page_number }}{% if search %}&search={{ search }}{% endif %}">
+                    <i class="fas fa-chevron-left text-primary"></i>
+                </a>
+            </li>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                <li class="page-item mx-1"><span class="page-link active border-0 shadow-sm rounded-3 px-3 fw-bold">{{ num }}</span></li>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <li class="page-item mx-1">
+                    <a class="page-link border-0 shadow-sm rounded-3 px-3 text-dark" href="?page={{ num }}{% if search %}&search={{ search }}{% endif %}">{{ num }}</a>
+                </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <li class="page-item mx-1">
+                <a class="page-link border-0 shadow-sm rounded-3 text-dark" href="?page={{ page_obj.next_page_number }}{% if search %}&search={{ search }}{% endif %}">
+                    <i class="fas fa-chevron-right text-primary"></i>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+
+</div>
+
+<style>
+    :root { --primary-color: #D6882A; }
+    body { background-color: #f4f7f6; }
+    
+    .breadcrumb-item a { color: var(--primary-color); }
+
+    .category-card {
+        border-radius: 20px;
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        border: 1px solid rgba(0,0,0,0.02);
+    }
+    
+    .category-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.08) !important;
+    }
+
+    .card-img-wrapper {
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+        background: #f8f9fa;
+    }
+
+    .card-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+
+    .category-card:hover .card-img-wrapper img {
+        transform: scale(1.1);
+    }
+
+    .btn-primary { background: var(--primary-color) !important; border: none !important; color: white !important; }
+    .btn-primary:hover { background: #b46f1e !important; }
+    .btn-outline-primary { border-color: var(--primary-color); color: var(--primary-color); }
+    .btn-outline-primary:hover { background: var(--primary-color); color: white; }
+
+    .page-link.active { background-color: var(--primary-color) !important; color: white !important; }
+    .alert { border-left: 5px solid; background: white; }
+</style>
+{% endblock %}
+
+
+
+
+{% comment %} <!-- ===================================================== -->
+<!-- real_subcategory_products.html -->
+<!-- ===================================================== -->
+
+{% extends 'custom_admin/dashboard.html' %}
+
+{% block content %}
+
+<div class="container py-4">
+
+    <div class="mb-5">
+
+        <h2 class="fw-bold">
+
+            {{ subcategory.name }} Products
+
+        </h2>
+
+        <p class="text-muted">
+
+            {{ subcategory.category.name }}
+
+        </p>
+
+    </div>
+
+    <!-- SEARCH -->
+    <form method="GET" class="mb-5">
+
+        <div class="input-group shadow-sm rounded-4 overflow-hidden">
+
+            <input type="text"
+                   name="search"
+                   value="{{ search }}"
+                   class="form-control border-0 py-3 px-4"
+                   placeholder="Search Products">
+
+            <button type="submit"
+                    class="btn btn-dark px-4">
+
+                Search
+
+            </button>
+
+        </div>
+
+    </form>
+
+    <!-- PRODUCTS -->
+    <div class="row g-4">
+
+        {% for product in page_obj %}
+
+        <div class="col-md-4">
+
+            <div class="card border-0 shadow-sm h-100 rounded-4 overflow-hidden">
+
+                {% if product.image %}
+
+                <img src="{{ product.image.url }}"
+                     class="w-100"
+                     style="height:240px; object-fit:cover;">
+
+                {% endif %}
+
+                <div class="card-body p-4 d-flex flex-column">
+
+                    <h4 class="fw-bold mb-3">
+
+                        {{ product.name }}
+
+                    </h4>
+
+                    <div class="text-muted mb-4 flex-grow-1">
+
+                        {{ product.short_description|safe|truncatechars_html:120 }}
+
+                    </div>
+
+                    <div class="d-flex gap-2">
+
+                        <a href="{% url 'edit_subcategory' product.id %}"
+                           class="btn btn-primary btn-sm w-100">
+
+                            Edit
+
+                        </a>
+
+                        <a href="{% url 'delete_subcategory' product.id %}"
+                           class="btn btn-danger btn-sm w-100">
+
+                            Delete
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %} {% endcomment %}

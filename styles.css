@@ -1,0 +1,1348 @@
+/* ================= DESIGN SYSTEM ================= */
+
+:root {
+    --orange: #D6882A;
+    --blue: #1f4fff;
+    --ink: #1a1a2e;
+    --muted: #313030;
+    --dark: #0b0b0b;
+    --white: #ffffff;
+    --font: 'Inter', system-ui, sans-serif;
+}
+
+
+/* ================= RESET ================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+body {
+    background: var(--orange);
+    font-family: var(--font);
+    color: var(--ink);
+    line-height: 1.6;
+}
+
+
+/* ================= LAYOUT ================= */
+
+.container {
+    width: 90%;
+    max-width: 1250px;
+    margin: auto
+}
+
+
+/* ================= HEADER ================= */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 99;
+    height: 72px;
+    background: var(--orange);
+    transition: background .3s ease, box-shadow .3s ease;
+}
+
+.header.scrolled {
+    background: var(--white);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, .12);
+}
+
+.nav {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+/* LOGO SWITCH */
+
+.logo {
+    position: relative;
+}
+
+.logo img {
+    height: 52px;
+    transition: opacity .3s ease;
+}
+
+.logo-scroll {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.header.scrolled .logo-default {
+    opacity: 0
+}
+
+.header.scrolled .logo-scroll {
+    opacity: 1
+}
+
+
+/* MENU */
+
+.menu a {
+    margin: 0 16px;
+    text-decoration: none;
+    color: var(--muted);
+    position: relative;
+    font-weight: 600;
+}
+
+.menu a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 2px;
+    background: var(--ink);
+    transition: .25s;
+}
+
+.menu a:hover::after,
+.menu a.active::after {
+    width: 100%
+}
+
+.btn-demo {
+    background: #1a0746;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+
+/* ================= MOBILE TOGGLE (PRO) ================= */
+
+.nav-toggle {
+    display: none;
+    /* desktop hidden */
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.25s ease;
+}
+
+.nav-toggle:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.nav-toggle span {
+    position: relative;
+    width: 22px;
+    height: 2px;
+    background: var(--ink);
+    transition: all 0.3s ease;
+}
+
+.nav-toggle span::before,
+.nav-toggle span::after {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 2px;
+    background: var(--ink);
+    transition: all 0.3s ease;
+}
+
+.nav-toggle span::before {
+    top: -7px;
+}
+
+.nav-toggle span::after {
+    top: 7px;
+}
+
+
+/* ACTIVE (X icon) */
+
+.nav-toggle.active span {
+    background: transparent;
+}
+
+.nav-toggle.active span::before {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+.nav-toggle.active span::after {
+    transform: rotate(-45deg);
+    top: 0;
+}
+
+
+/* ================= MOBILE MENU ================= */
+
+.mobile-menu {
+    position: absolute;
+    top: 72px;
+    /* header height */
+    left: 0;
+    width: 100%;
+    background: var(--white);
+    padding: 10px 20px;
+    display: block;
+    transform: translateY(-20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 98;
+}
+
+.mobile-menu a {
+    display: block;
+    padding: 14px 0;
+    text-decoration: none;
+    color: var(--ink);
+    font-weight: 500;
+    border-bottom: 1px solid #eee;
+}
+
+
+/* OPEN STATE */
+
+.mobile-menu.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+/* =================HOME- HERO ================= */
+
+.hero {
+    padding: 60px 0 83px;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    /* gap: -120px; */
+    align-items: center;
+}
+
+
+/* LEFT CONTENT */
+
+.hero-left {
+    margin-left: 80px;
+    /* desktop left offset */
+}
+
+.hero-left h1 {
+    font-size: 3rem;
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -.02em;
+    position: relative;
+    z-index: 10;
+}
+
+.desc {
+    margin: 20px 0 34px;
+    max-width: 400px;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--ink);
+}
+
+
+/* HERO VIDEO */
+
+.video-wrapper {
+    width: 500px;
+    height: 420px;
+    /* border-radius: 160px 160px 40px 40px; */
+    /* overflow: hidden; */
+    margin-left: -150px;
+    inset: 0;
+    /* top:0 left:0 right:0 bottom:0 */
+    z-index: 0;
+    /* 🔥 sabse peeche */
+    pointer-events: none;
+}
+
+.video-wrapper video {
+    width: 150%;
+    height: 121.5%;
+    /* object-fit: cover; */
+}
+
+@media(max-width:900px) {
+    /* hide desktop nav */
+    .menu,
+    .btn-demo {
+        display: none;
+    }
+    .nav-toggle {
+        display: flex;
+    }
+    /* ================= HOME HERO FIX ================= */
+    .hero {
+        padding: 40px 0 70px;
+    }
+    .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+    }
+    .hero-left {
+        margin-left: 0;
+        /* 🔥 remove desktop offset */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .hero-left h1 {
+        font-size: 2.1rem;
+        /* responsive heading */
+        line-height: 1.15;
+        max-width: 90%;
+    }
+    .hero-left .desc {
+        max-width: 90%;
+        margin: 16px auto 28px;
+        font-size: 0.95rem;
+    }
+    .hero-left .badge {
+        justify-content: center;
+        margin-bottom: 18px;
+    }
+    /* HERO VIDEO */
+    .video-wrapper {
+        width: 260px;
+        height: 260px;
+        margin: 0 auto;
+    }
+    .video-wrapper video {
+        width: 120%;
+        height: 172%;
+        /* object-fit: cover; */
+    }
+    /* ================= FOOTER ================= */
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+    }
+}
+
+
+/* ================= ABOUT HERO SECTION ================= */
+
+.about-hero {
+    background: var(--orange);
+    /* padding: 120px 0; */
+}
+
+.about-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    /* gap: 80px; */
+    align-items: center;
+}
+
+
+/* LEFT IMAGE FRAME */
+
+.about-hero-media {
+    display: flex;
+    justify-content: center;
+}
+
+.image-frame {
+    width: 420px;
+    height: 520px;
+    border-radius: 180px 180px 40px 40px;
+    overflow: hidden;
+    /* background: #f3f3f3; */
+}
+
+.image-frame img {
+    width: 100%;
+    height: 150%;
+    object-fit: cover;
+}
+
+
+/* RIGHT CONTENT */
+
+.about-hero-content h1 {
+    font-size: 3.2rem;
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin-bottom: 22px;
+}
+
+.about-hero-content .desc {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    max-width: 560px;
+    margin-bottom: 18px;
+}
+
+
+/* ================================================= */
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+    .about-hero {
+        padding: 80px 0;
+    }
+    .about-hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 50px;
+    }
+    .image-frame {
+        width: 260px;
+        height: 320px;
+    }
+    .about-hero-content h1 {
+        font-size: 2.1rem;
+    }
+    .about-hero-content .desc {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+
+/* ================= COMPANY PRESENCE SECTION ================= */
+
+.company-presence {
+    background: var(--white);
+    padding: 110px 0;
+}
+
+.presence-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 80px;
+    align-items: flex-start;
+    /* margin-left: 90px; */
+}
+
+
+/* LEFT CONTENT */
+
+.presence-content h2 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 22px;
+    color: #1a1a2e;
+}
+
+.presence-content .desc {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    max-width: 560px;
+    margin-bottom: 18px;
+}
+
+
+/* RIGHT STAT CARDS */
+
+.presence-stats {
+    display: grid;
+    gap: 22px;
+}
+
+.stat-card {
+    background: var(--orange);
+    padding: 26px 28px;
+    border-radius: 16px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.06);
+}
+
+.stat-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--ink);
+}
+
+.stat-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--muted);
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+    .company-presence {
+        padding: 80px 0;
+        color: var(--ink);
+    }
+    .presence-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        text-align: center;
+    }
+    .presence-content .desc {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .presence-stats {
+        max-width: 420px;
+        margin: auto;
+    }
+}
+
+
+/* ================= OUR APPROACH SECTION ================= */
+
+.our-approach {
+    background: var(--orange);
+    padding: 90px 0;
+}
+
+.approach-head {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 70px;
+}
+
+.approach-head h2 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+}
+
+.approach-intro {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--muted);
+}
+
+
+/* Cards grid */
+
+.approach-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+}
+
+
+/* Single card */
+
+.approach-card {
+    background: var(--white);
+    padding: 36px 32px;
+    border-radius: 18px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+}
+
+.approach-card h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--ink);
+}
+
+.approach-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--muted);
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+    .our-approach {
+        padding: 80px 0;
+    }
+    .approach-head h2 {
+        font-size: 2rem;
+    }
+    .approach-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+    .approach-card {
+        max-width: 420px;
+        margin: 0 auto;
+        text-align: center;
+    }
+}
+
+
+/* -------------------- */
+
+
+/* ================= FOOTER ================= */
+
+.footer {
+    background: var(--dark);
+    color: #cfcfcf;
+    padding: 80px 0 40px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 50px;
+    align-items: flex-start;
+    /* 🔥 IMPORTANT */
+}
+
+
+/* .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 40px;
+} */
+
+
+/* Brand column */
+
+.footer .brand {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.footer .brand .logo img {
+    height: 44px;
+    width: auto;
+}
+
+
+/* Headings */
+
+.footer h4 {
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+
+/* Links */
+
+.footer .col a {
+    display: block;
+    color: #bdbdbd;
+    font-size: 0.9rem;
+    text-decoration: none;
+    margin-bottom: 10px;
+    /* proper vertical spacing */
+    transition: color 0.2s ease;
+}
+
+.footer .col a:hover {
+    color: #ffffff;
+}
+
+
+/* Bottom line */
+
+.footer .bottom {
+    margin-top: 50px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    font-size: 0.85rem;
+    color: #9a9a9a;
+}
+
+@media (max-width: 900px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+    }
+    .footer .brand {
+        align-items: center;
+    }
+    .footer .brand p {
+        max-width: 320px;
+        margin: 0 auto;
+    }
+}
+
+
+/* ================= PRODUCTS HERO SECTION ================= */
+
+
+/* ================= PRODUCTS HERO SECTION ================= */
+
+.products-hero {
+    background: var(--orange);
+    padding: 60px 0;
+}
+
+
+/* ================= DESKTOP ================= */
+
+.products-hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    margin-left: 130px;
+    /* desktop offset */
+}
+
+
+/* ================= TABLET ================= */
+
+@media (max-width: 1024px) {
+    .products-hero-grid {
+        margin-left: 90px;
+        /* tablet offset */
+    }
+}
+
+
+/* ================= LEFT CONTENT ================= */
+
+.products-hero-content h1 {
+    font-size: 3.2rem;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 22px;
+}
+
+.products-hero-content .desc {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    max-width: 520px;
+}
+
+
+/* ================= RIGHT IMAGE FRAME ================= */
+
+.products-hero-visual {
+    display: flex;
+    justify-content: center;
+}
+
+.products-frame {
+    width: 420px;
+    height: 420px;
+    border-radius: 160px 160px 160px 160px;
+    overflow: hidden;
+    background: var(--white);
+}
+
+.products-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 900px) {
+    .products-hero {
+        padding: 80px 0;
+    }
+    .products-hero-grid {
+        grid-template-columns: 1fr;
+        /* single column */
+        margin-left: auto;
+        /* remove offset */
+        justify-items: center;
+        /* 🔥 real center */
+        text-align: center;
+        gap: 50px;
+    }
+    .products-hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .products-hero-content h1 {
+        font-size: 2.1rem;
+        line-height: 1.15;
+    }
+    .products-hero-content .desc {
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 0.95rem;
+    }
+    .products-frame {
+        width: 260px;
+        height: 260px;
+        border-radius: 140px 140px 40px 40px;
+    }
+}
+
+
+/* ================= PRODUCTS CATEGORIES SECTION ================= */
+
+.product-categories {
+    background: var(--white);
+    padding: 120px 0;
+}
+
+
+/* Section header */
+
+.section-head {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 70px;
+}
+
+.section-head h2 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.section-head p {
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+
+/* Grid */
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+
+/* Card */
+
+.category-card {
+    background: var(--orange);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Image */
+
+.category-image {
+    height: 220px;
+    overflow: hidden;
+    background: #D4D4D4;
+}
+
+.category-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .4s ease;
+}
+
+.category-card:hover .category-image img {
+    transform: scale(1.06);
+}
+
+
+/* Content */
+
+.category-content {
+    padding: 28px 26px;
+}
+
+.category-content h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.category-content p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 18px;
+    color: var(--ink);
+}
+
+
+/* Button */
+
+.btn-outline {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all .25s ease;
+}
+
+.btn-outline:hover {
+    background: var(--ink);
+    color: var(--white);
+}
+
+.btn-cta {
+    display: inline-block;
+    padding: 12px 30px;
+    background: transparent;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid #ffffff;
+    border-radius: 6px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* Hover Effect */
+
+.btn-cta:hover {
+    background: #ffffff;
+    color: #000000;
+    transform: translateY(-3px);
+}
+
+
+/* ================= ABOUT PAGE ENHANCEMENT ================= */
+
+
+/* Global spacing fix */
+
+.company-presence {
+    padding: 110px 0;
+}
+
+
+/* Paragraph refinement */
+
+.company-presence .desc {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    max-width: 850px;
+    margin: 0 auto 22px auto;
+    color: #333;
+}
+
+
+/* Section heading refinement */
+
+.company-presence h2 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+    text-align: center;
+    letter-spacing: -0.02em;
+}
+
+
+/* Philosophy list spacing */
+
+.company-presence strong {
+    font-weight: 600;
+    color: #000;
+}
+
+
+/* Tagline highlight block */
+
+.company-presence h2:last-child {
+    margin-top: 60px;
+    padding: 40px;
+    background: #D6882A;
+    color: #ffffff;
+    border-radius: 18px;
+    font-size: 1.8rem;
+    line-height: 1.4;
+}
+
+
+/* ================= INTRO SECTION IMPROVEMENT ================= */
+
+.company-presence:first-of-type {
+    background: #ffffff;
+}
+
+
+/* ================= EXPERTISE CARDS IMPROVEMENT ================= */
+
+.our-approach {
+    padding: 120px 0;
+}
+
+.approach-head h2 {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.approach-card {
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.approach-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ================= HERO REFINEMENT ================= */
+
+.about-hero {
+    /* Top: 100px | Right: 0 | Bottom: 0 | Left: 0 */
+    padding: 60px 0 0 0;
+}
+
+
+/* .about-hero-content h1 {
+    font-size: 3.2rem;
+    font-weight: 600;
+    line-height: 1.1;
+} */
+
+.badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: #ffffff;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 18px;
+}
+
+
+/* ================= RESPONSIVE IMPROVEMENTS ================= */
+
+@media (max-width: 900px) {
+    .company-presence {
+        padding: 80px 0;
+    }
+    .company-presence h2 {
+        font-size: 1.8rem;
+    }
+    .company-presence .desc {
+        font-size: 0.95rem;
+        padding: 0 20px;
+    }
+    .company-presence h2:last-child {
+        font-size: 1.4rem;
+        padding: 30px 20px;
+    }
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1024px) {
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .product-categories {
+        padding: 80px 0;
+    }
+    .section-head h2 {
+        font-size: 2rem;
+    }
+    .categories-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .category-card {
+        max-width: 420px;
+        margin: 0 auto;
+    }
+}
+
+
+/* ================= RESPONSIVE all pages ================= */
+
+@media(max-width:900px) {
+    .menu,
+    .btn-demo {
+        display: none
+    }
+    .nav-toggle {
+        display: flex;
+    }
+    .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .hero-left {
+        margin-left: 0;
+    }
+    .hero-left h1 {
+        font-size: 2.1rem;
+    }
+    .video-wrapper {
+        width: 260px;
+        height: 260px;
+        margin: auto;
+    }
+}
+
+
+/* ==================================== */
+
+
+/* ================= ABOUT PAGE REFINEMENTS ================= */
+
+
+/* Hero Adjustments */
+
+
+/* .about-hero-content h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 15px;
+    color: var(--ink);
+} */
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.8);
+    max-width: 500px;
+    font-weight: 500;
+}
+
+
+/* Intro Section */
+
+.company-intro {
+    background: var(--white);
+    padding: 70px 0 30px 0;
+}
+
+.intro-box {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.main-desc {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: var(--ink);
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.highlight-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.h-item {
+    background: #fdf2e3;
+    padding: 15px 25px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    border: 1px solid var(--orange);
+}
+
+
+/* Expertise Cards (Approach Card Update) */
+
+.approach-card {
+    position: relative;
+    padding-top: 50px !important;
+}
+
+.card-number {
+    position: absolute;
+    top: 20px;
+    left: 32px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--orange);
+    letter-spacing: 2px;
+}
+
+
+/* Philosophy Section */
+
+.philosophy {
+    background: var(--white);
+    padding: 100px 0;
+}
+
+.philosophy-wrapper {
+    background: var(--ink);
+    color: var(--white);
+    padding: 80px 40px;
+    border-radius: 40px;
+    text-align: center;
+}
+
+.philosophy-wrapper h2 {
+    margin-bottom: 60px;
+    font-size: 2.5rem;
+    color: var(--orange);
+}
+
+.philo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-bottom: 80px;
+}
+
+.philo-item h4 {
+    font-size: 1.4rem;
+    color: var(--white);
+    margin-bottom: 15px;
+}
+
+.philo-item p {
+    color: #b0b0b0;
+    font-size: 0.95rem;
+}
+
+.closing-statement {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 50px;
+}
+
+.closing-statement h3 {
+    font-size: 1.8rem;
+    background: linear-gradient(90deg, #D6882A, #ffcc8e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+/* Mobile Responsive */
+
+@media (max-width: 900px) {
+    .philo-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .philosophy-wrapper {
+        padding: 50px 20px;
+    }
+    .main-desc {
+        font-size: 1.1rem;
+    }
+}
+
+
+/* ============================================================== */
+
+
+/* Custom Additions for the Content Flow */
+
+.sub-desc {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    font-size: 1.1rem;
+    color: var(--muted);
+}
+
+.architects-callout {
+    padding: 60px 0;
+    background: #fff;
+}
+
+.dark-card {
+    background: var(--ink);
+    color: #fff;
+    padding: 60px;
+    border-radius: 30px;
+    text-align: center;
+}
+
+.dark-card h2 {
+    font-size: 2rem;
+    margin-bottom: 25px;
+    color: var(--orange);
+    line-height: 1.4;
+}
+
+.dark-card p {
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0.9;
+    line-height: 1.8;
+}
+
+.dynamics {
+    padding: 80px 0;
+    background: #f9f9f9;
+}
+
+.dynamics-content {
+    max-width: 850px;
+    margin: 0 auto;
+    text-align: center;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--ink);
+    border-left: 4px solid var(--orange);
+    padding-left: 30px;
+}
+
+.closing-text {
+    margin: 60px auto;
+    max-width: 800px;
+    text-align: center;
+}
+
+.closing-text p {
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #bdbdbd;
+    /* Light text for dark background */
+}
+
+
+/* Ensure cards in grid have equal height and clean alignment */
+
+.approach-card h3 {
+    font-size: 1rem;
+    line-height: 1.4;
+    color: var(--ink);
+}
+
+
+/* Animation for cards */
+
+.approach-card {
+    transition: all 0.3s ease;
+}
+
+.approach-card:hover {
+    transform: translateY(-10px);
+    border-bottom: 3px solid var(--orange);
+}

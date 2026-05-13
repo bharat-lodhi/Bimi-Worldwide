@@ -1,0 +1,151 @@
+/* ================= DESIGN SYSTEM ================= */
+
+:root {
+    --orange: #D6882A;
+    --blue: #1f4fff;
+    --ink: #1f1f3b;
+    --muted: #313030;
+    --dark: #0b0b0b;
+    --white: #ffffff;
+    --font: 'Inter', system-ui, sans-serif;
+}
+
+
+/* ================= RESET ================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+/* ================= BODY ================= */
+
+body {
+    background: var(--orange);
+    font-family: var(--font);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+
+/* ================= CONTAINER ================= */
+
+.container {
+    width: 90%;
+    max-width: 1250px;
+    margin: auto;
+}
+
+
+/* ================= IMAGES ================= */
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+
+/* ================= LINKS ================= */
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* ================= BUTTON ================= */
+
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: .3s;
+    cursor: pointer;
+}
+
+
+/* PRIMARY BUTTON */
+
+.btn-primary {
+    background: var(--orange);
+    color: var(--white);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #b46f1e;
+}
+
+
+/* OUTLINE BUTTON */
+
+.btn-outline {
+    border: 2px solid var(--white);
+    color: var(--white);
+    background: transparent;
+}
+
+.btn-outline:hover {
+    background: var(--white);
+    color: var(--ink);
+}
+
+
+/* ================= BADGE ================= */
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    padding: 0 20px;
+    background: #ffffff;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 18px;
+}
+
+
+/* remove default paragraph margin */
+
+.badge p {
+    margin: 0;
+}
+
+
+/* ================= SECTION ================= */
+
+section {
+    position: relative;
+}
+
+
+/* ================= HEADINGS ================= */
+
+h1,
+h2,
+h3,
+h4 {
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px) {
+    .container {
+        width: 92%;
+    }
+}

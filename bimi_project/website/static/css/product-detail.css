@@ -1,0 +1,474 @@
+/* ================= PRODUCT DETAIL ================= */
+
+
+/* Hero */
+
+.pd-hero {
+    background: var(--white);
+    padding: 80px 0 90px;
+}
+
+.pd-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: center;
+}
+
+
+/* Image */
+
+.pd-image {
+    position: relative;
+}
+
+.pd-image::after {
+    content: '';
+    position: absolute;
+    inset: 14px -14px -14px 14px;
+    background: var(--orange);
+    border-radius: 18px;
+    z-index: 0;
+    opacity: 0.12;
+}
+
+.pd-image img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.10);
+    display: block;
+}
+
+
+/* Content */
+
+.pd-content h1 {
+    font-size: 2.6rem;
+    margin: 16px 0 18px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.pd-summary {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--muted);
+    margin-bottom: 24px;
+}
+
+
+/* Features */
+
+.pd-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 32px;
+    border: 1.5px solid #ebebeb;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+
+/* CKEditor ul ke andar bhi list-style remove */
+
+.pd-features ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pd-features li,
+.pd-features ul li {
+    padding: 11px 18px 11px 42px;
+    position: relative;
+    font-size: 0.93rem;
+    color: var(--muted);
+    line-height: 1.6;
+    border-bottom: 1px solid #f0f0f0;
+    list-style: none;
+}
+
+.pd-features li:last-child {
+    border-bottom: none;
+}
+
+.pd-features li::before {
+    content: '';
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background: var(--orange);
+    border-radius: 50%;
+}
+
+
+/* Badge override for detail page */
+
+.detail-badge {
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    padding: 0 16px;
+    background: #fff5e8;
+    border: 1.5px solid rgba(214, 136, 42, 0.3);
+    border-radius: 30px;
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: var(--orange);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+
+.detail-badge p {
+    margin: 0;
+}
+
+
+/* ================= CONTENT SECTIONS ================= */
+
+.pd-section {
+    padding: 80px 0;
+    background: var(--white);
+}
+
+.pd-section.alt {
+    background: #f8f7f5;
+}
+
+.pd-section+.pd-section {
+    border-top: 1px solid #ebebeb;
+}
+
+.pd-section h2 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 32px;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pd-section h2::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 28px;
+    background: var(--orange);
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+
+/* CKEditor rendered content */
+
+.pd-section .ck-content,
+.pd-section .container>div {
+    font-size: 0.97rem;
+    line-height: 1.85;
+    color: var(--muted);
+}
+
+.pd-section .ck-content p,
+.pd-section .container>div p {
+    margin-bottom: 1rem;
+}
+
+.pd-section .ck-content ul,
+.pd-section .ck-content ol,
+.pd-section .container>div ul,
+.pd-section .container>div ol {
+    padding-left: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.pd-section .ck-content li,
+.pd-section .container>div li {
+    margin-bottom: 8px;
+}
+
+.pd-section .ck-content table,
+.pd-section .container>div table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.2rem 0;
+    font-size: 0.9rem;
+}
+
+.pd-section .ck-content table th,
+.pd-section .container>div table th {
+    background: #f4f3f0;
+    color: var(--ink);
+    font-weight: 600;
+    text-align: left;
+    padding: 11px 16px;
+    border-bottom: 2px solid #e4e4e4;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.pd-section .ck-content table td,
+.pd-section .container>div table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid #ebebeb;
+    color: var(--muted);
+}
+
+.pd-section .ck-content table tr:last-child td,
+.pd-section .container>div table tr:last-child td {
+    border-bottom: none;
+}
+
+.pd-section .ck-content table tr:hover td,
+.pd-section .container>div table tr:hover td {
+    background: #fafaf8;
+}
+
+
+/* ================= SPEC GRID ================= */
+
+.spec-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.spec-item {
+    background: #f8f7f5;
+    border: 1.5px solid #ebebeb;
+    border-radius: 12px;
+    padding: 16px 18px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.spec-item:hover {
+    border-color: rgba(214, 136, 42, 0.4);
+    box-shadow: 0 4px 12px rgba(214, 136, 42, 0.08);
+}
+
+.spec-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #aaa;
+    margin-bottom: 5px;
+}
+
+.spec-value {
+    font-size: 0.93rem;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+
+/* ================= RELATED PRODUCTS ================= */
+
+.related-section {
+    padding: 80px 0;
+    background: #f8f7f5;
+    border-top: 1px solid #ebebeb;
+}
+
+.related-section h2 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 36px;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.related-section h2::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 28px;
+    background: var(--orange);
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+
+/* Related Card */
+
+.related-card {
+    background: var(--white);
+    border: 1.5px solid #ebebeb;
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.22s, box-shadow 0.22s, transform 0.22s;
+}
+
+.related-card:hover {
+    border-color: rgba(214, 136, 42, 0.4);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+    transform: translateY(-3px);
+}
+
+.related-card-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #f4f3f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.related-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.related-card:hover .related-card-img img {
+    transform: scale(1.04);
+}
+
+.related-card-img .no-img {
+    font-size: 2.5rem;
+    color: #ccc;
+}
+
+.related-card-body {
+    padding: 18px 20px 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.related-card-cat {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--orange);
+    margin-bottom: 7px;
+}
+
+.related-card-name {
+    font-size: 0.97rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.35;
+    margin-bottom: 10px;
+}
+
+.related-card-desc {
+    font-size: 0.83rem;
+    color: var(--muted);
+    line-height: 1.6;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.related-card-link {
+    margin-top: 14px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--orange);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: gap 0.2s;
+}
+
+.related-card:hover .related-card-link {
+    gap: 9px;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1024px) {
+    .pd-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+    .pd-image::after {
+        display: none;
+    }
+    .pd-content {
+        text-align: center;
+    }
+    .detail-badge {
+        display: inline-flex;
+    }
+    .pd-features {
+        text-align: left;
+    }
+    .pd-section h2,
+    .related-section h2 {
+        justify-content: center;
+    }
+    .spec-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .related-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .pd-hero {
+        padding: 56px 0 64px;
+    }
+    .pd-content h1 {
+        font-size: 2rem;
+    }
+    .pd-section,
+    .related-section {
+        padding: 56px 0;
+    }
+    .pd-section h2,
+    .related-section h2 {
+        font-size: 1.55rem;
+    }
+    .spec-grid {
+        grid-template-columns: 1fr;
+    }
+    .related-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+    .btn.btn-primary {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 540px) {
+    .related-grid {
+        grid-template-columns: 1fr;
+    }
+    .pd-content h1 {
+        font-size: 1.75rem;
+    }
+}

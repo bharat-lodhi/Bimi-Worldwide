@@ -1,0 +1,410 @@
+<!-- ========================================= -->
+<!-- UPDATED Products_list.html -->
+<!-- ========================================= -->
+
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+
+{% if category %}
+{{ category.name }}
+{% else %}
+{{ subcategory.name }}
+{% endif %}
+
+– BiMi
+
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/sub_category-list.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ================= HERO ================= -->
+<section class="cat-hero">
+
+    <div class="container cat-hero-inner">
+
+        <div class="badge">
+
+            <p>
+
+                Products
+
+            </p>
+
+        </div>
+
+        <h1>
+
+            {% if category %}
+
+                {{ category.name }}
+
+            {% else %}
+
+                {{ subcategory.name }}
+
+            {% endif %}
+
+        </h1>
+
+        <p class="desc">
+
+            {% if category %}
+
+                {{ category.short_description|striptags|truncatechars:220 }}
+
+            {% else %}
+
+                {{ subcategory.short_description|striptags|truncatechars:220 }}
+
+            {% endif %}
+
+        </p>
+
+        <!-- SEARCH -->
+        <form class="cat-search-form"
+              method="GET"
+              action="">
+
+            <div class="cat-search-wrap">
+
+                <svg class="cat-search-icon"
+                     xmlns="http://www.w3.org/2000/svg"
+                     width="18"
+                     height="18"
+                     viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2.2"
+                     stroke-linecap="round"
+                     stroke-linejoin="round">
+
+                    <circle cx="11" cy="11" r="8"/>
+
+                    <line x1="21"
+                          y1="21"
+                          x2="16.65"
+                          y2="16.65"/>
+
+                </svg>
+
+                <input type="text"
+                       name="search"
+                       class="cat-search-input"
+                       placeholder="Search products..."
+                       value="{{ search|default:'' }}">
+
+                <button type="submit"
+                        class="cat-search-btn">
+
+                    Search
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PRODUCTS ================= -->
+<section class="cat-products">
+
+    <div class="container">
+
+        {% if search %}
+
+        <div class="cat-result-info">
+
+            <span>
+
+                Results for
+                <strong>"{{ search }}"</strong>
+
+                —
+                {{ page_obj.paginator.count }}
+                found
+
+            </span>
+
+            <a href="?">
+
+                Clear search ✕
+
+            </a>
+
+        </div>
+
+        {% endif %}
+
+
+        {% if page_obj %}
+
+        <div class="cat-grid">
+
+            {% for product in page_obj %}
+
+            <div class="product-card">
+
+                <div class="p-image">
+
+                    {% if product.image %}
+
+                    <img src="{{ product.image.url }}"
+                         alt="{{ product.name }}">
+
+                    {% endif %}
+
+                </div>
+
+                <div class="p-content">
+
+                    <h3>
+
+                        {{ product.name|truncatechars:40 }}
+
+                    </h3>
+
+                    <p>
+
+                        {{ product.short_description|striptags|truncatechars:100 }}
+
+                    </p>
+
+                    <a href="{% url 'product_detail' product.id %}"
+                       class="btn-outline">
+
+                        View Details →
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- PAGINATION -->
+        {% if page_obj.has_other_pages %}
+
+        <div class="cat-pagination">
+
+            {% if page_obj.has_previous %}
+
+            <a href="?{% if search %}search={{ search }}&{% endif %}page={{ page_obj.previous_page_number }}"
+               class="pg-btn">
+
+                ← Prev
+
+            </a>
+
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+
+                {% if page_obj.number == num %}
+
+                <span class="pg-btn pg-active">
+
+                    {{ num }}
+
+                </span>
+
+                {% else %}
+
+                <a href="?{% if search %}search={{ search }}&{% endif %}page={{ num }}"
+                   class="pg-btn">
+
+                    {{ num }}
+
+                </a>
+
+                {% endif %}
+
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+
+            <a href="?{% if search %}search={{ search }}&{% endif %}page={{ page_obj.next_page_number }}"
+               class="pg-btn">
+
+                Next →
+
+            </a>
+
+            {% endif %}
+
+        </div>
+
+        {% endif %}
+
+
+        {% else %}
+
+        <!-- EMPTY -->
+        <div class="cat-empty">
+
+            <div class="cat-empty-icon">
+
+                🔍
+
+            </div>
+
+            <h3>
+
+                No products found
+
+            </h3>
+
+            <p>
+
+                No results for "{{ search }}"
+
+            </p>
+
+            <a href="?"
+               class="btn btn-primary">
+
+                Clear Search
+
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+
+
+
+
+{% comment %} {% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ category.name }} – BiMi{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/sub_category-list.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ================= CATEGORY HERO ================= -->
+<section class="cat-hero">
+    <div class="container cat-hero-inner">
+
+        <div class="badge">
+            <p>Category</p>
+        </div>
+
+        <h1>{{ category.name }}</h1>
+
+        <p class="desc">
+            {{ category.short_description|striptags|truncatechars:220 }}
+        </p>
+
+        <!-- SEARCH BAR -->
+        <form class="cat-search-form" method="GET" action="">
+            <div class="cat-search-wrap">
+                <svg class="cat-search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input
+                    type="text"
+                    name="search"
+                    class="cat-search-input"
+                    placeholder="Search products..."
+                    value="{{ search|default:'' }}"
+                    autocomplete="off"
+                >
+                <button type="submit" class="cat-search-btn">Search</button>
+            </div>
+        </form>
+
+    </div>
+</section>
+
+<!-- ================= PRODUCT LIST GRID ================= -->
+<section class="cat-products">
+    <div class="container">
+
+        <!-- RESULT INFO -->
+        {% if search %}
+        <div class="cat-result-info">
+            <span>Results for <strong>"{{ search }}"</strong> — {{ page_obj.paginator.count }} product{{ page_obj.paginator.count|pluralize }} found</span>
+            <a href="?">Clear search ✕</a>
+        </div>
+        {% endif %}
+
+        {% if page_obj %}
+        <div class="cat-grid">
+            {% for sub in page_obj %}
+            <div class="product-card">
+
+                <div class="p-image">
+                    {% if sub.image %}
+                    <img src="{{ sub.image.url }}" alt="{{ sub.name }}">
+                    {% endif %}
+                </div>
+
+                <div class="p-content">
+                    <h3>{{ sub.name|truncatechars:40 }}</h3>
+                    <p>{{ sub.short_description|striptags|truncatechars:100 }}</p>
+                    <a href="{% url 'product_detail' sub.id %}" class="btn-outline">View Details →</a>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- PAGINATION -->
+        {% if page_obj.has_other_pages %}
+        <div class="cat-pagination">
+
+            {% if page_obj.has_previous %}
+            <a href="?{% if search %}search={{ search }}&{% endif %}page={{ page_obj.previous_page_number }}" class="pg-btn">← Prev</a>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                <span class="pg-btn pg-active">{{ num }}</span>
+                {% else %}
+                <a href="?{% if search %}search={{ search }}&{% endif %}page={{ num }}" class="pg-btn">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <a href="?{% if search %}search={{ search }}&{% endif %}page={{ page_obj.next_page_number }}" class="pg-btn">Next →</a>
+            {% endif %}
+
+        </div>
+        {% endif %}
+
+        {% else %}
+        <!-- EMPTY STATE -->
+        <div class="cat-empty">
+            <div class="cat-empty-icon">🔍</div>
+            <h3>No products found</h3>
+            <p>No results for "{{ search }}". Try a different keyword.</p>
+            <a href="?" class="btn btn-primary">Clear Search</a>
+        </div>
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %} {% endcomment %}

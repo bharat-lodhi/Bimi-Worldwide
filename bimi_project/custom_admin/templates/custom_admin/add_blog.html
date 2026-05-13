@@ -1,0 +1,173 @@
+{% extends 'custom_admin/dashboard.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid py-4 px-4">
+
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold text-dark mb-1">Create New Post</h2>
+            <p class="text-muted small mb-0">Draft your next masterpiece for the world to see.</p>
+        </div>
+        <a href="{% url 'blogs' %}" class="btn btn-outline-dark rounded-pill px-4">
+            <i class="fas fa-arrow-left me-2"></i> Back to List
+        </a>
+    </div>
+
+    <form id="blogForm" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row g-4">
+            
+            <!-- LEFT COLUMN: Main Content -->
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
+                    <!-- Title -->
+                    <div class="mb-4">
+                        <label class="form-label fw-bold text-dark">Blog Title <span class="text-danger">*</span></label>
+                        <input type="text" name="blog_title" class="form-control form-control-lg border-0 bg-light rounded-3" 
+                               placeholder="Enter a catchy title..." required>
+                    </div>
+
+                    <!-- Subtitle -->
+                    <div class="mb-4">
+                        <label class="form-label fw-bold text-dark">Short Subtitle</label>
+                        <input type="text" name="blog_subtitle" class="form-control border-0 bg-light rounded-3" 
+                               placeholder="A brief summary or hook...">
+                    </div>
+
+                    <!-- CKEditor 5 -->
+                    <div class="mb-2">
+                        <label class="form-label fw-bold text-dark">Full Story <span class="text-danger">*</span></label>
+                        <div id="editor-container">
+                            <textarea id="blogDescription" name="blog_description"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Sidebar Settings -->
+            <div class="col-lg-4">
+                
+                <!-- Publishing Sidebar -->
+                <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
+                    <h6 class="fw-bold mb-3"><i class="fas fa-cog me-2"></i>Post Settings</h6>
+                    
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Author Name</label>
+                        <input type="text" name="author_name" class="form-control rounded-3" placeholder="Editor name" required>
+                    </div>
+
+                    <hr class="text-muted opacity-25">
+
+                    <!-- Image Upload -->
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Featured Image</label>
+                        <div class="image-upload-wrapper border rounded-3 p-3 text-center bg-light">
+                            <input type="file" name="blog_image" id="blogImage" class="d-none" accept="image/*">
+                            <label for="blogImage" class="mb-0 cursor-pointer" id="uploadLabel">
+                                <i class="fas fa-cloud-upload-alt fa-2x text-primary mb-2"></i>
+                                <p class="small mb-0 text-muted">Click to upload cover image</p>
+                            </label>
+                            
+                            <div id="imagePreview" class="mt-2 position-relative d-none">
+                                <img id="preview" src="#" class="img-fluid rounded shadow-sm">
+                                <button type="button" class="btn btn-danger btn-sm position-absolute top-0 end-0 m-1" onclick="removeImage()">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-grid gap-2 pt-3">
+                        <button type="submit" class="btn btn-primary btn-lg rounded-3 py-3 fw-bold">
+                            <i class="fas fa-paper-plane me-2"></i> Publish Article
+                        </a>
+                        <button type="reset" class="btn btn-light text-muted border-0 small">Discard Draft</button>
+                    </div>
+                </div>
+
+                <!-- Tips Card -->
+                <div class="card border-0 bg-primary-soft rounded-4 p-4">
+                    <h6 class="fw-bold text-primary"><i class="fas fa-lightbulb me-2"></i>Pro Tip</h6>
+                    <p class="small text-dark mb-0 opacity-75">Use high-quality 1200x630px images for better social media sharing previews.</p>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Latest CKEditor 5 Classic Build CDN -->
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+
+<style>
+    :root { --primary-color: #D6882A; }
+    body { background-color: #f4f7f6; }
+
+    .form-control-lg { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); }
+    .form-control:focus { box-shadow: none; border-color: var(--primary-color); }
+    
+    .bg-primary-soft { background-color: #fffaf0; border: 1px dashed var(--primary-color); }
+    .text-primary { color: var(--primary-color) !important; }
+    .btn-primary { background-color: var(--primary-color); border-color: var(--primary-color); }
+    
+    /* CKEditor 5 Modern Styling */
+    .ck-editor__animated-border { border-radius: 12px !important; }
+    .ck-content { min-height: 400px; border-radius: 0 0 12px 12px !important; }
+    .ck-toolbar { border-radius: 12px 12px 0 0 !important; background: #f8f9fa !important; border: none !important; }
+
+    .cursor-pointer { cursor: pointer; }
+    .image-upload-wrapper:hover { border-color: var(--primary-color); }
+</style>
+
+<script>
+    let editorInstance;
+
+    // Initialize CKEditor 5
+    ClassicEditor
+        .create(document.querySelector('#blogDescription'), {
+            placeholder: 'Start writing your story here...',
+            toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'insertTable', 'undo', 'redo' ]
+        })
+        .then(editor => {
+            editorInstance = editor;
+            console.log('CKEditor 5 initialized successfully');
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    // Image Preview Logic
+    document.getElementById('blogImage').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview').src = e.target.result;
+                document.getElementById('imagePreview').classList.remove('d-none');
+                document.getElementById('uploadLabel').classList.add('d-none');
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
+    function removeImage() {
+        document.getElementById('blogImage').value = '';
+        document.getElementById('imagePreview').classList.add('d-none');
+        document.getElementById('uploadLabel').classList.remove('d-none');
+    }
+
+    // Form Submission check
+    document.getElementById('blogForm').addEventListener('submit', function(e) {
+        const editorData = editorInstance.getData();
+        if (!editorData.trim() || editorData === '<p>&nbsp;</p>') {
+            e.preventDefault();
+            alert('Please write something in the blog content area before publishing.');
+        }
+    });
+</script>
+{% endblock %}
+
+
+

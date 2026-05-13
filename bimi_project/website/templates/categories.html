@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Product Categories – BiMi{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/product.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="products-hero">
+    <div class="container products-hero-grid">
+
+        <div class="products-hero-content">
+            <div class="badge">
+                <p>Our Portfolio</p>
+            </div>
+
+            <h1>
+                Solutions Designed To Serve<br> Global Business Needs
+            </h1>
+
+            <form method="GET" action="{% url 'products_category' %}" class="hero-search-form">
+                <div class="search-wrap">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" name="search" value="{{ search|default:'' }}" placeholder="Search categories..." class="search-input">
+                    <button type="submit" class="search-btn">Search</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="products-hero-visual">
+            <div class="products-frame">
+                <img src="{% static 'images/product-hero-.png' %}" alt="BiMi Products">
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="product-categories">
+    <div class="container">
+
+        {% if search %}
+        <div class="result-info">
+            <p>Showing results for "<strong>{{ search }}</strong>" — {{ page_obj.paginator.count }} found</p>
+            <a href="{% url 'products_category' %}">Clear Search ✕</a>
+        </div>
+        {% endif %}
+
+        {% if page_obj %}
+        <div class="categories-grid">
+            {% for category in page_obj %}
+            <div class="category-card">
+                <div class="category-image">
+                    {% if category.image %}
+                        <img src="{{ category.image.url }}" alt="{{ category.name }}">
+                    {% else %}
+                        <div class="img-placeholder">📦</div>
+                    {% endif %}
+                </div>
+
+                <div class="category-content">
+                    <h3>{{ category.name }}</h3>
+                    <p>{{ category.short_description|striptags|truncatechars:100 }}</p>
+                    <a href="{% url 'products_list' category.id %}" class="btn-outline">
+                        View Category <span>→</span>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if page_obj.has_other_pages %}
+        <div class="pagination-wrapper">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}{% if search %}&search={{ search }}{% endif %}" class="page-btn">Prev</a>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <span class="page-btn active">{{ num }}</span>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <a href="?page={{ num }}{% if search %}&search={{ search }}{% endif %}" class="page-btn">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}{% if search %}&search={{ search }}{% endif %}" class="page-btn">Next</a>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% else %}
+        <div class="empty-state">
+            <div class="empty-icon">🔍</div>
+            <h3>No Categories Found</h3>
+            <p>We couldn't find any category matching your search. Try different keywords.</p>
+            <a href="{% url 'products-category' %}" class="btn-primary">Back to All Products</a>
+        </div>
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}
+

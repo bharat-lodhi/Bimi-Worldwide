@@ -1,0 +1,615 @@
+/* ================= DESIGN SYSTEM ================= */
+
+:root {
+    --orange: #D6882A;
+    --blue: #1f4fff;
+    --ink: #1f1f3b;
+    --muted: #313030;
+    --dark: #0b0b0b;
+    --white: #ffffff;
+    --font: 'Inter', system-ui, sans-serif;
+}
+
+
+/* ================= RESET ================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* ================= BODY ================= */
+
+body {
+    background: var(--orange);
+    font-family: var(--font);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+
+/* ================= CONTAINER ================= */
+
+.container {
+    width: 90%;
+    max-width: 1250px;
+    margin: auto;
+}
+
+
+/* ================= HERO SECTION ================= */
+
+.hero {
+    padding: 60px 0 90px;
+    position: relative;
+}
+
+
+/* GRID */
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    align-items: center;
+    position: relative;
+}
+
+
+/* LEFT CONTENT */
+
+.hero-left {
+    margin-left: 80px;
+    position: relative;
+    z-index: 5;
+}
+
+
+/* ================= BADGE ================= */
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    padding: 0 20px;
+    background: #ffffff;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 18px;
+}
+
+
+/* remove default paragraph margin */
+
+.badge p {
+    margin: 0;
+}
+
+
+/* ================= TITLE ================= */
+
+.hero-left h1 {
+    font-size: clamp(2rem, 3vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -.01em;
+    max-width: 850px;
+}
+
+
+/* ================= DESCRIPTION ================= */
+
+.desc {
+    margin: 20px 0 34px;
+    max-width: 420px;
+}
+
+
+/* ================= BUTTON ================= */
+
+.btn-cta {
+    display: inline-block;
+    padding: 12px 30px;
+    background: transparent;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid #ffffff;
+    border-radius: 6px;
+    transition: .4s;
+}
+
+.btn-cta:hover {
+    background: #ffffff;
+    color: #000;
+    transform: translateY(-3px);
+}
+
+
+/* ================= VIDEO ================= */
+
+.video-wrapper {
+    width: 500px;
+    height: 420px;
+    margin-left: -120px;
+    position: relative;
+    z-index: 0;
+}
+
+.video-wrapper video {
+    width: 140%;
+    height: 128%;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media(max-width:900px) {
+    .hero {
+        padding: 40px 0 70px;
+    }
+    .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+    }
+    .hero-left {
+        margin-left: 0;
+    }
+    .hero-left h1 {
+        font-size: 2.1rem;
+        white-space: normal;
+    }
+    .video-wrapper {
+        width: 260px;
+        height: 260px;
+        margin: auto;
+    }
+    .video-wrapper video {
+        width: 120%;
+        height: 172%;
+    }
+}
+
+
+/* ================Graph section========================== */
+
+.full-image-section {
+    width: 100%;
+    background: #fff;
+}
+
+.full-image-section img {
+    width: 100%;
+    height: auto;
+    /* पूरी image दिखेगी */
+    display: block;
+}
+
+
+/* ================================================================== */
+
+
+/* ================= PRODUCTS SECTION ================= */
+
+.products-section {
+    background: var(--orange);
+    padding: 90px 0;
+    text-align: center;
+    overflow: hidden;
+}
+
+
+/* HEADING */
+
+
+/* PRODUCTS HEADING */
+
+.products-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 70px;
+    letter-spacing: -0.5px;
+}
+
+
+/* highlight word */
+
+.products-title span {
+    color: var(--white);
+    position: relative;
+}
+
+
+/* underline effect */
+
+.products-title span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: var(--white);
+    border-radius: 4px;
+}
+
+
+/* SLIDER */
+
+.products-slider {
+    overflow: hidden;
+    width: 100%;
+}
+
+
+/* TRACK */
+
+.products-track {
+    display: flex;
+    gap: 80px;
+    align-items: center;
+    animation: scrollProducts 15s linear infinite;
+}
+
+
+/* PRODUCT ITEM */
+
+.product-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    min-width: 140px;
+}
+
+.product-item i {
+    font-size: 42px;
+    color: #1a1a2e;
+}
+
+.product-item p {
+    font-size: 15px;
+    color: #313030;
+    font-weight: 500;
+}
+
+
+/* ANIMATION */
+
+@keyframes scrollProducts {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:900px) {
+    .products-title {
+        font-size: 1.8rem;
+        white-space: normal;
+    }
+    .products-track {
+        gap: 50px;
+    }
+}
+
+
+/* ================client section================= */
+
+
+/* ================= CLIENT SECTION ================= */
+
+.clients-section {
+    background: #fdfdfd;
+    padding: 90px 0;
+    overflow: hidden;
+}
+
+.clients-container {
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+
+/* ================= HEADING ================= */
+
+.clients-head {
+    max-width: 750px;
+    margin: 0 auto 60px;
+    text-align: center;
+}
+
+.clients-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 15px;
+}
+
+.clients-title span {
+    color: var(--orange);
+    position: relative;
+}
+
+.clients-title span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 4px;
+    background: var(--orange);
+    border-radius: 10px;
+}
+
+.clients-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+
+/* ================= LAYOUT ================= */
+
+.clients-layout {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    align-items: center;
+    gap: 60px;
+    margin-top: 50px;
+}
+
+
+/* ================= LEFT IMAGE FRAME ================= */
+
+.image-frame {
+    position: relative;
+    background: #fff;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eee;
+}
+
+.image-frame img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    border-radius: 15px;
+    display: block;
+}
+
+
+/* ================= LOGO ANIMATION AREA ================= */
+
+.clients-logos {
+    width: 100%;
+    overflow: hidden;
+    /* Fade effect on edges for professional look */
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.logos-row {
+    margin-bottom: 30px;
+}
+
+.logos-row:last-child {
+    margin-bottom: 0;
+}
+
+.logos-track {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    width: max-content;
+}
+
+.logos-track img {
+    height: 65px;
+    /* Perfect size for 3 rows */
+    width: auto;
+    opacity: 1;
+    /* Always colorful */
+    transition: transform 0.3s ease;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+.logos-track img:hover {
+    transform: scale(1.1);
+}
+
+
+/* ================= SCROLL DIRECTIONS ================= */
+
+
+/* Left to Right Animation */
+
+.scroll-left .logos-track {
+    animation: scrollAnimationLeft 25s linear infinite;
+}
+
+
+/* Right to Left Animation */
+
+.scroll-right .logos-track {
+    animation: scrollAnimationRight 25s linear infinite;
+}
+
+@keyframes scrollAnimationLeft {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-50% - 25px));
+    }
+}
+
+@keyframes scrollAnimationRight {
+    0% {
+        transform: translateX(calc(-50% - 25px));
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
+/* ================= MOBILE RESPONSIVE ================= */
+
+@media (max-width: 1000px) {
+    .clients-layout {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    .image-frame img {
+        height: 300px;
+    }
+    .logos-track img {
+        height: 45px;
+    }
+}
+
+
+/* =========================call to action================= */
+
+
+/* ================= PREMIUM CTA ================= */
+
+
+/* ================= PREMIUM CTA ================= */
+
+.premium-cta {
+    padding: 50px 50px;
+    margin: 80px 90px;
+    /* sides se space */
+    background: var(--ink);
+    text-align: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    border-radius: 28px;
+    /* 🔥 rounded corners */
+}
+
+subtle glow .premium-cta::before {
+    content: "";
+    position: absolute;
+    top: -120px;
+    left: -120px;
+    width: 400px;
+    height: 400px;
+    background: #D6882A;
+    opacity: .08;
+    border-radius: 50%;
+    filter: blur(80px);
+}
+
+.premium-cta::after {
+    content: "";
+    position: absolute;
+    bottom: -120px;
+    right: -120px;
+    width: 400px;
+    height: 400px;
+    background: #D6882A;
+    opacity: .06;
+    border-radius: 50%;
+    filter: blur(80px);
+}
+
+.cta-container {
+    max-width: 800px;
+    margin: auto;
+    position: relative;
+    z-index: 2;
+}
+
+.cta-title {
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: -.5px;
+    margin-bottom: 22px;
+}
+
+.cta-subtitle {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #d6d6d6;
+    max-width: 700px;
+    margin: 0 auto 40px;
+}
+
+
+/* BUTTONS */
+
+.cta-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta-btn {
+    padding: 14px 34px;
+    font-size: .95rem;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: .3s;
+    display: inline-block;
+}
+
+
+/* Primary button */
+
+.cta-btn.primary {
+    background: #D6882A;
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(214, 136, 42, .35);
+}
+
+.cta-btn.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(214, 136, 42, .45);
+}
+
+
+/* Outline button */
+
+.cta-btn.outline {
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+.cta-btn.outline:hover {
+    background: #fff;
+    color: #000;
+    transform: translateY(-3px);
+}
+
+
+/* MOBILE */
+
+@media(max-width:900px) {
+    .cta-title {
+        font-size: 2rem;
+    }
+    .cta-subtitle {
+        font-size: .95rem;
+    }
+}

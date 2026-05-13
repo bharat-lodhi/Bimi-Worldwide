@@ -1,0 +1,531 @@
+{% extends 'custom_admin/dashboard.html' %}
+
+{% block content %}
+
+<div class="container py-5" style="max-width:900px;">
+
+    <div class="card border-0 shadow rounded-4 overflow-hidden">
+
+        <div class="card-body p-5">
+
+            <!-- HEADER -->
+            <div class="mb-5">
+
+                <h2 class="fw-bold mb-2">
+
+                    Add Product
+
+                </h2>
+
+                <p class="text-muted mb-0">
+
+                    Create new product with category and subcategory
+
+                </p>
+
+            </div>
+
+            <form method="POST"
+                  enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                <!-- CATEGORY -->
+                <div class="mb-4">
+
+                    <label class="form-label fw-semibold">
+
+                        Select Category
+
+                    </label>
+
+                    <select name="category"
+                            id="categorySelect"
+                            class="form-select py-3"
+                            required>
+
+                        <option value="">
+                            Choose Category
+                        </option>
+
+                        {% for category in categories %}
+
+                        <option value="{{ category.id }}">
+
+                            {{ category.name }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <!-- REAL SUBCATEGORY -->
+<!-- REAL SUBCATEGORY -->
+<div class="mb-4"
+     id="subcategoryWrapper"
+     style="display:none;">
+
+    <label class="form-label fw-semibold">
+
+        Select SubCategory
+
+    </label>
+
+    <select name="subcategory"
+            id="subcategorySelect"
+            class="form-select py-3">
+
+        <option value="">
+            Choose SubCategory
+        </option>
+
+        {% for sub in subcategories %}
+
+        <option value="{{ sub.id }}"
+                data-category="{{ sub.category.id }}">
+
+            {{ sub.name }}
+
+        </option>
+
+        {% endfor %}
+
+    </select>
+
+</div>
+                <!-- PRODUCT NAME -->
+                <div class="mb-4">
+
+                    <label class="form-label fw-semibold">
+
+                        Product Name
+
+                    </label>
+
+                    <input type="text"
+                           name="name"
+                           class="form-control py-3"
+                           placeholder="Enter Product Name">
+
+                </div>
+
+                <!-- SHORT DESCRIPTION -->
+                <div class="mb-4">
+
+                    <label class="form-label fw-semibold">
+
+                        Short Description
+
+                    </label>
+
+                    <textarea name="short_description"
+                              id="editor1"
+                              class="form-control"></textarea>
+
+                </div>
+
+                <!-- LONG DESCRIPTION -->
+                <div class="mb-4">
+
+                    <label class="form-label fw-semibold">
+
+                        Long Description
+
+                    </label>
+
+                    <textarea name="long_description"
+                              id="editor2"
+                              class="form-control"></textarea>
+
+                </div>
+
+                <!-- BENEFITS -->
+                <div class="mb-4">
+
+                    <label class="form-label fw-semibold">
+
+                        Benefits
+
+                    </label>
+
+                    <textarea name="benefits"
+                              id="editor3"
+                              class="form-control"></textarea>
+
+                </div>
+
+                <!-- SPECIFICATIONS -->
+                <div class="mb-4">
+
+                    <label class="form-label fw-semibold">
+
+                        Specifications
+
+                    </label>
+
+                    <textarea name="specifications"
+                              id="editor4"
+                              class="form-control"></textarea>
+
+                </div>
+
+                <!-- PACKING DETAILS -->
+                <div class="mb-4">
+
+                    <label class="form-label fw-semibold">
+
+                        Packing Details
+
+                    </label>
+
+                    <textarea name="packing_details"
+                              id="editor5"
+                              class="form-control"></textarea>
+
+                </div>
+
+                <!-- IMAGE -->
+                <div class="mb-5">
+
+                    <label class="form-label fw-semibold">
+
+                        Product Image
+
+                    </label>
+
+                    <input type="file"
+                           name="image"
+                           class="form-control py-3">
+
+                </div>
+
+                <!-- BUTTON -->
+                <button type="submit"
+                        class="btn btn-dark w-100 py-3 rounded-3 fw-semibold">
+
+                    Add Product
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- CKEDITOR -->
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+
+<script>
+
+
+const categorySelect =
+    document.getElementById(
+        'categorySelect'
+    );
+
+const subcategorySelect =
+    document.getElementById(
+        'subcategorySelect'
+    );
+
+const subcategoryWrapper =
+    document.getElementById(
+        'subcategoryWrapper'
+    );
+
+function filterSubcategories() {
+
+    const selectedCategory =
+        categorySelect.value;
+
+    const options =
+        subcategorySelect.querySelectorAll(
+            'option'
+        );
+
+    let hasVisibleSubcategory = false;
+
+    options.forEach(option => {
+
+        // Skip default option
+        if (!option.dataset.category) {
+            return;
+        }
+
+        // MATCH CATEGORY
+        if (
+            option.dataset.category ===
+            selectedCategory
+        ) {
+
+            option.style.display = 'block';
+
+            hasVisibleSubcategory = true;
+
+        }
+
+        // HIDE OTHERS
+        else {
+
+            option.style.display = 'none';
+
+        }
+
+    });
+
+    // SHOW/HIDE FIELD
+    if (hasVisibleSubcategory) {
+
+        subcategoryWrapper.style.display =
+            'block';
+
+    }
+
+    else {
+
+        subcategoryWrapper.style.display =
+            'none';
+
+        subcategorySelect.value = '';
+
+    }
+
+}
+
+categorySelect.addEventListener(
+    'change',
+    filterSubcategories
+);
+
+
+
+function createEditor(editorId) {
+
+    ClassicEditor
+
+        .create(document.querySelector(editorId), {
+
+            toolbar: [
+
+                'heading',
+                '|',
+                'bold',
+                'italic',
+                'link',
+                'bulletedList',
+                'numberedList',
+                '|',
+                'insertTable',
+                'blockQuote',
+                '|',
+                'undo',
+                'redo',
+                '|',
+                'htmlEmbed'
+
+            ]
+
+        })
+
+        .then(editor => {
+
+            editor.ui.view.editable.element.style.minHeight = '180px';
+
+        })
+
+        .catch(error => {
+
+            console.error(error);
+
+        });
+
+}
+
+createEditor('#editor1');
+createEditor('#editor2');
+createEditor('#editor3');
+createEditor('#editor4');
+createEditor('#editor5');
+
+</script>
+
+
+<style>
+
+.ck-editor__editable_inline {
+
+    min-height: 180px !important;
+
+}
+
+</style>
+
+{% endblock %}
+
+
+
+
+
+{% comment %} {% extends 'custom_admin/dashboard.html' %}
+
+{% block content %}
+
+<div class="container mt-5" style="max-width:800px;">
+
+    <div class="card shadow border-0">
+        <div class="card-body">
+
+            <h3 class="mb-4">Add Subcategory</h3>
+
+            <form method="POST" enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label>Select Category</label>
+
+                    <select name="category"
+                            class="form-control">
+
+                        {% for category in categories %}
+
+                        <option value="{{ category.id }}">
+                            {{ category.name }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label>Name</label>
+
+                    <input type="text"
+                           name="name"
+                           class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label>Short Description</label>
+
+                    <textarea name="short_description"
+                              id="editor1"
+                              class="form-control"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label>Long Description</label>
+
+                    <textarea name="long_description"
+                              id="editor2"
+                              class="form-control"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label>Benefits</label>
+
+                    <textarea name="benefits"
+                              id="editor3"
+                              class="form-control"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label>Specifications</label>
+
+                    <textarea name="specifications"
+                              id="editor4"
+                              class="form-control"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label>Packing Details</label>
+
+                    <textarea name="packing_details"
+                              id="editor5"
+                              class="form-control"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label>Image</label>
+
+                    <input type="file"
+                           name="image"
+                           class="form-control">
+                </div>
+
+                <button type="submit"
+                        class="btn btn-dark w-100">
+                    Add Subcategory
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+
+<script>
+
+function createEditor(editorId) {
+
+    ClassicEditor
+        .create(document.querySelector(editorId), {
+
+            toolbar: [
+
+                'heading',
+                '|',
+                'bold',
+                'italic',
+                'link',
+                'bulletedList',
+                'numberedList',
+                '|',
+                'insertTable',
+                'blockQuote',
+                'undo',
+                'redo',
+                '|',
+                'htmlEmbed'
+            ]
+
+        })
+        .then(editor => {
+
+            editor.ui.view.editable.element.style.minHeight = '150px';
+
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+}
+
+createEditor('#editor1');
+createEditor('#editor2');
+createEditor('#editor3');
+createEditor('#editor4');
+createEditor('#editor5');
+
+</script>
+
+<style>
+.ck-editor__editable_inline {
+    min-height: 150px !important;
+}
+</style>
+
+{% endblock %}
+
+ {% endcomment %}

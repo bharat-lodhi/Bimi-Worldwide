@@ -1,0 +1,109 @@
+<!-- ===================================================== -->
+<!-- edit_real_subcategory.html -->
+<!-- ===================================================== -->
+
+{% extends 'custom_admin/dashboard.html' %}
+
+{% block content %}
+
+<div class="container py-5" style="max-width:800px;">
+
+    <div class="card border-0 shadow rounded-4">
+
+        <div class="card-body p-5">
+
+            <h2 class="fw-bold mb-4">
+                Edit SubCategory
+            </h2>
+
+            <form method="POST"
+                  enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                <!-- CATEGORY -->
+                <div class="mb-4">
+
+                    <label class="form-label fw-semibold">
+                        Select Category
+                    </label>
+
+                    <select name="category"
+                            class="form-select py-3">
+
+                        {% for category in categories %}
+
+                        <option value="{{ category.id }}"
+                        
+                        {% if subcategory.category.id == category.id %}
+                        selected
+                        {% endif %}
+                        
+                        >
+
+                            {{ category.name }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <!-- NAME -->
+                <div class="mb-4">
+
+                    <label class="form-label fw-semibold">
+                        Name
+                    </label>
+
+                    <input type="text"
+                           name="name"
+                           value="{{ subcategory.name }}"
+                           class="form-control py-3">
+
+                </div>
+
+                <!-- DESCRIPTION -->
+                <div class="mb-4">
+
+                    <label class="form-label fw-semibold">
+                        Short Description
+                    </label>
+
+                    <textarea name="short_description"
+                              rows="5"
+                              class="form-control">{{ subcategory.short_description }}</textarea>
+
+                </div>
+
+                <!-- IMAGE -->
+                <div class="mb-4">
+
+                    <label class="form-label fw-semibold">
+                        Image
+                    </label>
+
+                    <input type="file"
+                           name="image"
+                           class="form-control py-3">
+
+                </div>
+
+                <button type="submit"
+                        class="btn btn-dark w-100 py-3 rounded-3">
+
+                    Update SubCategory
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
