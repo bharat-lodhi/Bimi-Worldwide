@@ -22,11 +22,11 @@
 
 <a href="{% url 'blog_list' %}">Blogs</a>
 
-<a href="#">Contact</a>
+<a href="{% url 'contact_form' %}">Contact Us</a>
 
 </nav>
 
-<a href="#" class="btn-demo" id="openPopup">Request Call</a>
+<a href="{% url 'contact_form' %}" class="btn-demo">Request Call</a>
 
 <div class="nav-toggle" id="navToggle">
 
@@ -46,52 +46,10 @@
 
 <b><a href="{% url 'blog_list' %}">Blogs</a></b>
 
-<b><a href="#">Contact</a></b>
+<b><a href="{% url 'contact_form' %}">Contact Us</a></b>
 
 </nav>
 
 </header>
-
-
-<!-- Popup html-->
- <div class="popup-overlay" id="popupForm">
-
-<div class="popup-box">
-
-<span class="popup-close" id="closePopup">&times;</span>
-
-<h3>Request a Call</h3>
-
-<form>
-
-<input type="text" placeholder="Your Name" required>
-
-<input type="email" placeholder="Email Address" required>
-
-<input type="tel" placeholder="Contact Number" required>
-
-<input type="text" placeholder="Company Name">
-
-<select required>
-
-<option value="">Product Interested In</option>
-<option>Agriculture</option>
-<option>Furniture</option>
-<option>Handicrafts</option>
-<option>Rugs</option>
-<option>Packaging</option>
-<option>Battery</option>
-
-</select>
-
-<input type="text" placeholder="Suitable Time">
-
-<button type="submit">Submit Request</button>
-
-</form>
-
-</div>
-
-</div>
 
 <!-- ================= HEADER / NAVBAR END ================= -->

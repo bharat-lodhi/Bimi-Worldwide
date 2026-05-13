@@ -1025,3 +1025,161 @@ def real_subcategory_products(request, pk):
         'custom_admin/sub_category/real_subcategory_products.html',
         context
     )
+    
+    
+#==========================================================
+# =========================================================
+# admin_views.py
+# =========================================================
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+
+from .models import ContactEnquiry
+
+
+# =========================================================
+# ENQUIRY LIST
+# =========================================================
+
+def enquiry_list(request):
+
+    enquiries = ContactEnquiry.objects.all().order_by(
+        '-id'
+    )
+
+    # =====================================================
+    # SEARCH
+    # =====================================================
+
+    search = request.GET.get("search")
+
+    if search:
+
+        enquiries = enquiries.filter(
+
+            Q(name__icontains=search) |
+            Q(number__icontains=search) |
+            Q(email__icontains=search) |
+            Q(company_name__icontains=search) |
+            Q(interested_product__icontains=search) |
+            Q(status__icontains=search)
+
+        )
+
+    # =====================================================
+    # STATUS FILTER
+    # =====================================================
+
+    status = request.GET.get("status")
+
+    if status:
+
+        enquiries = enquiries.filter(
+            status=status
+        )
+
+    # =====================================================
+    # PAGINATION
+    # =====================================================
+
+    paginator = Paginator(
+        enquiries,
+        20
+    )
+
+    page_number = request.GET.get("page")
+
+    enquiries = paginator.get_page(
+        page_number
+    )
+
+    context = {
+
+        "enquiries": enquiries,
+
+        "search": search,
+
+        "status": status,
+
+    }
+
+    return render(
+        request,
+        "contact/enquiry_list.html",
+        context
+    )
+
+# =========================================================
+# ENQUIRY DETAIL
+# =========================================================
+
+def enquiry_detail(request, enquiry_id):
+
+    enquiry = get_object_or_404(
+        ContactEnquiry,
+        id=enquiry_id
+    )
+
+    context = {
+        "enquiry": enquiry
+    }
+
+    return render(
+        request,
+        "contact/enquiry_detail.html",
+        context
+    )
+
+
+# =========================================================
+# UPDATE STATUS
+# =========================================================
+
+def update_enquiry_status(request, enquiry_id):
+
+    enquiry = get_object_or_404(
+        ContactEnquiry,
+        id=enquiry_id
+    )
+
+    if request.method == "POST":
+
+        status = request.POST.get("status")
+
+        enquiry.status = status
+
+        enquiry.save()
+
+        messages.success(
+            request,
+            "Status updated successfully."
+        )
+
+    return redirect(
+        "enquiry_detail",
+        enquiry_id=enquiry.id
+    )
+
+
+# =========================================================
+# DELETE ENQUIRY
+# =========================================================
+
+def delete_enquiry(request, enquiry_id):
+
+    enquiry = get_object_or_404(
+        ContactEnquiry,
+        id=enquiry_id
+    )
+
+    enquiry.delete()
+
+    messages.success(
+        request,
+        "Enquiry deleted successfully."
+    )
+
+    return redirect("enquiry_list")
+
+# ================================================

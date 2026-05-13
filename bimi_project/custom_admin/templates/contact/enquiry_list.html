@@ -1,0 +1,777 @@
+{% extends 'custom_admin/dashboard.html'%}
+{% load static %}
+
+{% block content %}
+<style>
+  .enq-page { padding: 28px 24px 60px; max-width: 1100px; margin: 0 auto; }
+
+  .enq-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .enq-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+  }
+
+  .enq-title::before {
+    content: '';
+    width: 4px;
+    height: 22px;
+    background: var(--primary-color);
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  .enq-count {
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: #fff5e8;
+    color: var(--primary-color);
+    border: 1.5px solid rgba(214,136,42,0.25);
+    border-radius: 20px;
+    padding: 3px 12px;
+  }
+
+  /* ── FILTERS BAR ── */
+  .enq-filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .enq-search-wrap {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1.5px solid #ebebeb;
+    border-radius: 10px;
+    padding: 0 14px;
+    gap: 8px;
+    flex: 1;
+    min-width: 200px;
+    transition: border-color 0.18s;
+  }
+
+  .enq-search-wrap:focus-within {
+    border-color: var(--primary-color);
+  }
+
+  .enq-search-wrap i {
+    color: #aaa;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  .enq-search-input {
+    border: none;
+    outline: none;
+    font-size: 0.88rem;
+    font-family: inherit;
+    color: #1a1a2e;
+    background: transparent;
+    padding: 10px 0;
+    width: 100%;
+  }
+
+  .enq-search-input::placeholder { color: #bbb; }
+
+  .enq-status-select {
+    padding: 10px 14px;
+    border: 1.5px solid #ebebeb;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-family: inherit;
+    color: #1a1a2e;
+    background: #fff;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.18s;
+    min-width: 140px;
+  }
+
+  .enq-status-select:focus { border-color: var(--primary-color); }
+
+  .enq-filter-btn {
+    padding: 10px 20px;
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.18s;
+    white-space: nowrap;
+  }
+
+  .enq-filter-btn:hover { background: #b46f1e; }
+
+  .enq-clear-btn {
+    padding: 10px 16px;
+    background: #f8f7f5;
+    color: #6b6b80;
+    border: 1.5px solid #ebebeb;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: border-color 0.18s, color 0.18s;
+    white-space: nowrap;
+  }
+
+  .enq-clear-btn:hover {
+    border-color: #c0392b;
+    color: #c0392b;
+    text-decoration: none;
+  }
+
+  /* Active filter info */
+  .enq-active-filters {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .enq-filter-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    background: #fff5e8;
+    border: 1.5px solid rgba(214,136,42,0.25);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--primary-color);
+  }
+
+  /* ── TABLE ── */
+  .enq-table-wrap {
+    background: #fff;
+    border: 1.5px solid #ebebeb;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .enq-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+
+  .enq-table thead {
+    background: #f8f7f5;
+    border-bottom: 1.5px solid #ebebeb;
+  }
+
+  .enq-table thead th {
+    padding: 12px 18px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #6b6b80;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  .enq-table tbody tr {
+    border-bottom: 1px solid #f2f2f2;
+    transition: background 0.15s;
+  }
+
+  .enq-table tbody tr:last-child { border-bottom: none; }
+  .enq-table tbody tr:hover { background: #fafaf8; }
+
+  .enq-table tbody td {
+    padding: 14px 18px;
+    color: #1a1a2e;
+    vertical-align: middle;
+  }
+
+  .enq-id { font-size: 0.75rem; font-weight: 700; color: #aaa; font-family: monospace; }
+  .enq-name { font-weight: 600; }
+  .enq-email { color: #6b6b80; font-size: 0.83rem; }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 11px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .status-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  .status-pending   { background: #fff8e8; color: #a06010; border: 1px solid rgba(214,136,42,0.2); }
+  .status-pending::before   { background: #D6882A; }
+  .status-contacted { background: #e8f4ff; color: #1050a0; border: 1px solid rgba(31,79,255,0.2); }
+  .status-contacted::before { background: #1f4fff; }
+  .status-closed    { background: #e8f7ee; color: #1a6e40; border: 1px solid rgba(26,158,86,0.2); }
+  .status-closed::before    { background: #1a9e56; }
+
+  .action-wrap { display: flex; align-items: center; gap: 8px; }
+
+  .act-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.18s, color 0.18s;
+    white-space: nowrap;
+  }
+
+  .act-view {
+    background: #fff5e8;
+    color: var(--primary-color);
+    border: 1px solid rgba(214,136,42,0.25);
+  }
+  .act-view:hover { background: var(--primary-color); color: #fff; text-decoration: none; }
+
+  .act-delete {
+    background: #fef0f0;
+    color: #c0392b;
+    border: 1px solid rgba(192,57,43,0.2);
+  }
+  .act-delete:hover { background: #c0392b; color: #fff; text-decoration: none; }
+
+  /* ── EMPTY STATE ── */
+  .enq-empty {
+    text-align: center;
+    padding: 64px 20px;
+    color: #6b6b80;
+  }
+
+  .enq-empty i { font-size: 2.5rem; margin-bottom: 12px; display: block; color: #d0d0d8; }
+
+  /* ── PAGINATION ── */
+  .enq-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+
+  .pg-btn {
+    min-width: 40px;
+    height: 40px;
+    padding: 0 14px;
+    border-radius: 9px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: 1.5px solid #e0e0e0;
+    text-decoration: none;
+    color: #1a1a2e;
+    font-weight: 600;
+    font-size: 0.85rem;
+    font-family: inherit;
+    transition: border-color 0.18s, color 0.18s;
+  }
+
+  .pg-btn:hover { border-color: var(--primary-color); color: var(--primary-color); text-decoration: none; }
+
+  .pg-active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #fff;
+    cursor: default;
+  }
+
+  .pg-active:hover { color: #fff; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .enq-table thead th:nth-child(4),
+    .enq-table tbody td:nth-child(4) { display: none; }
+    .enq-page { padding: 20px 14px 48px; }
+  }
+
+  @media (max-width: 540px) {
+    .enq-table thead th:nth-child(3),
+    .enq-table tbody td:nth-child(3) { display: none; }
+    .enq-filters { flex-direction: column; }
+    .enq-search-wrap { min-width: 100%; }
+  }
+</style>
+
+<div class="enq-page">
+
+  <!-- Header -->
+  <div class="enq-header">
+    <h1 class="enq-title">
+      Enquiries
+      <span class="enq-count">{{ enquiries.paginator.count }} total</span>
+    </h1>
+  </div>
+
+  <!-- Search + Filter Form -->
+  <form method="GET" action="">
+    <div class="enq-filters">
+
+      <div class="enq-search-wrap">
+        <i class="fas fa-search"></i>
+        <input
+          type="text"
+          name="search"
+          class="enq-search-input"
+          placeholder="Search by name, email, product..."
+          value="{{ search|default:'' }}"
+          autocomplete="off"
+        >
+      </div>
+
+      <select name="status" class="enq-status-select">
+        <option value="">All Status</option>
+        <option value="pending"   {% if status == "pending"   %}selected{% endif %}>Pending</option>
+        <option value="contacted" {% if status == "contacted" %}selected{% endif %}>Contacted</option>
+        <option value="closed"    {% if status == "closed"    %}selected{% endif %}>Closed</option>
+      </select>
+
+      <button type="submit" class="enq-filter-btn">
+        <i class="fas fa-filter"></i> Filter
+      </button>
+
+      {% if search or status %}
+      <a href="?" class="enq-clear-btn">
+        <i class="fas fa-times"></i> Clear
+      </a>
+      {% endif %}
+
+    </div>
+
+    <!-- Active filter tags -->
+    {% if search or status %}
+    <div class="enq-active-filters">
+      {% if search %}
+      <span class="enq-filter-tag"><i class="fas fa-search"></i> "{{ search }}"</span>
+      {% endif %}
+      {% if status %}
+      <span class="enq-filter-tag"><i class="fas fa-circle"></i> {{ status }}</span>
+      {% endif %}
+    </div>
+    {% endif %}
+
+  </form>
+
+  <!-- Table -->
+  <div class="enq-table-wrap">
+    {% if enquiries %}
+    <table class="enq-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Number</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for enquiry in enquiries %}
+        <tr>
+          <td><span class="enq-id">#{{ enquiry.id }}</span></td>
+          <td><span class="enq-name">{{ enquiry.name }}</span></td>
+          <td>{{ enquiry.number }}</td>
+          <td><span class="enq-email">{{ enquiry.email }}</span></td>
+          <td>
+            <span class="status-badge status-{{ enquiry.status }}">
+              {{ enquiry.status }}
+            </span>
+          </td>
+          <td>
+            <div class="action-wrap">
+              <a href="{% url 'enquiry_detail' enquiry.id %}" class="act-btn act-view">
+                <i class="fas fa-eye"></i> View
+              </a>
+              <a href="{% url 'delete_enquiry' enquiry.id %}" class="act-btn act-delete">
+                <i class="fas fa-trash"></i> Delete
+              </a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {% else %}
+    <div class="enq-empty">
+      <i class="fas fa-inbox"></i>
+      <p style="font-weight:600;color:#1a1a2e;margin-bottom:4px;">
+        {% if search or status %}No results found{% else %}No enquiries yet{% endif %}
+      </p>
+      <p style="font-size:0.85rem;">
+        {% if search or status %}Try different search or filter.{% else %}Submissions will appear here.{% endif %}
+      </p>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- Pagination -->
+  {% if enquiries.has_other_pages %}
+  <div class="enq-pagination">
+
+    {% if enquiries.has_previous %}
+    <a href="?{% if search %}search={{ search }}&{% endif %}{% if status %}status={{ status }}&{% endif %}page={{ enquiries.previous_page_number }}" class="pg-btn">
+      <i class="fas fa-chevron-left"></i>
+    </a>
+    {% endif %}
+
+    {% for num in enquiries.paginator.page_range %}
+      {% if enquiries.number == num %}
+      <span class="pg-btn pg-active">{{ num }}</span>
+      {% else %}
+      <a href="?{% if search %}search={{ search }}&{% endif %}{% if status %}status={{ status }}&{% endif %}page={{ num }}" class="pg-btn">{{ num }}</a>
+      {% endif %}
+    {% endfor %}
+
+    {% if enquiries.has_next %}
+    <a href="?{% if search %}search={{ search }}&{% endif %}{% if status %}status={{ status }}&{% endif %}page={{ enquiries.next_page_number }}" class="pg-btn">
+      <i class="fas fa-chevron-right"></i>
+    </a>
+    {% endif %}
+
+  </div>
+  {% endif %}
+
+</div>
+{% endblock content %}
+
+
+
+
+
+{% comment %} {% extends 'custom_admin/dashboard.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+  .enq-page { padding: 28px 24px 60px; max-width: 1100px; margin: 0 auto; }
+
+  .enq-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .enq-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+  }
+
+  .enq-title::before {
+    content: '';
+    width: 4px;
+    height: 22px;
+    background: var(--primary-color);
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  .enq-count {
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: #fff5e8;
+    color: var(--primary-color);
+    border: 1.5px solid rgba(214,136,42,0.25);
+    border-radius: 20px;
+    padding: 3px 12px;
+  }
+
+  .enq-table-wrap {
+    background: #fff;
+    border: 1.5px solid #ebebeb;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .enq-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+
+  .enq-table thead {
+    background: #f8f7f5;
+    border-bottom: 1.5px solid #ebebeb;
+  }
+
+  .enq-table thead th {
+    padding: 12px 18px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #6b6b80;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  .enq-table tbody tr {
+    border-bottom: 1px solid #f2f2f2;
+    transition: background 0.15s;
+  }
+
+  .enq-table tbody tr:last-child { border-bottom: none; }
+  .enq-table tbody tr:hover { background: #fafaf8; }
+
+  .enq-table tbody td {
+    padding: 14px 18px;
+    color: #1a1a2e;
+    vertical-align: middle;
+  }
+
+  .enq-id {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #aaa;
+    font-family: monospace;
+  }
+
+  .enq-name { font-weight: 600; }
+  .enq-email { color: #6b6b80; font-size: 0.83rem; }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 11px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .status-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  .status-pending   { background: #fff8e8; color: #a06010; border: 1px solid rgba(214,136,42,0.2); }
+  .status-pending::before   { background: #D6882A; }
+  .status-contacted { background: #e8f4ff; color: #1050a0; border: 1px solid rgba(31,79,255,0.2); }
+  .status-contacted::before { background: #1f4fff; }
+  .status-closed    { background: #e8f7ee; color: #1a6e40; border: 1px solid rgba(26,158,86,0.2); }
+  .status-closed::before    { background: #1a9e56; }
+
+  .action-wrap { display: flex; align-items: center; gap: 8px; }
+
+  .act-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.18s, color 0.18s;
+    white-space: nowrap;
+  }
+
+  .act-view {
+    background: #fff5e8;
+    color: var(--primary-color);
+    border: 1px solid rgba(214,136,42,0.25);
+  }
+  .act-view:hover { background: var(--primary-color); color: #fff; text-decoration: none; }
+
+  .act-delete {
+    background: #fef0f0;
+    color: #c0392b;
+    border: 1px solid rgba(192,57,43,0.2);
+  }
+  .act-delete:hover { background: #c0392b; color: #fff; text-decoration: none; }
+
+  .enq-empty {
+    text-align: center;
+    padding: 64px 20px;
+    color: #6b6b80;
+  }
+  .enq-empty i { font-size: 2.5rem; margin-bottom: 12px; display: block; color: #d0d0d8; }
+
+  @media (max-width: 768px) {
+    .enq-table thead th:nth-child(4),
+    .enq-table tbody td:nth-child(4) { display: none; }
+    .enq-page { padding: 20px 14px 48px; }
+  }
+
+  @media (max-width: 540px) {
+    .enq-table thead th:nth-child(3),
+    .enq-table tbody td:nth-child(3) { display: none; }
+  }
+</style>
+
+<div class="enq-page">
+
+  <div class="enq-header">
+    <h1 class="enq-title">
+      Enquiries
+      <span class="enq-count">{{ enquiries|length }} total</span>
+    </h1>
+  </div>
+
+  <div class="enq-table-wrap">
+    {% if enquiries %}
+    <table class="enq-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Number</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for enquiry in enquiries %}
+        <tr>
+          <td><span class="enq-id">#{{ enquiry.id }}</span></td>
+          <td><span class="enq-name">{{ enquiry.name }}</span></td>
+          <td>{{ enquiry.number }}</td>
+          <td><span class="enq-email">{{ enquiry.email }}</span></td>
+          <td>
+            <span class="status-badge status-{{ enquiry.status }}">
+              {{ enquiry.status }}
+            </span>
+          </td>
+          <td>
+            <div class="action-wrap">
+              <a href="{% url 'enquiry_detail' enquiry.id %}" class="act-btn act-view">
+                <i class="fas fa-eye"></i> View
+              </a>
+              <a href="{% url 'delete_enquiry' enquiry.id %}" class="act-btn act-delete">
+                <i class="fas fa-trash"></i> Delete
+              </a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="enq-empty">
+      <i class="fas fa-inbox"></i>
+      <p style="font-weight:600;color:#1a1a2e;margin-bottom:4px;">No enquiries yet</p>
+      <p style="font-size:0.85rem;">Submissions will appear here.</p>
+    </div>
+    {% endif %}
+  </div>
+
+</div>
+{% endblock content %}
+
+
+ {% endcomment %}
+
+
+
+{% comment %} <!-- ===================================================== -->
+<!-- enquiry_list.html -->
+<!-- ===================================================== -->
+
+<table border="1" cellpadding="10">
+
+    <tr>
+
+        <th>ID</th>
+
+        <th>Name</th>
+
+        <th>Number</th>
+
+        <th>Email</th>
+
+        <th>Status</th>
+
+        <th>Action</th>
+
+    </tr>
+
+    {% for enquiry in enquiries %}
+
+    <tr>
+
+        <td>{{ enquiry.id }}</td>
+
+        <td>{{ enquiry.name }}</td>
+
+        <td>{{ enquiry.number }}</td>
+
+        <td>{{ enquiry.email }}</td>
+
+        <td>{{ enquiry.status }}</td>
+
+        <td>
+
+            <a href="{% url 'enquiry_detail' enquiry.id %}">
+                View
+            </a>
+
+            |
+
+            <a href="{% url 'delete_enquiry' enquiry.id %}">
+                Delete
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table> {% endcomment %}

@@ -1,0 +1,416 @@
+{% extends 'custom_admin/dashboard.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+  .ed-page { padding: 28px 24px 60px; max-width: 780px; margin: 0 auto; }
+
+  .ed-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .ed-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+  }
+
+  .ed-title::before {
+    content: '';
+    width: 4px;
+    height: 22px;
+    background: var(--primary-color);
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  .ed-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #6b6b80;
+    text-decoration: none;
+    padding: 7px 14px;
+    border: 1.5px solid #ebebeb;
+    border-radius: 8px;
+    background: #fff;
+    transition: border-color 0.18s, color 0.18s;
+  }
+
+  .ed-back:hover { border-color: var(--primary-color); color: var(--primary-color); text-decoration: none; }
+
+  /* Info card */
+  .ed-card {
+    background: #fff;
+    border: 1.5px solid #ebebeb;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  .ed-card-head {
+    padding: 16px 22px;
+    border-bottom: 1px solid #f2f2f2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .ed-card-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    color: #9a9aaa;
+  }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .status-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  .status-pending   { background: #fff8e8; color: #a06010; border: 1px solid rgba(214,136,42,0.2); }
+  .status-pending::before   { background: #D6882A; }
+  .status-contacted { background: #e8f4ff; color: #1050a0; border: 1px solid rgba(31,79,255,0.2); }
+  .status-contacted::before { background: #1f4fff; }
+  .status-closed    { background: #e8f7ee; color: #1a6e40; border: 1px solid rgba(26,158,86,0.2); }
+  .status-closed::before    { background: #1a9e56; }
+
+  /* Fields grid */
+  .ed-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ed-field {
+    padding: 15px 22px;
+    border-bottom: 1px solid #f2f2f2;
+    border-right: 1px solid #f2f2f2;
+  }
+
+  .ed-field:nth-child(even) { border-right: none; }
+  .ed-field:nth-last-child(-n+2) { border-bottom: none; }
+
+  .ed-field.full {
+    grid-column: 1 / -1;
+    border-right: none;
+  }
+  .ed-field.full:last-child { border-bottom: none; }
+
+  .ed-field-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #aaa;
+    margin-bottom: 5px;
+  }
+
+  .ed-field-value {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: #1a1a2e;
+    line-height: 1.55;
+  }
+
+  /* Status update form card */
+  .ed-form-card {
+    background: #fff;
+    border: 1.5px solid #ebebeb;
+    border-radius: 16px;
+    padding: 22px;
+    margin-bottom: 16px;
+  }
+
+  .ed-form-title {
+    font-size: 0.83rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ed-form-title i { color: var(--primary-color); }
+
+  .ed-form-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .ed-select {
+    flex: 1;
+    min-width: 160px;
+    padding: 10px 36px 10px 14px;
+    border: 1.5px solid #ebebeb;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-family: inherit;
+    color: #1a1a2e;
+    background: #f8f7f5;
+    outline: none;
+    transition: border-color 0.18s;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+  }
+
+  .ed-select:focus { border-color: var(--primary-color); }
+
+  .ed-submit {
+    padding: 10px 24px;
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.18s;
+    white-space: nowrap;
+  }
+
+  .ed-submit:hover { background: #b46f1e; }
+
+  /* Delete button */
+  .ed-delete {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 20px;
+    background: #fef0f0;
+    color: #c0392b;
+    border: 1.5px solid rgba(192,57,43,0.2);
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.18s, color 0.18s;
+  }
+
+  .ed-delete:hover { background: #c0392b; color: #fff; text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .ed-fields { grid-template-columns: 1fr; }
+    .ed-field { border-right: none; }
+    .ed-field:nth-last-child(-n+2) { border-bottom: 1px solid #f2f2f2; }
+    .ed-field:last-child { border-bottom: none; }
+    .ed-page { padding: 20px 14px 48px; }
+  }
+</style>
+
+<div class="ed-page">
+
+  <div class="ed-header">
+    <h1 class="ed-title">Enquiry Detail</h1>
+    <a href="javascript:history.back()" class="ed-back">
+      <i class="fas fa-arrow-left"></i> Back
+    </a>
+  </div>
+
+  <!-- Info Card -->
+  <div class="ed-card">
+    <div class="ed-card-head">
+      <span class="ed-card-label">Enquiry #{{ enquiry.id }}</span>
+      <span class="status-badge status-{{ enquiry.status }}">{{ enquiry.status }}</span>
+    </div>
+    <div class="ed-fields">
+      <div class="ed-field">
+        <div class="ed-field-label">Name</div>
+        <div class="ed-field-value">{{ enquiry.name }}</div>
+      </div>
+      <div class="ed-field">
+        <div class="ed-field-label">Number</div>
+        <div class="ed-field-value">{{ enquiry.number }}</div>
+      </div>
+      <div class="ed-field">
+        <div class="ed-field-label">Email</div>
+        <div class="ed-field-value">{{ enquiry.email }}</div>
+      </div>
+      <div class="ed-field">
+        <div class="ed-field-label">Company</div>
+        <div class="ed-field-value">{{ enquiry.company_name }}</div>
+      </div>
+      <div class="ed-field">
+        <div class="ed-field-label">Interested Product</div>
+        <div class="ed-field-value">{{ enquiry.interested_product }}</div>
+      </div>
+      <div class="ed-field">
+        <div class="ed-field-label">Suitable Time</div>
+        <div class="ed-field-value">{{ enquiry.suitable_time }}</div>
+      </div>
+      <div class="ed-field">
+        <div class="ed-field-label">Submitted At</div>
+        <div class="ed-field-value">{{ enquiry.submitted_at }}</div>
+      </div>
+      <div class="ed-field">
+        <div class="ed-field-label">Current Status</div>
+        <div class="ed-field-value">{{ enquiry.status }}</div>
+      </div>
+      <div class="ed-field full">
+        <div class="ed-field-label">Message</div>
+        <div class="ed-field-value">{{ enquiry.message }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Status Update Form -->
+  <div class="ed-form-card">
+    <p class="ed-form-title">
+      <i class="fas fa-edit"></i> Update Status
+    </p>
+    <form method="POST" action="{% url 'update_enquiry_status' enquiry.id %}">
+      {% csrf_token %}
+      <div class="ed-form-row">
+        <select name="status" class="ed-select">
+          <option value="pending">Pending</option>
+          <option value="contacted">Contacted</option>
+          <option value="closed">Closed</option>
+        </select>
+        <button type="submit" class="ed-submit">
+          <i class="fas fa-check"></i> Update Status
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Delete -->
+  <a href="{% url 'delete_enquiry' enquiry.id %}" class="ed-delete">
+    <i class="fas fa-trash"></i> Delete Enquiry
+  </a>
+
+</div>
+{% endblock content %}
+
+
+
+
+{% comment %} <!-- ===================================================== -->
+<!-- enquiry_detail.html -->
+<!-- ===================================================== -->
+
+<h2>
+    Enquiry Detail
+</h2>
+
+<p>
+    <strong>Name:</strong>
+    {{ enquiry.name }}
+</p>
+
+<p>
+    <strong>Number:</strong>
+    {{ enquiry.number }}
+</p>
+
+<p>
+    <strong>Email:</strong>
+    {{ enquiry.email }}
+</p>
+
+<p>
+    <strong>Company:</strong>
+    {{ enquiry.company_name }}
+</p>
+
+<p>
+    <strong>Interested Product:</strong>
+    {{ enquiry.interested_product }}
+</p>
+
+<p>
+    <strong>Suitable Time:</strong>
+    {{ enquiry.suitable_time }}
+</p>
+
+<p>
+    <strong>Message:</strong>
+    {{ enquiry.message }}
+</p>
+
+<p>
+    <strong>Status:</strong>
+    {{ enquiry.status }}
+</p>
+
+<p>
+    <strong>Submitted:</strong>
+    {{ enquiry.submitted_at }}
+</p>
+
+<hr>
+
+<!-- STATUS UPDATE -->
+
+<form
+    method="POST"
+    action="{% url 'update_enquiry_status' enquiry.id %}"
+>
+
+    {% csrf_token %}
+
+    <select name="status">
+
+        <option value="pending">
+            Pending
+        </option>
+
+        <option value="contacted">
+            Contacted
+        </option>
+
+        <option value="closed">
+            Closed
+        </option>
+
+    </select>
+
+    <button type="submit">
+
+        Update Status
+
+    </button>
+
+</form>
+
+<br>
+
+<!-- DELETE -->
+
+<a href="{% url 'delete_enquiry' enquiry.id %}">
+
+    Delete Enquiry
+
+</a> {% endcomment %}

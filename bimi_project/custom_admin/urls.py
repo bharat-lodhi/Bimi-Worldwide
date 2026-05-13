@@ -108,4 +108,31 @@ urlpatterns = [
         name='real_subcategory_products'
     ),
     
+    #==========Contact Form==========================
+   
+
+    path(
+        'enquiries/',
+        views.enquiry_list,
+        name='enquiry_list'
+    ),
+
+    path(
+        'enquiry/<int:enquiry_id>/',
+        views.enquiry_detail,
+        name='enquiry_detail'
+    ),
+
+    path(
+        'enquiry-status/<int:enquiry_id>/',
+        views.update_enquiry_status,
+        name='update_enquiry_status'
+    ),
+
+    path(
+        'enquiry-delete/<int:enquiry_id>/',
+        views.delete_enquiry,
+        name='delete_enquiry'
+    ),
+    
 ]

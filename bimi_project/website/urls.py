@@ -41,5 +41,8 @@ path(
     # path("blogs/detail/", views.blog_detail, name="blog_detail"),
     path('blog/<int:pk>/',views.blog_detail,name='blog_detail'),
     
+    #==================================================================
+    path('contact/',views.contact_form,name='contact_form'),
+    
 ]
 

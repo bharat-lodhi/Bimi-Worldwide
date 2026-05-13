@@ -28,6 +28,14 @@
                     <button type="submit" class="search-btn">Search</button>
                 </div>
             </form>
+
+        {% if search %}
+        <br/>
+            <div class="result-info">
+                <p>Showing results for "<strong>{{ search }}</strong>" — {{ page_obj.paginator.count }} found</p>
+                <a href="{% url 'products_category' %}">Clear Search ✕</a>
+            </div>
+        {% endif %}
         </div>
 
         <div class="products-hero-visual">
@@ -37,17 +45,18 @@
         </div>
 
     </div>
+    
 </section>
 
 <section class="product-categories">
     <div class="container">
 
-        {% if search %}
+        {% comment %} {% if search %}
         <div class="result-info">
             <p>Showing results for "<strong>{{ search }}</strong>" — {{ page_obj.paginator.count }} found</p>
             <a href="{% url 'products_category' %}">Clear Search ✕</a>
         </div>
-        {% endif %}
+        {% endif %} {% endcomment %}
 
         {% if page_obj %}
         <div class="categories-grid">
@@ -97,7 +106,7 @@
             <div class="empty-icon">🔍</div>
             <h3>No Categories Found</h3>
             <p>We couldn't find any category matching your search. Try different keywords.</p>
-            <a href="{% url 'products-category' %}" class="btn-primary">Back to All Products</a>
+            <a href="{% url 'products_category' %}" class="btn-primary">Back to All Products</a>
         </div>
         {% endif %}
 

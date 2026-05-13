@@ -181,6 +181,16 @@ class ProductSubCategory(models.Model):
 # =========================================================
 
 class ContactEnquiry(models.Model):
+    
+    STATUS_CHOICES = [
+
+        ("pending", "Pending"),
+
+        ("contacted", "Contacted"),
+
+        ("closed", "Closed"),
+
+    ]
 
     # NAME
     name = models.CharField(
@@ -206,12 +216,10 @@ class ContactEnquiry(models.Model):
     )
 
     # INTERESTED PRODUCT
-    interested_product = models.ForeignKey(
-        ProductSubCategory,
-        on_delete=models.SET_NULL,
+    interested_product = models.CharField(
+        max_length=255,
         blank=True,
-        null=True,
-        related_name='enquiries'
+        null=True
     )
 
     # SUITABLE TIME TO CONTACT
@@ -223,6 +231,15 @@ class ContactEnquiry(models.Model):
 
     # MESSAGE (OPTIONAL)
     message = models.TextField(
+        blank=True,
+        null=True
+    )
+    
+    # STATUS
+    status = models.CharField(
+        max_length=50,
+        choices=STATUS_CHOICES,
+        default="pending",
         blank=True,
         null=True
     )

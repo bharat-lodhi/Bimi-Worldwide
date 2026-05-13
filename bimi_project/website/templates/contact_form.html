@@ -1,0 +1,393 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Contact Us – BiMi{% endblock %}
+
+{% block css %}
+<style>
+    :root { --primary-orange: #D6882A; --ink: #1e1e2d; }
+    
+    .contact-section { padding: 80px 0; background-color: #fcfdfe; }
+    
+    .contact-card {
+        background: #fff;
+        border-radius: 24px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+        border: 1px solid #f0f0f0;
+        overflow: hidden;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    .contact-info-panel {
+        background: var(--primary-orange);
+        color: #fff;
+        padding: 40px;
+    }
+    
+    .contact-form-panel { padding: 40px; }
+    
+    .form-label { font-weight: 600; color: var(--ink); font-size: 0.9rem; margin-bottom: 8px; }
+    
+    .form-control, .form-select {
+        border-radius: 12px;
+        border: 1.5px solid #eee;
+        padding: 12px 16px;
+        transition: 0.3s;
+    }
+    
+    .form-control:focus, .form-select:focus {
+        border-color: var(--primary-orange);
+        box-shadow: 0 0 0 4px rgba(214, 136, 42, 0.1);
+        outline: none;
+    }
+    
+    .btn-submit {
+        background: var(--primary-orange);
+        color: #fff;
+        border: none;
+        padding: 14px 30px;
+        border-radius: 12px;
+        font-weight: 700;
+        width: 100%;
+        transition: 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .btn-submit:hover { background: #b46f1e; transform: translateY(-2px); }
+    
+    .otp-box {
+        background: #fff8f0;
+        border: 1px dashed var(--primary-orange);
+        padding: 20px;
+        border-radius: 16px;
+        margin-top: 20px;
+    }
+
+    .badge-contact {
+        background: rgba(255,255,255,0.2);
+        color: #fff;
+        padding: 6px 14px;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        display: inline-block;
+        margin-bottom: 15px;
+    }
+
+    @media (max-width: 768px) {
+        .contact-card { border-radius: 0; }
+        .contact-info-panel { text-align: center; }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="contact-section">
+    <div class="container">
+        
+        <!-- SECTION HEADER -->
+        <div class="text-center mb-5">
+            <h2 class="fw-bold" style="color: var(--ink); font-size: 2.5rem;">Get in <span>Touch</span></h2>
+            <p class="text-muted mx-auto" style="max-width: 500px;">Have a bulk inquiry or need custom packaging solutions? Send us a message and we'll get back to you.</p>
+        </div>
+
+        <div class="contact-card">
+            <div class="row g-0">
+                
+                <!-- LEFT SIDE: INFO -->
+                <div class="col-lg-4 contact-info-panel d-flex flex-column justify-content-between">
+                    <div>
+                        <span class="badge-contact">Contact Us</span>
+                        <h3 class="fw-bold mb-4">Let's grow your business together.</h3>
+                        <p class="opacity-75 mb-5">Fill out the form and our team will reach out within 24 hours.</p>
+                    </div>
+                    
+                    <div class="contact-meta">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-envelope me-3"></i>
+                            <span>sales@bimiworldwide.com</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-phone-alt me-3"></i>
+                            <span>+91 98765 43210</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT SIDE: FORM -->
+                <div class="col-lg-8 contact-form-panel">
+                    
+                    {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-info border-0 rounded-3 shadow-sm mb-4">
+                            <i class="fas fa-info-circle me-2"></i> {{ message }}
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        
+                        <div class="row g-3">
+                            <!-- Name -->
+                            <div class="col-md-6">
+                                <label class="form-label">Your Name</label>
+                                <input type="text" name="name" class="form-control" placeholder="John Doe" value="{{ form_data.name }}" required>
+                            </div>
+                            
+                            <!-- Mobile -->
+                            <div class="col-md-6">
+                                <label class="form-label">Mobile Number</label>
+                                <input type="text" name="number" class="form-control" placeholder="+91 ..." value="{{ form_data.number }}" required>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="col-12">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" name="email" class="form-control" placeholder="abc@company.com" value="{{ form_data.email }}" required>
+                            </div>
+
+                            <!-- Company -->
+                            <div class="col-md-6">
+                                <label class="form-label">Company Name</label>
+                                <input type="text" name="company_name" class="form-control" placeholder="ABC Company" value="{{ form_data.company_name }}">
+                            </div>
+
+                            <!-- Product Selection -->
+                            <div class="col-md-6">
+                                <label class="form-label">Interested Product</label>
+                                <select name="interested_product" class="form-select" required>
+                                    <option value="">Select Product</option>
+                                    <option value="Paper Cups" {% if form_data.interested_product == "Paper Cups" %}selected{% endif %}>Paper Cups</option>
+                                    <option value="Paper Plates" {% if form_data.interested_product == "Paper Plates" %}selected{% endif %}>Paper Plates</option>
+                                    <option value="Food Packaging" {% if form_data.interested_product == "Food Packaging" %}selected{% endif %}>Food Packaging</option>
+                                    <option value="Carry Bags" {% if form_data.interested_product == "Carry Bags" %}selected{% endif %}>Carry Bags</option>
+                                </select>
+                            </div>
+
+                            <!-- Suitable Time -->
+                            <div class="col-12">
+                                <label class="form-label">Suitable Time to Call</label>
+                                <input type="text" name="suitable_time" class="form-control" placeholder="e.g. 10:00 AM - 02:00 PM" value="{{ form_data.suitable_time }}">
+                            </div>
+
+                            <!-- Message -->
+                            <div class="col-12">
+                                <label class="form-label">Your Requirements</label>
+                                <textarea name="message" class="form-control" rows="3" placeholder="Tell us about your bulk needs...">{{ form_data.message }}</textarea>
+                            </div>
+
+                            <!-- OTP SECTION -->
+                            <div class="col-12">
+                                {% if show_otp_field %}
+                                    <div class="otp-box">
+                                        <label class="form-label fw-bold text-primary">Verification Code</label>
+                                        <p class="small text-muted mb-3">Please enter the OTP sent to your email/number.</p>
+                                        <div class="d-flex gap-2 mb-3">
+                                            <input type="text" name="otp" class="form-control text-center fw-bold" placeholder="0 0 0 0 0 0" style="letter-spacing: 8px; font-size: 1.2rem;" required>
+                                        </div>
+                                        <button type="submit" name="verify_otp" class="btn-submit">Verify & Submit Inquiry</button>
+                                    </div>
+                                {% else %}
+                                    <button type="submit" name="send_otp" class="btn-submit mt-3">
+                                        <i class="fas fa-paper-plane me-2"></i> Send OTP to Verify
+                                    </button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+
+
+
+
+
+{% comment %} <!-- ===================================================== -->
+<!-- templates/contact/contact_form.html -->
+<!-- ===================================================== -->
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>
+        Contact Form
+    </title>
+
+</head>
+
+<body>
+
+    <h2>
+        Contact Form
+    </h2>
+
+    <!-- MESSAGES -->
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <p>
+                {{ message }}
+            </p>
+
+        {% endfor %}
+
+    {% endif %}
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <!-- NAME -->
+        <input
+            type="text"
+            name="name"
+            placeholder="Enter Name"
+            value="{{ form_data.name }}"
+            required
+        >
+
+        <br><br>
+
+        <!-- NUMBER -->
+        <input
+            type="text"
+            name="number"
+            placeholder="Enter Mobile Number"
+            value="{{ form_data.number }}"
+            required
+        >
+
+        <br><br>
+
+        <!-- EMAIL -->
+        <input
+            type="email"
+            name="email"
+            placeholder="Enter Email"
+            value="{{ form_data.email }}"
+            required
+        >
+
+        <br><br>
+
+        <!-- COMPANY -->
+        <input
+            type="text"
+            name="company_name"
+            placeholder="Company Name"
+            value="{{ form_data.company_name }}"
+        >
+
+        <br><br>
+
+        <!-- PRODUCT -->
+        <select
+            name="interested_product"
+            required
+        >
+
+            <option value="">
+                Select Product
+            </option>
+
+            <option
+                value="Paper Cups"
+                {% if form_data.interested_product == "Paper Cups" %}
+                    selected
+                {% endif %}
+            >
+                Paper Cups
+            </option>
+
+            <option
+                value="Paper Plates"
+                {% if form_data.interested_product == "Paper Plates" %}
+                    selected
+                {% endif %}
+            >
+                Paper Plates
+            </option>
+
+            <option
+                value="Food Packaging"
+                {% if form_data.interested_product == "Food Packaging" %}
+                    selected
+                {% endif %}
+            >
+                Food Packaging
+            </option>
+
+            <option
+                value="Carry Bags"
+                {% if form_data.interested_product == "Carry Bags" %}
+                    selected
+                {% endif %}
+            >
+                Carry Bags
+            </option>
+
+        </select>
+
+        <br><br>
+
+        <!-- SUITABLE TIME -->
+        <input
+            type="text"
+            name="suitable_time"
+            placeholder="Suitable Time"
+            value="{{ form_data.suitable_time }}"
+        >
+
+        <br><br>
+
+        <!-- MESSAGE -->
+        <textarea
+            name="message"
+            placeholder="Write Message"
+        >{{ form_data.message }}</textarea>
+
+        <br><br>
+
+        <!-- OTP FIELD -->
+        {% if show_otp_field %}
+
+            <input
+                type="text"
+                name="otp"
+                placeholder="Enter OTP"
+                required
+            >
+
+            <br><br>
+
+            <button
+                type="submit"
+                name="verify_otp"
+            >
+                Verify & Submit
+            </button>
+
+        {% else %}
+
+            <button
+                type="submit"
+                name="send_otp"
+            >
+                Send OTP
+            </button>
+
+        {% endif %}
+
+    </form>
+
+</body>
+</html> {% endcomment %}
