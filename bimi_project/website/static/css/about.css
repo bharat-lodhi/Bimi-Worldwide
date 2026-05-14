@@ -4,6 +4,7 @@ body {
     font-family: 'Inter', system-ui, sans-serif;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
     /* color: #333; */
 }
 
@@ -19,36 +20,45 @@ body {
 /* --- ABOUT HERO --- */
 
 .about-hero {
-    padding: 55px 0 0 0;
+    padding: clamp(36px, 6vw, 55px) 0 0;
     background: var(--orange);
+    overflow: hidden;
 }
 
 .about-hero-grid {
     display: grid;
-    grid-template-columns: 1fr 1.1fr;
-    gap: 60px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: clamp(30px, 5vw, 60px);
     align-items: center;
 }
 
+.about-hero-media,
+.about-hero-content {
+    min-width: 0;
+}
+
 .image-frame {
-    width: 420px;
-    height: 520px;
+    width: min(100%, 420px);
+    height: clamp(360px, 42vw, 520px);
     border-radius: 180px 180px 40px 40px;
     overflow: hidden;
+    margin-inline: auto;
 }
 
 .image-frame img {
     width: 100%;
     height: 140%;
     object-fit: cover;
+    object-position: center;
 }
 
 .about-hero-content h1 {
     font-size: clamp(2rem, 3vw, 2.6rem);
     font-weight: 700;
     line-height: 1.1;
-    letter-spacing: -.01em;
+    letter-spacing: 0;
     margin-bottom: 20px;
+    overflow-wrap: anywhere;
     /* color: #000; */
     /* Heading Black */
 }
@@ -58,6 +68,7 @@ body {
     line-height: 1.7;
     max-width: 500px;
     margin: 20px 0 34px;
+    overflow-wrap: break-word;
     /* color: #000; */
     /* Subtitle Black as requested */
 }
@@ -84,6 +95,8 @@ body {
     min-width: 150px;
     /* Thoda width fix kiya taaki centering dikhe */
     text-transform: uppercase;
+    max-width: 100%;
+    white-space: normal;
 }
 
 
@@ -91,22 +104,30 @@ body {
 
 .company-intro {
     background: #fff;
-    padding-top: 90px;
-    padding-bottom: 10px;
+    padding-top: clamp(52px, 8vw, 90px);
+    padding-bottom: clamp(10px, 3vw, 24px);
 }
 
 .intro-box {
     max-width: 900px;
     margin: auto;
     text-align: center;
+    min-width: 0;
 }
 
 .main-desc {
-    font-size: 1.3rem;
+    font-size: clamp(1rem, 2vw, 1.3rem);
     line-height: 1.8;
-    margin-bottom: 40px;
+    margin-bottom: clamp(24px, 5vw, 40px);
+    overflow-wrap: break-word;
     /* color: #000; */
     /* Dark Color */
+}
+
+.sub-desc {
+    font-size: clamp(0.95rem, 1.8vw, 1rem);
+    line-height: 1.75;
+    overflow-wrap: break-word;
 }
 
 .highlight-grid {
@@ -130,52 +151,63 @@ body {
 /* --- DARK CALLOUT --- */
 
 .architects-callout {
-    padding: 80px 0;
+    padding: clamp(48px, 7vw, 80px) 0;
     background: #fff;
 }
 
 .dark-card {
     background: #1a1a2e;
     color: #fff;
-    padding: 60px;
-    border-radius: 30px;
+    padding: clamp(28px, 6vw, 60px);
+    border-radius: clamp(18px, 3vw, 30px);
     text-align: center;
+    overflow: hidden;
 }
 
 .dark-card h2 {
-    font-size: 2rem;
+    font-size: clamp(1.35rem, 3vw, 2rem);
     color: #D6882A;
     margin-bottom: 20px;
+    overflow-wrap: break-word;
+}
+
+.dark-card p {
+    margin: 0 auto;
+    max-width: 900px;
+    overflow-wrap: break-word;
 }
 
 
 /* --- APPROACH (Expertise Section - Updated & Compact) --- */
 
 .our-approach {
-    padding: 80px 0;
+    padding: clamp(52px, 7vw, 80px) 0;
     background: #D6882A;
+    overflow: hidden;
 }
 
 .approach-head h2 {
     text-align: center;
     /* color: #000; */
     /* Heading Black */
-    font-size: 2.2rem;
-    margin-bottom: 40px;
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    margin-bottom: clamp(28px, 5vw, 40px);
+    overflow-wrap: break-word;
 }
 
 .approach-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(16px, 2vw, 20px);
     /* Gap kam kiya */
     max-width: 1100px;
     margin: 0 auto;
+    width: 100%;
 }
 
 .approach-card {
     background: #fff;
-    padding: 20px 15px;
+    padding: clamp(18px, 3vw, 22px) clamp(14px, 2vw, 18px);
     /* Chhota padding */
     border-radius: 12px;
     text-align: center;
@@ -185,15 +217,17 @@ body {
     flex-direction: column;
     justify-content: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    min-width: 0;
 }
 
 .approach-card h3 {
-    font-size: 1rem;
+    font-size: clamp(0.95rem, 1.5vw, 1rem);
     /* Font size chhota kiya */
     /* color: #000; */
     /* Heading Black */
     margin: 0;
-    line-height: 1.3;
+    line-height: 1.4;
+    overflow-wrap: break-word;
 }
 
 .card-number {
@@ -207,7 +241,7 @@ body {
 /* --- DYNAMICS --- */
 
 .dynamics {
-    padding: 80px 0 60px;
+    padding: clamp(52px, 7vw, 80px) 0 clamp(44px, 6vw, 60px);
     background: #f9f9f9;
 }
 
@@ -216,8 +250,13 @@ body {
     margin: auto;
     text-align: center;
     font-style: italic;
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 2vw, 1.1rem);
     color: #555;
+    overflow-wrap: break-word;
+}
+
+.dynamics-content p {
+    margin: 0;
 }
 
 
@@ -225,58 +264,122 @@ body {
 
 .philosophy {
     background: #fff;
-    padding: 100px 0;
+    padding: clamp(56px, 8vw, 100px) 0;
 }
 
 .philosophy-wrapper {
     background: #1a1a2e;
-    padding: 80px;
-    border-radius: 30px;
+    padding: clamp(30px, 6vw, 80px);
+    border-radius: clamp(18px, 3vw, 30px);
     color: #fff;
     text-align: center;
+    overflow: hidden;
 }
 
 .philosophy-wrapper h2 {
-    font-size: 2rem;
-    margin-bottom: 30px;
+    font-size: clamp(1.45rem, 3.5vw, 2rem);
+    margin-bottom: clamp(22px, 4vw, 30px);
     color: #D6882A;
+    overflow-wrap: break-word;
 }
 
 .philo-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    margin-top: 40px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(22px, 4vw, 40px);
+    margin-top: clamp(28px, 5vw, 40px);
+}
+
+.philo-item {
+    min-width: 0;
 }
 
 .philo-item h4 {
-    font-size: 1.3rem;
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
     color: #D6882A;
     margin-bottom: 10px;
+    overflow-wrap: break-word;
+}
+
+.philo-item p {
+    margin: 0;
+    overflow-wrap: break-word;
+}
+
+.closing-text {
+    margin-top: clamp(30px, 5vw, 40px);
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.8;
+}
+
+.closing-text p {
+    margin: 0 auto 14px;
+    max-width: 940px;
+    overflow-wrap: break-word;
+}
+
+.closing-text p:last-child {
+    margin-bottom: 0;
+}
+
+.closing-statement {
+    margin-top: clamp(34px, 6vw, 50px);
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: clamp(22px, 4vw, 30px);
+}
+
+.closing-statement h3 {
+    font-size: clamp(1.15rem, 3vw, 1.5rem);
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    overflow-wrap: break-word;
 }
 
 
-/* --- MOBILE RESPONSIVENESS --- */
+/* --- RESPONSIVE FIX: Tablet layouts keep two-column cards while preventing overflow. --- */
 
 @media(max-width:900px) {
     .about-hero-grid {
         grid-template-columns: 1fr;
         text-align: center;
     }
+    .hero-subtitle {
+        margin-inline: auto;
+    }
     .image-frame {
-        width: 260px;
-        height: 320px;
+        width: min(78vw, 340px);
+        height: clamp(330px, 58vw, 440px);
         margin: auto;
     }
     .approach-grid {
-        grid-template-columns: 1fr 1fr;
-        /* Tablet pe 2 columns */
-        padding: 0 20px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .philo-grid {
         grid-template-columns: 1fr;
     }
 }
+
+
+/* --- TABLET FIX: Reduce panel padding and keep readable line lengths on mid-sized screens. --- */
+
+@media(min-width:481px) and (max-width:768px) {
+    .about-hero {
+        padding-top: 44px;
+    }
+    .dark-card,
+    .philosophy-wrapper {
+        padding-inline: 36px;
+    }
+    .approach-card {
+        min-height: 120px;
+    }
+}
+
+
+/* --- MOBILE FIX: Single-column layout, smaller spacing, and edge-safe content for 320px screens. --- */
 
 @media(max-width:600px) {
     .approach-grid {
@@ -284,6 +387,42 @@ body {
         /* Mobile pe single column */
     }
     .about-hero-content h1 {
-        font-size: 2.2rem;
+        font-size: clamp(1.85rem, 9vw, 2.2rem);
+    }
+}
+
+@media(max-width:480px) {
+    .about-hero {
+        padding-top: 34px;
+    }
+    .about-hero-grid {
+        gap: 26px;
+    }
+    .image-frame {
+        width: min(86vw, 300px);
+        height: clamp(300px, 100vw, 370px);
+        border-radius: 140px 140px 28px 28px;
+    }
+    .badge {
+        min-width: 0;
+        width: auto;
+        padding: 8px 16px;
+        font-size: 0.72rem;
+        letter-spacing: 0.8px;
+    }
+    .hero-subtitle,
+    .sub-desc,
+    .dark-card p,
+    .dynamics-content,
+    .closing-text {
+        line-height: 1.65;
+    }
+    .dark-card,
+    .philosophy-wrapper {
+        border-radius: 18px;
+    }
+    .approach-card {
+        min-height: auto;
+        padding: 20px 16px;
     }
 }

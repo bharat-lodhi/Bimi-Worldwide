@@ -5,14 +5,23 @@
 
 .pd-hero {
     background: var(--white);
-    padding: 80px 0 90px;
+    padding: 50px 16px;
+    /* MOBILE FIX: Reduced padding and added horizontal padding */
+    width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
+    overflow-x: hidden;
+    /* MOBILE FIX: Prevent horizontal overflow */
 }
 
 .pd-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 72px;
+    grid-template-columns: 1fr;
+    /* MOBILE FIX: Single column on mobile */
+    gap: 30px;
+    /* MOBILE FIX: Reduced gap for small screens */
     align-items: center;
+    width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
 }
 
 
@@ -20,6 +29,8 @@
 
 .pd-image {
     position: relative;
+    width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
 }
 
 .pd-image::after {
@@ -30,31 +41,44 @@
     border-radius: 18px;
     z-index: 0;
     opacity: 0.12;
+    display: none;
+    /* MOBILE FIX: Hide on small screens to prevent overflow */
 }
 
 .pd-image img {
     position: relative;
     z-index: 1;
     width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
+    height: auto;
+    /* MOBILE FIX: Auto height for responsive aspect ratio */
+    aspect-ratio: 1 / 1;
+    /* RESPONSIVE FIX: Maintains square aspect ratio */
     border-radius: 16px;
     box-shadow: 0 20px 48px rgba(0, 0, 0, 0.10);
     display: block;
+    object-fit: cover;
+    /* MOBILE FIX: Ensure image fills container properly */
 }
 
 
 /* Content */
 
 .pd-content h1 {
-    font-size: 2.6rem;
+    font-size: clamp(1.5rem, 6vw, 2.6rem);
+    /* RESPONSIVE FIX: Fluid sizing from 1.5rem mobile to 2.6rem desktop */
     margin: 16px 0 18px;
     font-weight: 700;
     color: var(--ink);
     line-height: 1.2;
     letter-spacing: -0.02em;
+    word-break: break-word;
+    /* MOBILE FIX: Prevent overflow on long titles */
 }
 
 .pd-summary {
-    font-size: 1rem;
+    font-size: clamp(0.95rem, 2.5vw, 1rem);
+    /* RESPONSIVE FIX: Fluid font sizing */
     line-height: 1.8;
     color: var(--muted);
     margin-bottom: 24px;
@@ -70,6 +94,8 @@
     border: 1.5px solid #ebebeb;
     border-radius: 12px;
     overflow: hidden;
+    width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
 }
 
 
@@ -83,9 +109,11 @@
 
 .pd-features li,
 .pd-features ul li {
-    padding: 11px 18px 11px 42px;
+    padding: 12px 16px 12px 36px;
+    /* MOBILE FIX: Reduced from 11px 18px 11px 42px */
     position: relative;
-    font-size: 0.93rem;
+    font-size: clamp(0.85rem, 2vw, 0.93rem);
+    /* RESPONSIVE FIX: Fluid font sizing */
     color: var(--muted);
     line-height: 1.6;
     border-bottom: 1px solid #f0f0f0;
@@ -99,7 +127,8 @@
 .pd-features li::before {
     content: '';
     position: absolute;
-    left: 16px;
+    left: 14px;
+    /* MOBILE FIX: Reduced from 16px */
     top: 50%;
     transform: translateY(-50%);
     width: 8px;
@@ -115,16 +144,21 @@
     display: inline-flex;
     align-items: center;
     height: 32px;
-    padding: 0 16px;
+    padding: 0 14px;
+    /* MOBILE FIX: Reduced from 16px */
     background: #fff5e8;
     border: 1.5px solid rgba(214, 136, 42, 0.3);
     border-radius: 30px;
-    font-size: 0.72rem;
-    letter-spacing: 2px;
+    font-size: clamp(0.65rem, 2vw, 0.72rem);
+    /* RESPONSIVE FIX: Fluid font sizing */
+    letter-spacing: 1.5px;
+    /* MOBILE FIX: Reduced from 2px */
     font-weight: 700;
     color: var(--orange);
     text-transform: uppercase;
     margin-bottom: 14px;
+    white-space: nowrap;
+    /* MOBILE FIX: Prevent text wrapping */
 }
 
 .detail-badge p {
@@ -135,8 +169,13 @@
 /* ================= CONTENT SECTIONS ================= */
 
 .pd-section {
-    padding: 80px 0;
+    padding: 50px 16px;
+    /* MOBILE FIX: Reduced from 80px 0 and added horizontal padding */
     background: var(--white);
+    width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
+    overflow-x: hidden;
+    /* MOBILE FIX: Prevent horizontal overflow */
 }
 
 .pd-section.alt {
@@ -148,21 +187,26 @@
 }
 
 .pd-section h2 {
-    font-size: 1.9rem;
+    font-size: clamp(1.4rem, 5vw, 1.9rem);
+    /* RESPONSIVE FIX: Fluid heading sizing */
     font-weight: 700;
     color: var(--ink);
-    margin-bottom: 32px;
+    margin-bottom: 28px;
+    /* MOBILE FIX: Reduced from 32px */
     letter-spacing: -0.02em;
     display: flex;
     align-items: center;
     gap: 12px;
+    flex-wrap: wrap;
+    /* MOBILE FIX: Allow wrapping on small screens */
 }
 
 .pd-section h2::before {
     content: '';
     display: inline-block;
     width: 4px;
-    height: 28px;
+    height: 24px;
+    /* MOBILE FIX: Reduced from 28px */
     background: var(--orange);
     border-radius: 4px;
     flex-shrink: 0;
@@ -173,7 +217,8 @@
 
 .pd-section .ck-content,
 .pd-section .container>div {
-    font-size: 0.97rem;
+    font-size: clamp(0.9rem, 2.5vw, 0.97rem);
+    /* RESPONSIVE FIX: Fluid font sizing */
     line-height: 1.85;
     color: var(--muted);
 }
@@ -181,14 +226,19 @@
 .pd-section .ck-content p,
 .pd-section .container>div p {
     margin-bottom: 1rem;
+    word-break: break-word;
+    /* MOBILE FIX: Prevent overflow on long words */
 }
 
 .pd-section .ck-content ul,
 .pd-section .ck-content ol,
 .pd-section .container>div ul,
 .pd-section .container>div ol {
-    padding-left: 1.4rem;
+    padding-left: 1.2rem;
+    /* MOBILE FIX: Reduced from 1.4rem */
     margin-bottom: 1rem;
+    list-style-position: inside;
+    /* MOBILE FIX: Prevent overflow */
 }
 
 .pd-section .ck-content li,
@@ -202,6 +252,12 @@
     border-collapse: collapse;
     margin: 1.2rem 0;
     font-size: 0.9rem;
+    display: block;
+    /* MOBILE FIX: Block display for overflow */
+    overflow-x: auto;
+    /* MOBILE FIX: Allow horizontal scroll for tables */
+    -webkit-overflow-scrolling: touch;
+    /* MOBILE FIX: Smooth scrolling on iOS */
 }
 
 .pd-section .ck-content table th,
@@ -210,16 +266,21 @@
     color: var(--ink);
     font-weight: 600;
     text-align: left;
-    padding: 11px 16px;
+    padding: 10px 12px;
+    /* MOBILE FIX: Reduced from 11px 16px */
     border-bottom: 2px solid #e4e4e4;
-    font-size: 0.8rem;
+    font-size: clamp(0.7rem, 2vw, 0.8rem);
+    /* RESPONSIVE FIX: Fluid font sizing */
     letter-spacing: 0.04em;
     text-transform: uppercase;
+    white-space: nowrap;
+    /* MOBILE FIX: Prevent wrapping */
 }
 
 .pd-section .ck-content table td,
 .pd-section .container>div table td {
-    padding: 11px 16px;
+    padding: 10px 12px;
+    /* MOBILE FIX: Reduced from 11px 16px */
     border-bottom: 1px solid #ebebeb;
     color: var(--muted);
 }
@@ -239,15 +300,20 @@
 
 .spec-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+    grid-template-columns: 1fr;
+    /* MOBILE FIX: Single column on mobile */
+    gap: 12px;
+    /* MOBILE FIX: Reduced gap for mobile */
+    width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
 }
 
 .spec-item {
     background: #f8f7f5;
     border: 1.5px solid #ebebeb;
     border-radius: 12px;
-    padding: 16px 18px;
+    padding: 14px 16px;
+    /* MOBILE FIX: Reduced padding */
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
@@ -257,7 +323,8 @@
 }
 
 .spec-label {
-    font-size: 0.72rem;
+    font-size: clamp(0.65rem, 2vw, 0.72rem);
+    /* RESPONSIVE FIX: Fluid font sizing */
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1.2px;
@@ -266,7 +333,8 @@
 }
 
 .spec-value {
-    font-size: 0.93rem;
+    font-size: clamp(0.85rem, 2.5vw, 0.93rem);
+    /* RESPONSIVE FIX: Fluid font sizing */
     font-weight: 600;
     color: var(--ink);
 }
@@ -275,27 +343,36 @@
 /* ================= RELATED PRODUCTS ================= */
 
 .related-section {
-    padding: 80px 0;
+    padding: 50px 16px;
+    /* MOBILE FIX: Reduced from 80px 0 and added horizontal padding */
     background: #f8f7f5;
     border-top: 1px solid #ebebeb;
+    width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
+    overflow-x: hidden;
+    /* MOBILE FIX: Prevent horizontal overflow */
 }
 
 .related-section h2 {
-    font-size: 1.9rem;
+    font-size: clamp(1.4rem, 5vw, 1.9rem);
+    /* RESPONSIVE FIX: Fluid heading sizing */
     font-weight: 700;
     color: var(--ink);
-    margin-bottom: 36px;
+    margin-bottom: 32px;
     letter-spacing: -0.02em;
     display: flex;
     align-items: center;
     gap: 12px;
+    flex-wrap: wrap;
+    /* MOBILE FIX: Allow wrapping */
 }
 
 .related-section h2::before {
     content: '';
     display: inline-block;
     width: 4px;
-    height: 28px;
+    height: 24px;
+    /* MOBILE FIX: Reduced from 28px */
     background: var(--orange);
     border-radius: 4px;
     flex-shrink: 0;
@@ -303,8 +380,12 @@
 
 .related-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
+    grid-template-columns: 1fr;
+    /* MOBILE FIX: Single column on mobile */
+    gap: 16px;
+    /* MOBILE FIX: Reduced gap for mobile */
+    width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
 }
 
 
@@ -320,6 +401,8 @@
     display: flex;
     flex-direction: column;
     transition: border-color 0.22s, box-shadow 0.22s, transform 0.22s;
+    width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
 }
 
 .related-card:hover {
@@ -330,6 +413,7 @@
 
 .related-card-img {
     width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
     aspect-ratio: 4 / 3;
     overflow: hidden;
     background: #f4f3f0;
@@ -340,6 +424,7 @@
 
 .related-card-img img {
     width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
@@ -350,36 +435,46 @@
 }
 
 .related-card-img .no-img {
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    /* RESPONSIVE FIX: Fluid icon sizing */
     color: #ccc;
 }
 
 .related-card-body {
-    padding: 18px 20px 20px;
+    padding: 14px;
+    /* MOBILE FIX: Reduced from 18px 20px 20px */
     flex: 1;
     display: flex;
     flex-direction: column;
 }
 
 .related-card-cat {
-    font-size: 0.68rem;
+    font-size: clamp(0.6rem, 2vw, 0.68rem);
+    /* RESPONSIVE FIX: Fluid font sizing */
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 1.2px;
+    /* MOBILE FIX: Reduced from 1.5px */
     color: var(--orange);
-    margin-bottom: 7px;
+    margin-bottom: 6px;
+    /* MOBILE FIX: Reduced from 7px */
 }
 
 .related-card-name {
-    font-size: 0.97rem;
+    font-size: clamp(0.85rem, 2.5vw, 0.97rem);
+    /* RESPONSIVE FIX: Fluid font sizing */
     font-weight: 600;
     color: var(--ink);
     line-height: 1.35;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    /* MOBILE FIX: Reduced from 10px */
+    word-break: break-word;
+    /* MOBILE FIX: Prevent overflow */
 }
 
 .related-card-desc {
-    font-size: 0.83rem;
+    font-size: clamp(0.75rem, 2vw, 0.83rem);
+    /* RESPONSIVE FIX: Fluid font sizing */
     color: var(--muted);
     line-height: 1.6;
     flex: 1;
@@ -390,14 +485,18 @@
 }
 
 .related-card-link {
-    margin-top: 14px;
-    font-size: 0.82rem;
+    margin-top: 10px;
+    /* MOBILE FIX: Reduced from 14px */
+    font-size: clamp(0.75rem, 2vw, 0.82rem);
+    /* RESPONSIVE FIX: Fluid font sizing */
     font-weight: 600;
     color: var(--orange);
     display: inline-flex;
     align-items: center;
     gap: 5px;
     transition: gap 0.2s;
+    white-space: nowrap;
+    /* MOBILE FIX: Prevent wrapping */
 }
 
 .related-card:hover .related-card-link {
@@ -407,22 +506,105 @@
 
 /* ================= RESPONSIVE ================= */
 
+@media (min-width: 481px) and (max-width: 768px) {
+    .pd-hero {
+        padding: 60px 20px;
+    }
+    .pd-grid {
+        gap: 40px;
+    }
+    .pd-content h1 {
+        font-size: 2rem;
+    }
+    .pd-section,
+    .related-section {
+        padding: 60px 20px;
+    }
+    .pd-section h2,
+    .related-section h2 {
+        font-size: 1.6rem;
+        margin-bottom: 24px;
+    }
+    .spec-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    .related-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+    }
+    .pd-features li,
+    .pd-features ul li {
+        padding: 12px 16px 12px 38px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 769px) {
+    .pd-hero {
+        padding: 80px 0 90px;
+    }
+    .pd-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+    }
+    .pd-image::after {
+        display: block;
+        /* DESKTOP FIX: Show decorative element on desktop */
+    }
+    .pd-image img {
+        aspect-ratio: auto;
+    }
+    .pd-content h1 {
+        font-size: 2.6rem;
+    }
+    .pd-section,
+    .related-section {
+        padding: 80px 0;
+    }
+    .pd-section h2,
+    .related-section h2 {
+        font-size: 1.9rem;
+        margin-bottom: 32px;
+    }
+    .pd-section h2::before,
+    .related-section h2::before {
+        height: 28px;
+    }
+    .spec-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+    }
+    .spec-item {
+        padding: 16px 18px;
+    }
+    .related-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+    }
+    .related-card-body {
+        padding: 18px 20px 20px;
+    }
+    .pd-features li,
+    .pd-features ul li {
+        padding: 11px 18px 11px 42px;
+        font-size: 0.93rem;
+    }
+    .detail-badge {
+        height: 32px;
+        padding: 0 16px;
+        font-size: 0.72rem;
+        letter-spacing: 2px;
+    }
+}
+
 @media (max-width: 1024px) {
     .pd-grid {
         grid-template-columns: 1fr;
-        gap: 48px;
+        gap: 40px;
     }
     .pd-image::after {
         display: none;
-    }
-    .pd-content {
-        text-align: center;
-    }
-    .detail-badge {
-        display: inline-flex;
-    }
-    .pd-features {
-        text-align: left;
     }
     .pd-section h2,
     .related-section h2 {
@@ -438,29 +620,24 @@
 
 @media (max-width: 768px) {
     .pd-hero {
-        padding: 56px 0 64px;
+        padding: 50px 16px;
     }
     .pd-content h1 {
-        font-size: 2rem;
+        font-size: 1.75rem;
     }
     .pd-section,
     .related-section {
-        padding: 56px 0;
+        padding: 50px 16px;
     }
     .pd-section h2,
     .related-section h2 {
-        font-size: 1.55rem;
+        font-size: 1.4rem;
     }
     .spec-grid {
         grid-template-columns: 1fr;
     }
     .related-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 14px;
-    }
-    .btn.btn-primary {
-        width: 100%;
-        text-align: center;
+        grid-template-columns: 1fr;
     }
 }
 
@@ -469,6 +646,6 @@
         grid-template-columns: 1fr;
     }
     .pd-content h1 {
-        font-size: 1.75rem;
+        font-size: 1.5rem;
     }
 }

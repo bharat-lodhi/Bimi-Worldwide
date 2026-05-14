@@ -43,8 +43,9 @@ body {
 /* ================= HERO SECTION ================= */
 
 .hero {
-    padding: 60px 0 90px;
+    padding: 40px 0 60px;
     position: relative;
+    /* MOBILE FIX: Reduced padding for small screens */
 }
 
 
@@ -52,18 +53,23 @@ body {
 
 .hero-grid {
     display: grid;
-    grid-template-columns: 1.1fr .9fr;
+    grid-template-columns: 1fr;
     align-items: center;
     position: relative;
+    gap: 30px;
+    /* RESPONSIVE FIX: Single column by default, auto-adjusts on larger screens */
 }
 
 
 /* LEFT CONTENT */
 
 .hero-left {
-    margin-left: 80px;
+    margin-left: 0;
+    /* MOBILE FIX: Removed fixed margin-left */
     position: relative;
     z-index: 5;
+    padding: 0 16px;
+    /* MOBILE FIX: Added horizontal padding for mobile */
 }
 
 
@@ -95,11 +101,14 @@ body {
 /* ================= TITLE ================= */
 
 .hero-left h1 {
-    font-size: clamp(2rem, 3vw, 2.6rem);
+    font-size: clamp(1.5rem, 5vw, 2.6rem);
+    /* RESPONSIVE FIX: clamp() for fluid scaling from 1.5rem mobile to 2.6rem desktop */
     font-weight: 700;
     line-height: 1.1;
     letter-spacing: -.01em;
-    max-width: 850px;
+    max-width: 100%;
+    /* MOBILE FIX: Changed from 850px to 100% */
+    width: 100%;
 }
 
 
@@ -107,7 +116,10 @@ body {
 
 .desc {
     margin: 20px 0 34px;
-    max-width: 420px;
+    max-width: 100%;
+    /* MOBILE FIX: Changed from 420px to 100% for responsiveness */
+    font-size: clamp(0.95rem, 2vw, 1rem);
+    /* RESPONSIVE FIX: Fluid font sizing */
 }
 
 
@@ -115,15 +127,19 @@ body {
 
 .btn-cta {
     display: inline-block;
-    padding: 12px 30px;
+    padding: 14px 32px;
+    /* MOBILE FIX: Increased padding to 44px+ height for touch accessibility */
     background: transparent;
     color: #ffffff;
-    font-size: 16px;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    /* RESPONSIVE FIX: Fluid font sizing */
     font-weight: 600;
     text-decoration: none;
     border: 2px solid #ffffff;
     border-radius: 6px;
     transition: .4s;
+    white-space: nowrap;
+    /* MOBILE FIX: Prevent text wrapping */
 }
 
 .btn-cta:hover {
@@ -136,16 +152,69 @@ body {
 /* ================= VIDEO ================= */
 
 .video-wrapper {
-    width: 500px;
-    height: 420px;
-    margin-left: -120px;
+    width: 100%;
+    /* MOBILE FIX: Changed from 500px to 100% */
+    max-width: 500px;
+    /* DESKTOP FIX: Set max-width for large screens */
+    height: auto;
+    /* MOBILE FIX: Changed from 420px to auto for aspect ratio */
+    aspect-ratio: 16 / 12;
+    /* RESPONSIVE FIX: Maintains aspect ratio on all screen sizes */
+    margin: auto;
+    /* MOBILE FIX: Auto margin instead of negative margin */
     position: relative;
     z-index: 0;
 }
 
 .video-wrapper video {
-    width: 140%;
-    height: 128%;
+    width: 100%;
+    /* MOBILE FIX: Changed from 140% to 100% */
+    height: 100%;
+    /* MOBILE FIX: Changed from 128% to 100% */
+    object-fit: cover;
+    /* RESPONSIVE FIX: Ensures video fills container properly */
+    display: block;
+}
+
+
+/* ================= RESPONSIVE - TABLET ================= */
+
+@media(min-width: 481px) and (max-width: 768px) {
+    .hero {
+        padding: 50px 0 70px;
+    }
+    .hero-grid {
+        gap: 30px;
+    }
+    .hero-left {
+        padding: 0 20px;
+    }
+    .hero-left h1 {
+        font-size: 1.8rem;
+    }
+    .video-wrapper {
+        max-width: 400px;
+    }
+}
+
+
+/* ================= RESPONSIVE - DESKTOP ================= */
+
+@media(min-width: 769px) {
+    .hero {
+        padding: 60px 0 90px;
+    }
+    .hero-grid {
+        grid-template-columns: 1.1fr .9fr;
+        gap: 40px;
+    }
+    .hero-left {
+        margin-left: 0;
+        padding: 0;
+    }
+    .video-wrapper {
+        max-width: 500px;
+    }
 }
 
 
@@ -153,28 +222,29 @@ body {
 
 @media(max-width:900px) {
     .hero {
-        padding: 40px 0 70px;
+        padding: 40px 0 60px;
     }
     .hero-grid {
         grid-template-columns: 1fr;
         text-align: center;
-        gap: 40px;
+        gap: 30px;
     }
     .hero-left {
         margin-left: 0;
     }
     .hero-left h1 {
-        font-size: 2.1rem;
+        font-size: 1.5rem;
         white-space: normal;
     }
     .video-wrapper {
-        width: 260px;
-        height: 260px;
+        width: 100%;
+        max-width: 350px;
+        height: auto;
         margin: auto;
     }
     .video-wrapper video {
-        width: 120%;
-        height: 172%;
+        width: 100%;
+        height: 100%;
     }
 }
 
@@ -201,9 +271,12 @@ body {
 
 .products-section {
     background: var(--orange);
-    padding: 90px 0;
+    padding: 60px 16px;
+    /* MOBILE FIX: Reduced padding and added horizontal padding */
     text-align: center;
     overflow: hidden;
+    width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
 }
 
 
@@ -213,11 +286,14 @@ body {
 /* PRODUCTS HEADING */
 
 .products-title {
-    font-size: 2.5rem;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    /* RESPONSIVE FIX: Fluid sizing for all screens */
     font-weight: 800;
     color: var(--ink);
-    margin-bottom: 70px;
+    margin-bottom: 50px;
+    /* MOBILE FIX: Reduced from 70px */
     letter-spacing: -0.5px;
+    max-width: 100%;
 }
 
 
@@ -248,6 +324,9 @@ body {
 .products-slider {
     overflow: hidden;
     width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
+    max-width: 100%;
+    /* MOBILE FIX: Prevent overflow */
 }
 
 
@@ -255,7 +334,8 @@ body {
 
 .products-track {
     display: flex;
-    gap: 80px;
+    gap: 40px;
+    /* MOBILE FIX: Reduced from 80px */
     align-items: center;
     animation: scrollProducts 15s linear infinite;
 }
@@ -268,16 +348,21 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    min-width: 140px;
+    min-width: 100px;
+    /* MOBILE FIX: Reduced from 140px */
+    flex-shrink: 0;
+    /* MOBILE FIX: Prevent flex shrinking */
 }
 
 .product-item i {
-    font-size: 42px;
+    font-size: clamp(2rem, 6vw, 2.625rem);
+    /* RESPONSIVE FIX: Fluid icon sizing */
     color: #1a1a2e;
 }
 
 .product-item p {
-    font-size: 15px;
+    font-size: clamp(0.85rem, 2vw, 0.9375rem);
+    /* RESPONSIVE FIX: Fluid text sizing */
     color: #313030;
     font-weight: 500;
 }
@@ -297,6 +382,43 @@ body {
 
 /* RESPONSIVE */
 
+@media(min-width: 481px) and (max-width: 768px) {
+    .products-section {
+        padding: 70px 20px;
+    }
+    .products-title {
+        margin-bottom: 60px;
+        font-size: 2rem;
+    }
+    .products-track {
+        gap: 60px;
+    }
+    .product-item {
+        min-width: 110px;
+    }
+}
+
+@media(min-width: 769px) {
+    .products-section {
+        padding: 90px 0;
+    }
+    .products-title {
+        margin-bottom: 70px;
+    }
+    .products-track {
+        gap: 80px;
+    }
+    .product-item {
+        min-width: 140px;
+    }
+    .product-item i {
+        font-size: 42px;
+    }
+    .product-item p {
+        font-size: 15px;
+    }
+}
+
 @media(max-width:900px) {
     .products-title {
         font-size: 1.8rem;
@@ -315,14 +437,20 @@ body {
 
 .clients-section {
     background: #fdfdfd;
-    padding: 90px 0;
+    padding: 60px 16px;
+    /* MOBILE FIX: Reduced padding and added horizontal padding */
     overflow: hidden;
+    width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
 }
 
 .clients-container {
     max-width: 1250px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0;
+    /* MOBILE FIX: Removed padding, container handles it */
+    width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
 }
 
 
@@ -332,10 +460,15 @@ body {
     max-width: 750px;
     margin: 0 auto 60px;
     text-align: center;
+    width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
+    padding: 0 16px;
+    /* MOBILE FIX: Added padding for small screens */
 }
 
 .clients-title {
-    font-size: 2.8rem;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    /* RESPONSIVE FIX: Fluid title sizing */
     font-weight: 800;
     color: var(--ink);
     margin-bottom: 15px;
@@ -358,7 +491,8 @@ body {
 }
 
 .clients-subtitle {
-    font-size: 1.1rem;
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    /* RESPONSIVE FIX: Fluid subtitle sizing */
     color: #666;
     line-height: 1.6;
 }
@@ -368,10 +502,16 @@ body {
 
 .clients-layout {
     display: grid;
-    grid-template-columns: 420px 1fr;
+    grid-template-columns: 1fr;
+    /* MOBILE FIX: Single column by default */
     align-items: center;
-    gap: 60px;
+    gap: 40px;
+    /* MOBILE FIX: Reduced gap for small screens */
     margin-top: 50px;
+    width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
+    padding: 0 16px;
+    /* MOBILE FIX: Added horizontal padding */
 }
 
 
@@ -384,11 +524,21 @@ body {
     border-radius: 20px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     border: 1px solid #eee;
+    width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
+    max-width: 420px;
+    /* MOBILE FIX: Set max-width for desktop */
+    margin: auto;
+    /* MOBILE FIX: Center on mobile */
 }
 
 .image-frame img {
     width: 100%;
-    height: 420px;
+    /* MOBILE FIX: Changed from fixed 100% but enforced */
+    height: auto;
+    /* MOBILE FIX: Changed from 420px to auto */
+    aspect-ratio: 1 / 1;
+    /* RESPONSIVE FIX: Maintains square ratio */
     object-fit: cover;
     border-radius: 15px;
     display: block;
@@ -399,13 +549,20 @@ body {
 
 .clients-logos {
     width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
     overflow: hidden;
     /* Fade effect on edges for professional look */
     mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    padding: 0 16px;
+    /* MOBILE FIX: Added padding to prevent edge cutting */
 }
 
 .logos-row {
     margin-bottom: 30px;
+    width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
+    overflow: hidden;
+    /* MOBILE FIX: Ensure no overflow */
 }
 
 .logos-row:last-child {
@@ -414,19 +571,26 @@ body {
 
 .logos-track {
     display: flex;
-    gap: 50px;
+    gap: 30px;
+    /* MOBILE FIX: Reduced from 50px */
     align-items: center;
     width: max-content;
+    flex-wrap: nowrap;
+    /* MOBILE FIX: Prevent wrapping */
 }
 
 .logos-track img {
-    height: 65px;
-    /* Perfect size for 3 rows */
+    height: 45px;
+    /* MOBILE FIX: Reduced from 65px for mobile */
     width: auto;
+    min-width: 60px;
+    /* MOBILE FIX: Prevent images from shrinking too small */
     opacity: 1;
     /* Always colorful */
     transition: transform 0.3s ease;
     image-rendering: -webkit-optimize-contrast;
+    flex-shrink: 0;
+    /* MOBILE FIX: Prevent flex shrinking */
 }
 
 .logos-track img:hover {
@@ -471,13 +635,69 @@ body {
 
 /* ================= MOBILE RESPONSIVE ================= */
 
+@media (min-width: 481px) and (max-width: 768px) {
+    .clients-section {
+        padding: 70px 20px;
+    }
+    .clients-head {
+        margin-bottom: 50px;
+        padding: 0;
+    }
+    .clients-layout {
+        gap: 50px;
+        padding: 0;
+    }
+    .image-frame img {
+        aspect-ratio: 1 / 1;
+    }
+    .logos-track {
+        gap: 40px;
+    }
+    .logos-track img {
+        height: 55px;
+    }
+}
+
+@media (min-width: 769px) {
+    .clients-section {
+        padding: 90px 0;
+    }
+    .clients-head {
+        margin-bottom: 60px;
+        padding: 0;
+    }
+    .clients-layout {
+        grid-template-columns: 420px 1fr;
+        gap: 60px;
+        padding: 0;
+    }
+    .image-frame {
+        max-width: 420px;
+        margin: 0;
+    }
+    .image-frame img {
+        height: 420px;
+        aspect-ratio: auto;
+    }
+    .clients-logos {
+        padding: 0;
+    }
+    .logos-track {
+        gap: 50px;
+    }
+    .logos-track img {
+        height: 65px;
+    }
+}
+
 @media (max-width: 1000px) {
     .clients-layout {
         grid-template-columns: 1fr;
-        gap: 50px;
+        gap: 40px;
     }
     .image-frame img {
         height: 300px;
+        max-height: 400px;
     }
     .logos-track img {
         height: 45px;
@@ -490,23 +710,31 @@ body {
 
 /* ================= PREMIUM CTA ================= */
 
-
-/* ================= PREMIUM CTA ================= */
-
 .premium-cta {
-    padding: 50px 50px;
-    margin: 80px 90px;
-    /* sides se space */
+    padding: 40px 20px;
+    /* MOBILE FIX: Responsive padding */
+    margin: 60px 16px;
+    /* MOBILE FIX: Changed from 80px 90px to responsive values */
     background: var(--ink);
     text-align: center;
     color: #fff;
     position: relative;
     overflow: hidden;
-    border-radius: 28px;
-    /* 🔥 rounded corners */
+    border-radius: 20px;
+    /* MOBILE FIX: Reduced from 28px */
+    width: calc(100% - 32px);
+    /* MOBILE FIX: Account for margins */
+    max-width: 1200px;
+    /* MOBILE FIX: Set max-width */
+    margin-left: auto;
+    /* MOBILE FIX: Center the container */
+    margin-right: auto;
 }
 
-subtle glow .premium-cta::before {
+
+/* subtle glow */
+
+.premium-cta::before {
     content: "";
     position: absolute;
     top: -120px;
@@ -537,21 +765,27 @@ subtle glow .premium-cta::before {
     margin: auto;
     position: relative;
     z-index: 2;
+    padding: 0 20px;
+    /* MOBILE FIX: Added padding */
 }
 
 .cta-title {
-    font-size: 2.6rem;
+    font-size: clamp(1.5rem, 5vw, 2.6rem);
+    /* RESPONSIVE FIX: Fluid title sizing */
     font-weight: 700;
     letter-spacing: -.5px;
     margin-bottom: 22px;
 }
 
 .cta-subtitle {
-    font-size: 1.05rem;
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
+    /* RESPONSIVE FIX: Fluid subtitle sizing */
     line-height: 1.8;
     color: #d6d6d6;
     max-width: 700px;
     margin: 0 auto 40px;
+    width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
 }
 
 
@@ -559,19 +793,32 @@ subtle glow .premium-cta::before {
 
 .cta-actions {
     display: flex;
-    gap: 20px;
+    gap: 16px;
+    /* MOBILE FIX: Reduced from 20px */
     justify-content: center;
     flex-wrap: wrap;
+    width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
 }
 
 .cta-btn {
-    padding: 14px 34px;
-    font-size: .95rem;
+    padding: 16px 32px;
+    /* MOBILE FIX: Increased to 44px+ height for touch targets */
+    font-size: clamp(0.9rem, 2vw, 0.95rem);
+    /* RESPONSIVE FIX: Fluid font sizing */
     font-weight: 600;
     border-radius: 8px;
     text-decoration: none;
     transition: .3s;
     display: inline-block;
+    white-space: nowrap;
+    /* MOBILE FIX: Prevent text wrapping */
+    flex: 1 1 auto;
+    /* MOBILE FIX: Flexible width on mobile */
+    min-width: 150px;
+    /* MOBILE FIX: Minimum width for touch */
+    text-align: center;
+    /* MOBILE FIX: Center button text */
 }
 
 
@@ -581,6 +828,8 @@ subtle glow .premium-cta::before {
     background: #D6882A;
     color: #fff;
     box-shadow: 0 10px 30px rgba(214, 136, 42, .35);
+    border: none;
+    /* MOBILE FIX: Added explicit border */
 }
 
 .cta-btn.primary:hover {
@@ -594,6 +843,7 @@ subtle glow .premium-cta::before {
 .cta-btn.outline {
     border: 2px solid #fff;
     color: #fff;
+    background: transparent;
 }
 
 .cta-btn.outline:hover {
@@ -605,11 +855,59 @@ subtle glow .premium-cta::before {
 
 /* MOBILE */
 
-@media(max-width:900px) {
+@media (min-width: 481px) and (max-width: 768px) {
+    .premium-cta {
+        padding: 40px 30px;
+        margin: 60px 20px;
+        border-radius: 20px;
+    }
     .cta-title {
         font-size: 2rem;
+        margin-bottom: 18px;
+    }
+    .cta-subtitle {
+        font-size: 1rem;
+        margin-bottom: 35px;
+    }
+    .cta-actions {
+        gap: 12px;
+    }
+    .cta-btn {
+        padding: 14px 28px;
+        font-size: 0.9rem;
+        flex: 1 1 calc(50% - 6px);
+        min-width: 140px;
+    }
+}
+
+@media (min-width: 769px) {
+    .premium-cta {
+        padding: 50px 50px;
+        margin: 80px 40px;
+        border-radius: 28px;
+    }
+    .cta-actions {
+        gap: 20px;
+    }
+    .cta-btn {
+        flex: 0 1 auto;
+        min-width: auto;
+    }
+}
+
+@media(max-width:900px) {
+    .cta-title {
+        font-size: 1.8rem;
     }
     .cta-subtitle {
         font-size: .95rem;
+    }
+    .cta-actions {
+        gap: 12px;
+    }
+    .cta-btn {
+        flex: 1 1 calc(50% - 6px);
+        min-width: 130px;
+        padding: 14px 24px;
     }
 }

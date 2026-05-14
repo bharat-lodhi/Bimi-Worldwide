@@ -1,4 +1,9 @@
 {% load static %}
+{% url 'home' as home_url %}
+{% url 'about' as about_url %}
+{% url 'products_category' as products_url %}
+{% url 'blog_list' as blogs_url %}
+{% url 'contact_form' as contact_url %}
 
 <header class="header">
 
@@ -14,19 +19,20 @@
 
 <nav class="menu">
 
-<a href="{% url 'home' %}" class="active">Home</a>
+{# ACTIVE LINK FIX: active underline follows the current page instead of staying hardcoded on Home. #}
+<a href="{{ home_url }}" class="{% if request.path == home_url %}active{% endif %}">Home</a>
 
-<a href="{% url 'about' %}">About Us</a>
+<a href="{{ about_url }}" class="{% if request.path == about_url %}active{% endif %}">About Us</a>
 
-<a href="{% url 'products_category' %}">Products</a>
+<a href="{{ products_url }}" class="{% if request.path == products_url or '/products-list/' in request.path or '/subcategory-products/' in request.path or '/product-detail/' in request.path %}active{% endif %}">Products</a>
 
-<a href="{% url 'blog_list' %}">Blogs</a>
+<a href="{{ blogs_url }}" class="{% if request.path == blogs_url or '/blog/' in request.path %}active{% endif %}">Blogs</a>
 
-<a href="{% url 'contact_form' %}">Contact Us</a>
+<a href="{{ contact_url }}" class="{% if request.path == contact_url %}active{% endif %}">Contact Us</a>
 
 </nav>
 
-<a href="{% url 'contact_form' %}" class="btn-demo">Request Call</a>
+<a href="{{ contact_url }}" class="btn-demo">Request Call</a>
 
 <div class="nav-toggle" id="navToggle">
 
@@ -38,15 +44,16 @@
 
 <nav class="mobile-menu" id="mobileMenu">
 
-<b><a href="{% url 'home' %}" class="active">Home</a></b>
+{# ACTIVE LINK FIX: mobile menu uses the same persistent active page state as desktop. #}
+<b><a href="{{ home_url }}" class="{% if request.path == home_url %}active{% endif %}">Home</a></b>
 
-<b><a href="{% url 'about' %}">About Us</a></b>
+<b><a href="{{ about_url }}" class="{% if request.path == about_url %}active{% endif %}">About Us</a></b>
 
-<b><a href="{% url 'products_category' %}">Products</a></b>
+<b><a href="{{ products_url }}" class="{% if request.path == products_url or '/products-list/' in request.path or '/subcategory-products/' in request.path or '/product-detail/' in request.path %}active{% endif %}">Products</a></b>
 
-<b><a href="{% url 'blog_list' %}">Blogs</a></b>
+<b><a href="{{ blogs_url }}" class="{% if request.path == blogs_url or '/blog/' in request.path %}active{% endif %}">Blogs</a></b>
 
-<b><a href="{% url 'contact_form' %}">Contact Us</a></b>
+<b><a href="{{ contact_url }}" class="{% if request.path == contact_url %}active{% endif %}">Contact Us</a></b>
 
 </nav>
 

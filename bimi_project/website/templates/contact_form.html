@@ -85,10 +85,17 @@
 {% block content %}
 <section class="contact-section">
     <div class="container">
+                    {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-info border-0 rounded-3 shadow-sm mb-4">
+                            <i class="fas fa-info-circle me-2"></i> {{ message }}
+                        </div>
+                        {% endfor %}
+                    {% endif %}
         
         <!-- SECTION HEADER -->
         <div class="text-center mb-5">
-            <h2 class="fw-bold" style="color: var(--ink); font-size: 2.5rem;">Get in <span>Touch</span></h2>
+            <h2 class="fw-bold" style="color: #1F1F3B; font-size: 2.5rem;">Get in <span>Touch</span></h2>
             <p class="text-muted mx-auto" style="max-width: 500px;">Have a bulk inquiry or need custom packaging solutions? Send us a message and we'll get back to you.</p>
         </div>
 
@@ -117,14 +124,15 @@
 
                 <!-- RIGHT SIDE: FORM -->
                 <div class="col-lg-8 contact-form-panel">
-                    
+
+                {% comment %}                     
                     {% if messages %}
                         {% for message in messages %}
                         <div class="alert alert-info border-0 rounded-3 shadow-sm mb-4">
                             <i class="fas fa-info-circle me-2"></i> {{ message }}
                         </div>
                         {% endfor %}
-                    {% endif %}
+                    {% endif %} {% endcomment %}
 
                     <form method="POST">
                         {% csrf_token %}
@@ -183,7 +191,7 @@
                                 {% if show_otp_field %}
                                     <div class="otp-box">
                                         <label class="form-label fw-bold text-primary">Verification Code</label>
-                                        <p class="small text-muted mb-3">Please enter the OTP sent to your email/number.</p>
+                                        <p class="small text-muted mb-3">Please enter the OTP sent to your Email.</p>
                                         <div class="d-flex gap-2 mb-3">
                                             <input type="text" name="otp" class="form-control text-center fw-bold" placeholder="0 0 0 0 0 0" style="letter-spacing: 8px; font-size: 1.2rem;" required>
                                         </div>

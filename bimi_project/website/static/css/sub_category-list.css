@@ -2,8 +2,13 @@
 
 .cat-hero {
     background: var(--orange);
-    padding: 72px 0 80px;
+    padding: 50px 16px;
+    /* MOBILE FIX: Reduced padding and added horizontal padding */
     text-align: center;
+    width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
+    overflow-x: hidden;
+    /* MOBILE FIX: Prevent horizontal overflow */
 }
 
 .cat-hero-inner .badge {
@@ -11,21 +16,30 @@
     color: var(--white);
     border: none;
     margin-bottom: 16px;
+    display: inline-flex;
+    /* MOBILE FIX: Ensure badge fits properly */
 }
 
 .cat-hero-inner h1 {
-    font-size: 3rem;
+    font-size: clamp(1.5rem, 6vw, 3rem);
+    /* RESPONSIVE FIX: Fluid sizing from 1.5rem mobile to 3rem desktop */
     font-weight: 700;
     margin: 0 0 18px;
     color: var(--white);
     letter-spacing: -0.03em;
     line-height: 1.15;
+    word-break: break-word;
+    /* MOBILE FIX: Prevent overflow on long titles */
 }
 
 .cat-hero-inner .desc {
-    max-width: 620px;
+    max-width: 100%;
+    /* MOBILE FIX: Changed from 620px to 100% */
     margin: 0 auto 40px;
-    font-size: 1.02rem;
+    padding: 0 16px;
+    /* MOBILE FIX: Added padding for small screens */
+    font-size: clamp(0.95rem, 2.5vw, 1.02rem);
+    /* RESPONSIVE FIX: Fluid font sizing */
     line-height: 1.75;
     color: rgba(255, 255, 255, 0.85);
 }
@@ -34,8 +48,11 @@
 /* ================= SEARCH ================= */
 
 .cat-search-form {
-    max-width: 560px;
+    max-width: 100%;
+    /* MOBILE FIX: Changed from 560px to 100% */
     margin: 0 auto;
+    padding: 0 16px;
+    /* MOBILE FIX: Added horizontal padding */
 }
 
 .cat-search-wrap {
@@ -43,25 +60,37 @@
     align-items: center;
     background: var(--white);
     border-radius: 14px;
-    padding: 6px 6px 6px 18px;
+    padding: 6px 6px 6px 16px;
+    /* MOBILE FIX: Reduced padding */
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
-    gap: 10px;
+    gap: 8px;
+    /* MOBILE FIX: Reduced gap */
+    flex-wrap: nowrap;
+    /* MOBILE FIX: Prevent wrapping */
+    width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
 }
 
 .cat-search-icon {
     color: #aaa;
     flex-shrink: 0;
+    min-width: 18px;
+    /* MOBILE FIX: Prevent shrinking */
 }
 
 .cat-search-input {
     flex: 1;
     border: none;
     outline: none;
-    font-size: 0.97rem;
+    font-size: clamp(0.9rem, 2vw, 0.97rem);
+    /* RESPONSIVE FIX: Fluid font sizing */
     font-family: var(--font);
     color: var(--ink);
     background: transparent;
-    padding: 8px 0;
+    padding: 8px 4px;
+    /* MOBILE FIX: Adjusted padding */
+    min-width: 80px;
+    /* MOBILE FIX: Prevent input from shrinking too much */
 }
 
 .cat-search-input::placeholder {
@@ -73,13 +102,18 @@
     color: var(--white);
     border: none;
     border-radius: 10px;
-    padding: 10px 24px;
-    font-size: 0.9rem;
+    padding: 10px 16px;
+    /* MOBILE FIX: Reduced from 24px */
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    /* RESPONSIVE FIX: Fluid font sizing */
     font-weight: 700;
     font-family: var(--font);
     cursor: pointer;
     transition: background 0.2s;
     white-space: nowrap;
+    /* MOBILE FIX: Prevent text wrapping */
+    min-height: 44px;
+    /* MOBILE FIX: Ensure touch-friendly height */
 }
 
 .cat-search-btn:hover {
@@ -94,13 +128,16 @@
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
+    /* MOBILE FIX: Increased gap for wrap spacing */
     margin-bottom: 36px;
-    padding: 14px 20px;
+    padding: 14px 16px;
+    /* MOBILE FIX: Reduced padding */
     background: #fff8f0;
     border: 1.5px solid rgba(214, 136, 42, 0.25);
     border-radius: 12px;
-    font-size: 0.9rem;
+    font-size: clamp(0.85rem, 2vw, 0.9rem);
+    /* RESPONSIVE FIX: Fluid font sizing */
     color: var(--muted);
 }
 
@@ -109,11 +146,14 @@
 }
 
 .cat-result-info a {
-    font-size: 0.83rem;
+    font-size: clamp(0.75rem, 2vw, 0.83rem);
+    /* RESPONSIVE FIX: Fluid font sizing */
     font-weight: 600;
     color: var(--orange);
     text-decoration: none;
     transition: opacity 0.2s;
+    white-space: nowrap;
+    /* MOBILE FIX: Prevent wrapping */
 }
 
 .cat-result-info a:hover {
@@ -125,13 +165,22 @@
 
 .cat-products {
     background: var(--white);
-    padding: 80px 0 100px;
+    padding: 60px 16px;
+    /* MOBILE FIX: Reduced padding and added horizontal padding */
+    width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
+    overflow-x: hidden;
+    /* MOBILE FIX: Prevent horizontal overflow */
 }
 
 .cat-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
+    grid-template-columns: 1fr;
+    /* MOBILE FIX: Single column on mobile by default */
+    gap: 16px;
+    /* MOBILE FIX: Reduced gap for mobile */
+    max-width: 100%;
+    /* MOBILE FIX: Explicit max-width */
 }
 
 
@@ -145,6 +194,8 @@
     display: flex;
     flex-direction: column;
     transition: border-color 0.22s, box-shadow 0.22s, transform 0.22s;
+    width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
 }
 
 .product-card:hover {
@@ -154,13 +205,19 @@
 }
 
 .p-image {
-    height: 210px;
+    height: auto;
+    /* MOBILE FIX: Changed from 210px to auto */
+    aspect-ratio: 16 / 10;
+    /* RESPONSIVE FIX: Maintains consistent aspect ratio */
     overflow: hidden;
     background: #f4f3f0;
+    width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
 }
 
 .p-image img {
     width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
     height: 100%;
     object-fit: cover;
     transition: transform 0.4s ease;
@@ -172,23 +229,29 @@
 }
 
 .p-content {
-    padding: 22px 24px 24px;
+    padding: 16px;
+    /* MOBILE FIX: Reduced from 22px 24px 24px */
     flex: 1;
     display: flex;
     flex-direction: column;
 }
 
 .p-content h3 {
-    font-size: 1rem;
+    font-size: clamp(0.95rem, 2.5vw, 1rem);
+    /* RESPONSIVE FIX: Fluid font sizing */
     font-weight: 700;
     margin-bottom: 8px;
     color: var(--ink);
     line-height: 1.35;
+    word-break: break-word;
+    /* MOBILE FIX: Prevent overflow */
 }
 
 .p-content p {
-    font-size: 0.87rem;
-    margin-bottom: 20px;
+    font-size: clamp(0.8rem, 2vw, 0.87rem);
+    /* RESPONSIVE FIX: Fluid font sizing */
+    margin-bottom: 16px;
+    /* MOBILE FIX: Reduced from 20px */
     line-height: 1.65;
     color: var(--muted);
     flex: 1;
@@ -201,15 +264,21 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 10px 18px;
+    padding: 12px 16px;
+    /* MOBILE FIX: Increased to 44px+ height */
     border-radius: 10px;
     border: 1.5px solid var(--orange);
     color: var(--orange);
-    font-size: 0.85rem;
+    font-size: clamp(0.8rem, 2vw, 0.85rem);
+    /* RESPONSIVE FIX: Fluid font sizing */
     font-weight: 600;
     text-decoration: none;
     transition: all 0.22s ease;
     align-self: flex-start;
+    white-space: nowrap;
+    /* MOBILE FIX: Prevent text wrapping */
+    min-height: 44px;
+    /* MOBILE FIX: Ensure touch target size */
 }
 
 .btn-outline:hover {
@@ -222,23 +291,29 @@
 
 .cat-empty {
     text-align: center;
-    padding: 80px 20px;
+    padding: 60px 16px;
+    /* MOBILE FIX: Reduced from 80px and added horizontal padding */
+    width: 100%;
+    /* MOBILE FIX: Explicit 100% width */
 }
 
 .cat-empty-icon {
-    font-size: 3.5rem;
+    font-size: clamp(2.5rem, 8vw, 3.5rem);
+    /* RESPONSIVE FIX: Fluid icon sizing */
     margin-bottom: 20px;
 }
 
 .cat-empty h3 {
-    font-size: 1.5rem;
+    font-size: clamp(1.25rem, 4vw, 1.5rem);
+    /* RESPONSIVE FIX: Fluid heading sizing */
     font-weight: 700;
     color: var(--ink);
     margin-bottom: 10px;
 }
 
 .cat-empty p {
-    font-size: 1rem;
+    font-size: clamp(0.95rem, 2.5vw, 1rem);
+    /* RESPONSIVE FIX: Fluid font sizing */
     color: var(--muted);
     margin-bottom: 28px;
 }
@@ -250,15 +325,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
-    margin-top: 64px;
+    gap: 6px;
+    /* MOBILE FIX: Reduced from 8px */
+    margin-top: 50px;
+    /* MOBILE FIX: Reduced from 64px */
     flex-wrap: wrap;
+    padding: 0 16px;
+    /* MOBILE FIX: Added horizontal padding */
 }
 
 .pg-btn {
-    min-width: 44px;
-    height: 44px;
-    padding: 0 16px;
+    min-width: 40px;
+    /* MOBILE FIX: Reduced from 44px */
+    height: 40px;
+    /* MOBILE FIX: Reduced from 44px */
+    padding: 0 12px;
+    /* MOBILE FIX: Reduced from 16px */
     border-radius: 10px;
     display: inline-flex;
     align-items: center;
@@ -268,9 +350,12 @@
     text-decoration: none;
     color: var(--ink);
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    /* RESPONSIVE FIX: Fluid font sizing */
     font-family: var(--font);
     transition: border-color 0.2s, background 0.2s, color 0.2s;
+    white-space: nowrap;
+    /* MOBILE FIX: Prevent text wrapping */
 }
 
 .pg-btn:hover {
@@ -292,38 +377,75 @@
 
 /* ================= RESPONSIVE ================= */
 
-@media (max-width: 1024px) {
-    .cat-grid {
-        grid-template-columns: repeat(2, 1fr);
+@media (min-width: 481px) and (max-width: 768px) {
+    .cat-hero {
+        padding: 60px 20px;
     }
-}
-
-@media (max-width: 900px) {
     .cat-hero-inner h1 {
         font-size: 2.2rem;
+        margin-bottom: 16px;
+    }
+    .cat-hero-inner .desc {
+        margin-bottom: 30px;
+        font-size: 1rem;
+    }
+    .cat-search-form {
+        padding: 0 20px;
+    }
+    .cat-search-btn {
+        padding: 10px 20px;
     }
     .cat-products {
-        padding: 60px 0 80px;
+        padding: 70px 20px;
+    }
+    .cat-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    .p-content {
+        padding: 18px;
+    }
+    .pg-btn {
+        min-width: 42px;
+        height: 42px;
+        padding: 0 14px;
     }
 }
 
-@media (max-width: 640px) {
+@media (min-width: 769px) {
     .cat-hero {
-        padding: 56px 0 64px;
+        padding: 72px 0 80px;
     }
     .cat-hero-inner h1 {
-        font-size: 1.8rem;
+        font-size: 3rem;
     }
-    .cat-grid {
-        grid-template-columns: 1fr;
-        gap: 18px;
+    .cat-search-form {
+        max-width: 560px;
     }
-    .product-card {
-        max-width: 420px;
-        margin: auto;
+    .cat-search-wrap {
+        gap: 10px;
+        padding: 6px 6px 6px 18px;
     }
     .cat-search-btn {
-        padding: 10px 16px;
-        font-size: 0.85rem;
+        padding: 10px 24px;
+    }
+    .cat-products {
+        padding: 80px 0 100px;
+    }
+    .cat-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+    }
+    .p-image {
+        height: 210px;
+        aspect-ratio: auto;
+    }
+    .p-content {
+        padding: 22px 24px 24px;
+    }
+    .pg-btn {
+        min-width: 44px;
+        height: 44px;
+        padding: 0 16px;
     }
 }
