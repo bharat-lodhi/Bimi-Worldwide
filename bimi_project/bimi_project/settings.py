@@ -2,29 +2,22 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load .env
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-dx3w+p=k$%vb(aw_zba)j693k2^z1h7c!_4y#t6&h8gml+suxq'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-# Production allowed hosts
 ALLOWED_HOSTS = [
     'bimiworldwide.com',
     'www.bimiworldwide.com',
     'localhost',
     '127.0.0.1',
+    '*',  # testing ke liye, baad me hata dena
 ]
-
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -33,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'website',
     'custom_admin',
 ]
@@ -54,7 +48,6 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
         'APP_DIRS': True,
-        
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
@@ -67,18 +60,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bimi_project.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-
+# PostgreSQL
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -89,9 +71,6 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
-# Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -108,112 +87,58 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
 USE_TZ = True
 
+# Static Files
+STATIC_URL = '/static/'
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
-
-STATIC_URL = 'static/'
-
-
-# Project ke root static folder ka path
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / 'static',
 ]
 
-# (Optional) — Agar production ke liye collect karna ho to
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-
-import os
+# Media Files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-# # ========================================
-# BASE_URL = "https://e5c6-2401-4900-55b0-508c-104f-c995-cccb-20a.ngrok-free.app"  # 👈 local testing
-# # For Production Use
-# # BASE_URL = "https://yourdomain.com"
-
-
-# CSRF_TRUSTED_ORIGINS = [
-#     "https://e5c6-2401-4900-55b0-508c-104f-c995-cccb-20a.ngrok-free.app",
-#     "http://127.0.0.1:8000",
-#     "http://localhost:8000",
-# ]
-# =============================================================
-
-
-# Production Base URL
+# Domain
 BASE_URL = "https://www.bimiworldwide.com"
 
-# CSRF Trusted Origins (Production)
 CSRF_TRUSTED_ORIGINS = [
     "https://bimiworldwide.com",
     "https://www.bimiworldwide.com",
 ]
 
+# TEMPORARILY DISABLE SSL SETTINGS FOR TESTING
+SECURE_SSL_REDIRECT = False
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 
-
-# Security Settings for Production
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
-SECURE_HSTS_SECONDS = 31536000  # 1 year
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
 
-#========Mail Sending Settings=======
-import os
+SECURE_HSTS_SECONDS = 0
+SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+SECURE_HSTS_PRELOAD = False
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-# LOAD .env FILE
-load_dotenv(os.path.join(BASE_DIR, '.env'))
-
-
-# =========================================================
-# EMAIL SETTINGS
-# =========================================================
-
+# Email Settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = os.getenv("SMTP_HOST")
-
 EMAIL_PORT = int(os.getenv("SMTP_PORT", 587))
 
 EMAIL_HOST_USER = os.getenv("SMTP_EMAIL")
-
 EMAIL_HOST_PASSWORD = os.getenv("SMTP_PASSWORD")
 
 EMAIL_USE_TLS = True
 
-# CUSTOM
 FROM_EMAIL = os.getenv("FROM_EMAIL")
-
 REPLY_TO_EMAIL = os.getenv("REPLY_TO_EMAIL")
-
-#=====================================
