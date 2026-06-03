@@ -13,9 +13,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-dx3w+p=k$%vb(aw_zba)j693k2^z1h7c!_4y#t6&h8gml+suxq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+# Production allowed hosts
+ALLOWED_HOSTS = [
+    'bimiworldwide.com',
+    'www.bimiworldwide.com',
+    'localhost',
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -144,19 +150,41 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# ========================================
-BASE_URL = "https://a7c2-2401-4900-88f0-3f9b-8d47-2bd6-4d0b-ce8a.ngrok-free.app"  # 👈 local testing
-# For Production Use
-# BASE_URL = "https://yourdomain.com"
+# # ========================================
+# BASE_URL = "https://e5c6-2401-4900-55b0-508c-104f-c995-cccb-20a.ngrok-free.app"  # 👈 local testing
+# # For Production Use
+# # BASE_URL = "https://yourdomain.com"
 
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://a7c2-2401-4900-88f0-3f9b-8d47-2bd6-4d0b-ce8a.ngrok-free.app",
-    "http://127.0.0.1:8000",
-    "http://localhost:8000",
-]
+# CSRF_TRUSTED_ORIGINS = [
+#     "https://e5c6-2401-4900-55b0-508c-104f-c995-cccb-20a.ngrok-free.app",
+#     "http://127.0.0.1:8000",
+#     "http://localhost:8000",
+# ]
 # =============================================================
 
+
+# Production Base URL
+BASE_URL = "https://www.bimiworldwide.com"
+
+# CSRF Trusted Origins (Production)
+CSRF_TRUSTED_ORIGINS = [
+    "https://bimiworldwide.com",
+    "https://www.bimiworldwide.com",
+]
+
+
+
+# Security Settings for Production
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
 
 #========Mail Sending Settings=======
 import os

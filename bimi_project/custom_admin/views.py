@@ -814,7 +814,7 @@ def add_real_subcategory(request):
             'SubCategory Added Successfully'
         )
 
-        return redirect('real_subcategory_list')
+        return redirect('category_real_subcategory_list')
 
     context = {
         'categories': categories
@@ -932,7 +932,7 @@ def edit_real_subcategory(request, pk):
             'SubCategory Updated Successfully'
         )
 
-        return redirect('real_subcategory_list')
+        return redirect('category_real_subcategory_list')
 
     context = {
         'subcategory': subcategory,
@@ -965,7 +965,7 @@ def delete_real_subcategory(request, pk):
         'SubCategory Deleted Successfully'
     )
 
-    return redirect('real_subcategory_list')
+    return redirect('category_real_subcategory_list')
 
 
 # =========================================================
