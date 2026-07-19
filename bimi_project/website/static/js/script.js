@@ -19,21 +19,23 @@ const openPopup = document.getElementById("openPopup");
 const popup = document.getElementById("popupForm");
 const closePopup = document.getElementById("closePopup");
 
-openPopup.addEventListener("click", (e) => {
-    e.preventDefault();
-    popup.classList.add("active");
-    document.body.style.overflow = "hidden";
-});
+if (openPopup && popup) {
+    openPopup.addEventListener("click", (e) => {
+        e.preventDefault();
+        popup.classList.add("active");
+        document.body.style.overflow = "hidden";
+    });
+}
 
-closePopup.addEventListener("click", () => {
-    popup.classList.remove("active");
-    document.body.style.overflow = "auto";
-});
+if (closePopup && popup) {
+    closePopup.addEventListener("click", () => {
+        popup.classList.remove("active");
+        document.body.style.overflow = "auto";
+    });
+}
 
 window.addEventListener("click", (e) => {
-
-    if (e.target === popup) {
+    if (popup && e.target === popup) {
         popup.classList.remove("active");
     }
-
 });

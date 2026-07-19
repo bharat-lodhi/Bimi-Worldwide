@@ -20,7 +20,7 @@ body {
 /* --- ABOUT HERO --- */
 
 .about-hero {
-    padding: clamp(36px, 6vw, 55px) 0 0;
+    padding: 140px 0 0; /* Clear fixed navbar on desktop */
     background: var(--orange);
     overflow: hidden;
 }
@@ -29,12 +29,20 @@ body {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
     gap: clamp(30px, 5vw, 60px);
-    align-items: center;
+    align-items: stretch;
 }
 
-.about-hero-media,
+.about-hero-media {
+    min-width: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
 .about-hero-content {
     min-width: 0;
+    align-self: center;
+    padding-bottom: clamp(40px, 6vw, 80px);
 }
 
 .image-frame {
@@ -47,9 +55,9 @@ body {
 
 .image-frame img {
     width: 100%;
-    height: 140%;
+    height: 145%; /* Zoom in to hide empty bottom space */
     object-fit: cover;
-    object-position: center;
+    object-position: center top; /* Align head to top, waist to bottom */
 }
 
 .about-hero-content h1 {
@@ -207,12 +215,10 @@ body {
 
 .approach-card {
     background: #fff;
-    padding: clamp(18px, 3vw, 22px) clamp(14px, 2vw, 18px);
-    /* Chhota padding */
+    padding: clamp(20px, 3vw, 26px) clamp(14px, 2vw, 18px);
     border-radius: 12px;
     text-align: center;
-    min-height: 130px;
-    /* Height control ki taaki cards chhote dikhen */
+    min-height: 175px; /* Increased to accommodate icons */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -220,11 +226,23 @@ body {
     min-width: 0;
 }
 
+.card-icon {
+    width: 44px;
+    height: 44px;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #D6882A;
+}
+
+.card-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
 .approach-card h3 {
     font-size: clamp(0.95rem, 1.5vw, 1rem);
-    /* Font size chhota kiya */
-    /* color: #000; */
-    /* Heading Black */
     margin: 0;
     line-height: 1.4;
     overflow-wrap: break-word;
@@ -342,9 +360,23 @@ body {
 /* --- RESPONSIVE FIX: Tablet layouts keep two-column cards while preventing overflow. --- */
 
 @media(max-width:900px) {
+    .about-hero {
+        padding-top: 110px; /* Clear fixed navbar on mid-size screens */
+    }
     .about-hero-grid {
         grid-template-columns: 1fr;
+        grid-template-areas: 
+            "content"
+            "media";
         text-align: center;
+        gap: 30px;
+    }
+    .about-hero-content {
+        padding-bottom: 0;
+        grid-area: content; /* Restrict grid placement to mobile query */
+    }
+    .about-hero-media {
+        grid-area: media; /* Restrict grid placement to mobile query */
     }
     .hero-subtitle {
         margin-inline: auto;
@@ -352,7 +384,7 @@ body {
     .image-frame {
         width: min(78vw, 340px);
         height: clamp(330px, 58vw, 440px);
-        margin: auto;
+        margin: 0 auto;
     }
     .approach-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -367,7 +399,7 @@ body {
 
 @media(min-width:481px) and (max-width:768px) {
     .about-hero {
-        padding-top: 44px;
+        padding-top: 110px; /* Clear navbar */
     }
     .dark-card,
     .philosophy-wrapper {
@@ -393,7 +425,7 @@ body {
 
 @media(max-width:480px) {
     .about-hero {
-        padding-top: 34px;
+        padding-top: 100px; /* Clear navbar on mobile */
     }
     .about-hero-grid {
         gap: 26px;
@@ -424,5 +456,368 @@ body {
     .approach-card {
         min-height: auto;
         padding: 20px 16px;
+    }
+}
+
+/* ================= BIMI ADVANTAGE ================= */
+
+.bimi-advantage {
+    padding: clamp(60px, 8vw, 100px) 0;
+    background: #fcfcfc;
+    overflow: hidden;
+}
+
+.advantage-head {
+    max-width: 800px;
+    margin: 0 auto clamp(40px, 6vw, 60px);
+    text-align: center;
+}
+
+.advantage-head h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: #1a1a2e; /* Brand dark blue color */
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.heading-logo {
+    display: inline-block;
+    height: clamp(28px, 4.5vw, 38px);
+    width: auto;
+    object-fit: contain;
+}
+
+.advantage-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.25rem);
+    color: var(--orange);
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.advantage-desc {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--muted);
+}
+
+.advantage-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.advantage-card {
+    background: #ffffff;
+    padding: 35px 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    border-top: 4px solid transparent;
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.advantage-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(214, 136, 42, 0.08);
+    border-top-color: var(--orange);
+}
+
+.adv-icon {
+    font-size: 2.2rem;
+    color: var(--orange);
+    margin-bottom: 20px;
+}
+
+.advantage-card h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.advantage-card p {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: #555;
+    margin: 0;
+    flex-grow: 1;
+}
+
+/* ================= VISION & MISSION ================= */
+
+.vision-mission {
+    padding: clamp(60px, 8vw, 100px) 0;
+    background: #fcfcfc;
+}
+
+.vision-mission-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.vm-card {
+    background: #ffffff;
+    color: var(--ink);
+    padding: 50px 40px;
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.03);
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: 1px solid #eee;
+    border-top: 6px solid var(--orange);
+}
+
+.vm-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(214, 136, 42, 0.08);
+}
+
+.vm-icon {
+    font-size: 2.8rem;
+    color: var(--orange);
+    margin-bottom: 22px;
+}
+
+.vm-card h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: var(--ink);
+}
+
+.vm-card p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin: 0;
+    color: var(--muted);
+}
+
+/* ================= ADDITIONAL RESPONSIVE ADJUSTMENTS ================= */
+
+@media(max-width: 1024px) {
+    .advantage-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+}
+
+@media(max-width: 768px) {
+    .advantage-grid {
+        grid-template-columns: 1fr;
+    }
+    .vision-mission-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .vm-card {
+        padding: 40px 30px;
+    }
+}
+
+/* ================= BIMI ACRONYM EXPLANATION SECTION ================= */
+.bimi-explanation-section {
+    padding: clamp(60px, 8vw, 100px) 0;
+    background: #fdfdfd;
+    position: relative;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.explanation-head {
+    text-align: center;
+    max-width: 750px;
+    margin: 0 auto clamp(40px, 6vw, 60px);
+}
+
+.expl-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(214, 136, 42, 0.1);
+    color: var(--orange);
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.explanation-head h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    color: #1a1a2e; /* Explicit brand dark blue color */
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+.explanation-head h2 span {
+    color: var(--orange);
+}
+
+.explanation-head p {
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.acronym-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.acronym-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
+    padding: clamp(20px, 3vw, 30px);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.acronym-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(214, 136, 42, 0.08);
+    border-color: rgba(214, 136, 42, 0.2);
+}
+
+.letter-box {
+    width: 54px;
+    height: 54px;
+    background: var(--orange);
+    color: #ffffff;
+    font-size: 1.8rem;
+    font-weight: 800;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 15px rgba(214, 136, 42, 0.25);
+}
+
+.acronym-content h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 10px;
+}
+
+.acronym-content p {
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Worldwide full-width card */
+.worldwide-card {
+    max-width: 1200px;
+    margin: 30px auto 0;
+    background: linear-gradient(135deg, #1a1a2e 0%, #111122 100%);
+    border-radius: 20px;
+    padding: clamp(30px, 4vw, 45px);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.worldwide-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(214, 136, 42, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.worldwide-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+}
+
+.world-globe {
+    width: 60px;
+    height: 60px;
+    background: rgba(214, 136, 42, 0.15);
+    border: 1px solid rgba(214, 136, 42, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: var(--orange);
+    animation: spinGlobe 15s linear infinite;
+}
+
+@keyframes spinGlobe {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.worldwide-header h3 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+}
+
+.worldwide-card p {
+    font-size: 1.05rem;
+    color: #cbd5e1;
+    line-height: 1.7;
+    margin: 0;
+    max-width: 800px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .acronym-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    .worldwide-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        text-align: left;
+    }
+}
+
+@media (max-width: 600px) {
+    .acronym-grid {
+        grid-template-columns: 1fr;
+    }
+    .worldwide-header h3 {
+        font-size: 1.5rem;
+    }
+    .worldwide-card p {
+        font-size: 0.95rem;
     }
 }

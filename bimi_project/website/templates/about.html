@@ -4,7 +4,7 @@
 {% block title %}About Us | BiMi Worldwide{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/about.css' %}">
+<link rel="stylesheet" href="{% static 'css/about.css' %}?v=2.0">
 {% endblock %}
 
 {% block content %}
@@ -17,11 +17,14 @@
                 </div>
             </div>
             <div class="about-hero-content">
-                <div class="badge">ESTABLISHED 2025</div>
-                <h1>Leadership Rooted in Experience. Driven by Vision</h1>
+                <div class="badge">Founded in 2025 • Built on 15+ Years of Global Trade Expertise</div>
+                <h1> Leading International Trade with Experience and Vision</h1>
                 <p class="hero-subtitle">
-                    Built on decades of experience and guided by integrity and vision, our leadership is committed to creating trusted partnerships and lasting global success. At BIMI, success is not measured by shipments alone, but by the strength of relationships we build
-                    and the opportunities we create for our partners.
+                     BIMI Worldwide is backed by professionals with over 15 years of experience in 
+international sourcing, logistics, customs clearance, and global trade. We help businesses 
+connect with trusted suppliers, ensure quality, and manage end-to-end import and export 
+operations. 
+
                 </p>
             </div>
         </div>
@@ -59,26 +62,73 @@
             </div>
             <div class="approach-grid">
                 <div class="approach-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            <path d="M2 12h20"/>
+                        </svg>
+                    </div>
                     <div class="card-number">01</div>
                     <h3>Strategic Global Sourcing & Merchandising</h3>
                 </div>
                 <div class="approach-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <path d="m9 11 2 2 4-4"/>
+                        </svg>
+                    </div>
                     <div class="card-number">02</div>
                     <h3>Quality Assurance & International Compliance</h3>
                 </div>
                 <div class="approach-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                    </div>
                     <div class="card-number">03</div>
                     <h3>Customs Advisory & Regulatory Management</h3>
                 </div>
                 <div class="approach-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 20h20"/>
+                            <path d="M20 18v-2a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v2"/>
+                            <path d="M7 10h10"/>
+                            <path d="M12 4v6"/>
+                            <path d="M10 6h4"/>
+                            <path d="m3 18 2 2h14l2-2"/>
+                        </svg>
+                    </div>
                     <div class="card-number">04</div>
                     <h3>International Freight Forwarding</h3>
                 </div>
                 <div class="approach-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="1" y="3" width="15" height="13" rx="2" ry="2"/>
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                            <circle cx="5.5" cy="18.5" r="2.5"/>
+                            <circle cx="18.5" cy="18.5" r="2.5"/>
+                        </svg>
+                    </div>
                     <div class="card-number">05</div>
                     <h3>Dedicated Inland Transportation</h3>
                 </div>
                 <div class="approach-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                            <line x1="12" y1="22.08" x2="12" y2="12"/>
+                        </svg>
+                    </div>
                     <div class="card-number">06</div>
                     <h3>Warehousing & Supply Chain Integration</h3>
                 </div>
@@ -86,11 +136,73 @@
         </div>
     </section>
 
+    <!--================ BIMI ADVANTAGE SECTION =================-->
+    <section class="bimi-advantage">
+        <div class="container">
+            <div class="approach-head">
+                <h2>The <img src="{% static 'images/logo-2.png' %}" alt="BIMI" class="heading-logo"> Advantage</h2>
+                <p class="advantage-desc">At BIMI Worldwide, we combine decades of industry expertise with a modern, customer-centric approach to global trade. Our commitment extends beyond sourcing and logistics—we deliver confidence, quality, and long-term value through every partnership.</p>
+            </div>
+            <div class="advantage-grid">
+                <div class="advantage-card">
+                    <div class="adv-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                    <h3>1. A Legacy of Experience</h3>
+                    <p>Founded in 2025 and backed by industry expertise dating back to 2012, BIMI Worldwide combines years of practical knowledge with a forward-looking approach to international trade, helping businesses navigate global markets with confidence.</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="adv-icon"><i class="fa-solid fa-globe"></i></div>
+                    <h3>2. Global Trade Network</h3>
+                    <p>Our growing network of trusted suppliers, manufacturers, logistics partners, and buyers enables us to source quality products and deliver comprehensive trade solutions across international markets.</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="adv-icon"><i class="fa-solid fa-award"></i></div>
+                    <h3>3. Industry Expertise</h3>
+                    <p>Our experienced team brings extensive knowledge across sourcing, merchandising, quality assurance, customs compliance, freight forwarding, and supply chain management. Every project is handled with professionalism, technical understanding, and attention to detail.</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="adv-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <h3>4. Flexible & Responsive Solutions</h3>
+                    <p>Global trade is dynamic, and so are we. Whether it's urgent sourcing requirements, last-minute shipments, or customized procurement solutions, our team responds quickly to keep your business moving without interruption.</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="adv-icon"><i class="fa-solid fa-handshake"></i></div>
+                    <h3>5. Transparency & Timely Communication</h3>
+                    <p>We believe that trust is built through transparency. From supplier evaluation to shipment tracking and documentation, our clients receive clear communication, timely updates, and complete visibility throughout every stage of the process.</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="adv-icon"><i class="fa-solid fa-user-tie"></i></div>
+                    <h3>6. Dedicated Client Partnership</h3>
+                    <p>Every client is assigned a dedicated relationship manager who understands their business objectives and provides personalized support, ensuring a seamless experience from inquiry to final delivery.</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="adv-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <h3>7. Scalable Global Solutions</h3>
+                    <p>Whether you're placing your first international order or managing high-volume procurement across multiple markets, BIMI Worldwide has the expertise, network, and operational capabilities to scale alongside your business.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--================ VISION & MISSION SECTION =================-->
+    <section class="vision-mission" id="vision-mission">
+        <div class="container vision-mission-grid">
+            <div class="vm-card vision">
+                <div class="vm-icon"><i class="fa-solid fa-eye"></i></div>
+                <h2>Our Vision</h2>
+                <p>To be the world's most trusted global trade partner, connecting premium products with international markets through innovation, integrity, and excellence.</p>
+            </div>
+            <div class="vm-card mission">
+                <div class="vm-icon"><i class="fa-solid fa-bullseye"></i></div>
+                <h2>Our Mission</h2>
+                <p>To empower businesses with reliable sourcing, seamless logistics, and end-to-end trade solutions that deliver quality, transparency, and sustainable growth.</p>
+            </div>
+        </div>
+    </section>
+
     <section class="dynamics">
         <div class="container">
             <div class="dynamics-content">
-                <p>Every solution we provide is guided by meticulous attention to detail and a deep understanding of global trade dynamics. We carefully align suppliers, products, documentation, and logistics to create a streamlined pathway from origin to
-                    destination.
+                <p>Trade is more than the movement of goods—it's the movement of trust, opportunity, and enduring partnerships. At BIMI Worldwide, every connection we create is a step toward shared global success.
                 </p>
             </div>
         </div>
@@ -99,26 +211,26 @@
     <section class="philosophy">
         <div class="container">
             <div class="philosophy-wrapper">
-                <h2>The name BIMI Worldwide reflects our philosophy:</h2>
+                <h2>The Principles That Drive BIMI Worldwide</h2>
                 <div class="philo-grid">
                     <div class="philo-item">
                         <h4>Bilateral</h4>
-                        <p>Fostering meaningful, long-term partnerships</p>
+                        <p>Building Strong Business Partnerships </p>
                     </div>
                     <div class="philo-item">
-                        <h4>Import Merchandise</h4>
-                        <p>Safeguarding the integrity and value of every product</p>
+                        <h4>Import Merchandise </h4>
+                        <p>Quality Products, Carefully Sourced</p>
                     </div>
                     <div class="philo-item">
-                        <h4>International Worldwide</h4>
-                        <p>Operating with a truly global perspective</p>
+                        <h4>International </h4>
+                        <p>Connecting Global Markets </p>
                     </div>
                 </div>
 
                 {# RESPONSIVE FIX: moved inline spacing/alignment into CSS so mobile and tablet layouts can adjust cleanly. #}
                 <div class="closing-text">
-                    <p>At BIMI Worldwide, relationships are not transactional—they are strategic. We believe excellence in trade is achieved through trust, consistency, and a commitment to delivering measurable value.</p>
-                    <p>With legacy experience, modern infrastructure, and a refined global outlook, BIMI Worldwide stands as a premium partner for businesses seeking not just access to markets—but distinction within them.</p>
+                    <p>BIMI Worldwide is more than a trading company - we are your strategic partner for global 
+sourcing, international trade, and supply chain excellence.</p>
                 </div>
 
                 <div class="closing-statement">
@@ -128,198 +240,71 @@
         </div>
     </section>
 
+    <!--================ BIMI EXPLANATION SECTION =================-->
+    <section class="bimi-explanation-section">
+      <div class="container">
+        
+        <div class="explanation-head">
+          <span class="expl-badge">Decoding Our Name</span>
+          <h2>What does <span>BIMI Worldwide</span> stand for?</h2>
+          <p>Every letter in our name represents a core pillar of our business operations, reflecting our commitment to global trade excellence.</p>
+        </div>
+
+        <div class="acronym-grid">
+          
+          <!-- Letter B -->
+          <div class="acronym-card">
+            <div class="letter-box">B</div>
+            <div class="acronym-content">
+              <h3>Bilateral</h3>
+              <p>Fostering mutually beneficial, long-term trade relations and strategic business partnerships across borders.</p>
+            </div>
+          </div>
+
+          <!-- Letter I -->
+          <div class="acronym-card">
+            <div class="letter-box">I</div>
+            <div class="acronym-content">
+              <h3>Import</h3>
+              <p>Bringing premium goods, raw materials, and industrial products into target markets with full compliance.</p>
+            </div>
+          </div>
+
+          <!-- Letter M -->
+          <div class="acronym-card">
+            <div class="letter-box">M</div>
+            <div class="acronym-content">
+              <h3>Merchandise</h3>
+              <p>Managing a diverse portfolio of high-quality goods, ensuring excellence in procurement and product integrity.</p>
+            </div>
+          </div>
+
+          <!-- Letter I -->
+          <div class="acronym-card">
+            <div class="letter-box">I</div>
+            <div class="acronym-content">
+              <h3>International</h3>
+              <p>Operating with a global mindset, navigating international trade lanes, regulations, and multi-country logistics.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Worldwide Block at the bottom as a full-width callout -->
+        <div class="worldwide-card">
+          <div class="worldwide-header">
+            <span class="world-globe"><i class="fa-solid fa-earth-americas"></i></span>
+            <h3>Worldwide</h3>
+          </div>
+          <p>Connecting businesses across global markets with seamless supply chain integration, trusted sourcing, and end-to-end logistics solutions.</p>
+        </div>
+
+      </div>
+    </section>
+
 {% endblock %}
 
 
 
 
 
-
-
-
-{% comment %} {% extends "base.html" %}
-{% load static %}
-
-{% block title %}About Us | Bimi Worldwide{% endblock %}
-
-{% block css %}
-<link rel="stylesheet" href="{% static 'css/about.css' %}">
-{% endblock %}
-
-{% block content %}
-
-<section class="about-hero">
-
-<div class="container about-hero-grid">
-
-<div class="about-hero-media">
-
-<div class="image-frame">
-<img src="{% static 'images/about-hero.png' %}" alt="About BIMI Worldwide">
-</div>
-
-</div>
-
-<div class="about-hero-content">
-
-<div class="badge">ESTABLISHED 2025</div>
-
-<h1>Leadership Rooted in Experience. Driven by Vision</h1>
-
-<p class="hero-subtitle">
-Built on decades of experience and guided by integrity and vision, our leadership is committed to creating trusted partnerships and lasting global success.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section class="company-intro">
-
-<div class="container">
-
-<div class="intro-box">
-
-<p class="main-desc">
-BIMI Worldwide (Bilateral Import Merchandise International Worldwide) was established in 2025 as the evolution of a legacy built over nearly two decades in global trade and logistics.
-</p>
-
-<p class="sub-desc">
-BIMI Worldwide was created with a singular vision: to redefine how businesses source, trade, and expand across borders.
-</p>
-
-<div class="highlight-grid">
-
-<div class="h-item">Precision</div>
-<div class="h-item">Intelligence</div>
-<div class="h-item">Uncompromising Standards</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section class="architects-callout">
-
-<div class="container">
-
-<div class="dark-card">
-
-<h2>"We are more than a trade facilitator. We are architects of seamless global commerce."</h2>
-
-<p>
-From identifying premium-quality products to ensuring regulatory compliance and logistics coordination.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section class="our-approach">
-
-<div class="container">
-
-<div class="approach-head">
-<h2>Our expertise spans:</h2>
-</div>
-
-<div class="approach-grid">
-
-<div class="approach-card">
-<div class="card-number">01</div>
-<h3>Strategic Global Sourcing & Merchandising</h3>
-</div>
-
-<div class="approach-card">
-<div class="card-number">02</div>
-<h3>Quality Assurance & International Compliance</h3>
-</div>
-
-<div class="approach-card">
-<div class="card-number">03</div>
-<h3>Customs Advisory & Regulatory Management</h3>
-</div>
-
-<div class="approach-card">
-<div class="card-number">04</div>
-<h3>International Freight Forwarding</h3>
-</div>
-
-<div class="approach-card">
-<div class="card-number">05</div>
-<h3>Dedicated Inland Transportation</h3>
-</div>
-
-<div class="approach-card">
-<div class="card-number">06</div>
-<h3>Warehousing & Supply Chain Integration</h3>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section class="dynamics">
-
-<div class="container">
-
-<div class="dynamics-content">
-
-<p>
-Every solution we provide is guided by meticulous attention to detail and a deep understanding of global trade dynamics.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section class="philosophy">
-
-<div class="container">
-
-<div class="philosophy-wrapper">
-
-<h2>The name BIMI Worldwide reflects our philosophy:</h2>
-
-<div class="philo-grid">
-
-<div class="philo-item">
-<h4>Bilateral</h4>
-<p>Fostering meaningful, long-term partnerships</p>
-</div>
-
-<div class="philo-item">
-<h4>Import Merchandise</h4>
-<p>Safeguarding the integrity and value of every product</p>
-</div>
-
-<div class="philo-item">
-<h4>International Worldwide</h4>
-<p>Operating with a truly global perspective</p>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-{% endblock %} {% endcomment %}
