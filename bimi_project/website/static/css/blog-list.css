@@ -2,8 +2,10 @@
 
 .blog-hero {
     background: var(--orange);
-    padding: 100px 0 90px;
+    padding: clamp(35px, 4vw, 45px) 16px clamp(40px, 6vw, 50px); /* Position content higher below fixed header */
     text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
 .blog-hero-inner {
@@ -172,15 +174,6 @@
 }
 
 @media (max-width: 900px) {
-    .blog-hero {
-        padding: 70px 0 60px;
-    }
-    .blog-hero-inner h1 {
-        font-size: 2.1rem;
-    }
-    .blog-hero-inner .desc {
-        font-size: .98rem;
-    }
     .blog-list {
         padding: 90px 0;
     }

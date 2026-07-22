@@ -43,6 +43,6 @@ path(
     
     #==================================================================
     path('contact/',views.contact_form,name='contact_form'),
-    
+    path('why-choose-us/', views.why_us, name='why_us'),
 ]
 

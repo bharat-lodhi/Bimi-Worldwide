@@ -596,7 +596,8 @@ body {
 
 .logos-track {
     display: flex;
-    gap: 30px;
+    --logos-gap: 30px;
+    gap: var(--logos-gap);
     /* MOBILE FIX: Reduced from 50px */
     align-items: center;
     width: max-content;
@@ -629,14 +630,14 @@ body {
 /* Left to Right Animation */
 
 .scroll-left .logos-track {
-    animation: scrollAnimationLeft 25s linear infinite;
+    animation: scrollAnimationLeft 14s linear infinite;
 }
 
 
 /* Right to Left Animation */
 
 .scroll-right .logos-track {
-    animation: scrollAnimationRight 25s linear infinite;
+    animation: scrollAnimationRight 14s linear infinite;
 }
 
 @keyframes scrollAnimationLeft {
@@ -644,13 +645,13 @@ body {
         transform: translateX(0);
     }
     100% {
-        transform: translateX(calc(-50% - 25px));
+        transform: translateX(calc(-50% - var(--logos-gap) / 2));
     }
 }
 
 @keyframes scrollAnimationRight {
     0% {
-        transform: translateX(calc(-50% - 25px));
+        transform: translateX(calc(-50% - var(--logos-gap) / 2));
     }
     100% {
         transform: translateX(0);
@@ -676,7 +677,7 @@ body {
         aspect-ratio: 1 / 1;
     }
     .logos-track {
-        gap: 40px;
+        --logos-gap: 40px;
     }
     .logos-track img {
         height: 55px;
@@ -708,7 +709,7 @@ body {
         padding: 0;
     }
     .logos-track {
-        gap: 50px;
+        --logos-gap: 50px;
     }
     .logos-track img {
         height: 65px;
@@ -934,5 +935,185 @@ body {
         flex: 1 1 calc(50% - 6px);
         min-width: 130px;
         padding: 14px 24px;
+    }
+}
+
+/* ================= GLOBAL REACH SECTION ================= */
+
+.global-reach {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    background: var(--ink); /* #1f1f3b - theme navy background */
+    color: #fff;
+    overflow: hidden;
+    position: relative;
+}
+
+.reach-left {
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* Badge styled like other badges in the theme */
+.reach-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.reach-line {
+    display: inline-block;
+    width: 24px;
+    height: 2px;
+    background: var(--orange);
+}
+
+.reach-badge-text {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--orange);
+    text-transform: uppercase;
+}
+
+.reach-title {
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 35px;
+    color: #fff;
+    letter-spacing: -0.5px;
+}
+
+.reach-title .highlight {
+    color: var(--orange);
+}
+
+.reach-subtitle {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+
+/* Progress bar list */
+.reach-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 40px;
+    max-width: 600px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.stat-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.95rem;
+}
+
+.stat-name {
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.4;
+}
+
+.stat-name strong {
+    color: #fff;
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+.stat-percent {
+    font-weight: 700;
+    color: var(--orange);
+}
+
+.stat-bar-bg {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.stat-bar-fill {
+    height: 100%;
+    background: var(--orange);
+    border-radius: 2px;
+    transition: width 1.5s ease-out;
+}
+
+/* CTA Button */
+.btn-reach {
+    display: inline-block;
+    align-self: flex-start;
+    padding: 14px 32px;
+    background: var(--orange);
+    color: #fff;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: 0.3s;
+    box-shadow: 0 8px 24px rgba(214, 136, 42, 0.25);
+}
+
+.btn-reach:hover {
+    background: #fff;
+    color: var(--ink);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(255, 255, 255, 0.2);
+}
+
+/* Right Column (Map) */
+.reach-right {
+    background: #f2f4ef; /* Matches the map image background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 380px;
+    position: relative;
+}
+
+.reach-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* RESPONSIVE LAYOUT FOR DESKTOP */
+@media(min-width: 992px) {
+    .global-reach {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .reach-left {
+        padding: 90px 60px 90px calc((100vw - min(90vw, 1250px)) / 2 + 10px);
+    }
+    
+    .reach-right {
+        min-height: 100%;
+    }
+}
+
+@media(min-width: 1200px) {
+    .reach-left {
+        padding-top: 110px;
+        padding-bottom: 110px;
     }
 }

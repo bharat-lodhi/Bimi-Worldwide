@@ -724,3 +724,6 @@ def contact_form(request):
         context
     )
 # ==================================================================
+
+def why_us(request):
+    return render(request, "why_us.html")

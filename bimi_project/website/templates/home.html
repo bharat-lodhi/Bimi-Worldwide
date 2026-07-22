@@ -4,7 +4,7 @@
 {% block title %}Home | BiMi{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/home.css' %}?v=1.9">
+<link rel="stylesheet" href="{% static 'css/home.css' %}?v=2.1">
 <style>
 
 /* Document modal popup */
@@ -383,12 +383,17 @@ international trade solutions.
 
         <div class="logos-row scroll-right">
           <div class="logos-track">
-            
+            <!-- Set 1 -->
             <img src="{% static 'images/cli-1.webp' %}" alt="Client">
             <img src="{% static 'images/cli-2.svg' %}" alt="Client">
             <img src="{% static 'images/cli-3.png' %}" alt="Client">
             <img src="{% static 'images/cli-4.webp' %}" alt="Client">
-
+            
+            <!-- Duplicated Set 2 (for seamless infinite loop) -->
+            <img src="{% static 'images/cli-1.webp' %}" alt="Client">
+            <img src="{% static 'images/cli-2.svg' %}" alt="Client">
+            <img src="{% static 'images/cli-3.png' %}" alt="Client">
+            <img src="{% static 'images/cli-4.webp' %}" alt="Client">
           </div>
         </div>
 
@@ -438,6 +443,79 @@ international trade solutions.
       <a href="#" class="cta-btn outline doc-btn" >GST</a>
     </div>
 
+  </div>
+</section>
+
+<!-- ================= GLOBAL CONNECTIONS SECTION ================= -->
+<section class="global-reach">
+  <div class="reach-left">
+    <div class="reach-badge">
+      <span class="reach-line"></span>
+      <span class="reach-badge-text">WORLDWIDE REACH</span>
+    </div>
+    <h2 class="reach-title">
+      Our Global <span class="highlight">Connections</span>
+    </h2>
+    
+    <p class="reach-subtitle">EXPORT DESTINATIONS</p>
+    
+    <div class="reach-stats">
+      <div class="stat-item">
+        <div class="stat-info">
+          <span class="stat-name"><strong>Middle East</strong> UAE, Saudi Arabia, Qatar, Kuwait</span>
+          <span class="stat-percent">35%</span>
+        </div>
+        <div class="stat-bar-bg">
+          <div class="stat-bar-fill" style="width: 35%;"></div>
+        </div>
+      </div>
+
+      <div class="stat-item">
+        <div class="stat-info">
+          <span class="stat-name"><strong>Southeast Asia</strong> Singapore, Malaysia, Indonesia</span>
+          <span class="stat-percent">25%</span>
+        </div>
+        <div class="stat-bar-bg">
+          <div class="stat-bar-fill" style="width: 25%;"></div>
+        </div>
+      </div>
+
+      <div class="stat-item">
+        <div class="stat-info">
+          <span class="stat-name"><strong>Europe</strong> UK, Netherlands, Germany</span>
+          <span class="stat-percent">20%</span>
+        </div>
+        <div class="stat-bar-bg">
+          <div class="stat-bar-fill" style="width: 20%;"></div>
+        </div>
+      </div>
+
+      <div class="stat-item">
+        <div class="stat-info">
+          <span class="stat-name"><strong>North America</strong> USA, Canada</span>
+          <span class="stat-percent">15%</span>
+        </div>
+        <div class="stat-bar-bg">
+          <div class="stat-bar-fill" style="width: 15%;"></div>
+        </div>
+      </div>
+
+      <div class="stat-item">
+        <div class="stat-info">
+          <span class="stat-name"><strong>Africa</strong> Kenya, South Africa, Egypt</span>
+          <span class="stat-percent">5%</span>
+        </div>
+        <div class="stat-bar-bg">
+          <div class="stat-bar-fill" style="width: 5%;"></div>
+        </div>
+      </div>
+    </div>
+
+    <a href="{% url 'contact_form' %}" class="btn-reach">Start Exporting with Us &rarr;</a>
+  </div>
+  
+  <div class="reach-right">
+    <img src="{% static 'images/world-map.png' %}" alt="Bimi Worldwide Global Reach Map">
   </div>
 </section>
 
