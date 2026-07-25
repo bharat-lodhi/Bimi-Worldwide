@@ -147,6 +147,21 @@
               <i class="fas fa-blog me-1"></i> Blogs
             </a>
           </li>
+          <li class="nav-item mx-lg-2">
+            <a class="nav-link text-white" href="{% url 'enquiry_list' %}">
+              <i class="fas fa-envelope-open-text me-1"></i> Contact Enquiries
+            </a>
+          </li>
+          <li class="nav-item mx-lg-2">
+            <a class="nav-link text-white" href="{% url 'product_enquiry_list' %}">
+              <i class="fas fa-file-invoice-dollar me-1"></i> Product Enquiries
+            </a>
+          </li>
+          <li class="nav-item mx-lg-2">
+            <a class="nav-link text-white" href="{% url 'supplier_list' %}">
+              <i class="fas fa-handshake me-1"></i> Suppliers
+            </a>
+          </li>
         </ul>
 
         <div class="d-flex align-items-center">
@@ -173,25 +188,30 @@
           </div>
       </div>
 
-      <div class="row g-3 mb-5">
-          <div class="col-6 col-md-3">
+      <div class="row g-3 mb-5 justify-content-center">
+          <div class="col-6 col-sm-4 col-md-2">
               <a href="{% url 'add_category' %}" class="quick-action-btn">
                   <i class="fas fa-plus-circle d-block mb-1 fs-4"></i> Add Category
               </a>
           </div>
-          <div class="col-6 col-md-3">
+          <div class="col-6 col-sm-4 col-md-2">
               <a href="{% url 'add_real_subcategory' %}" class="quick-action-btn">
                   <i class="fas fa-indent d-block mb-1 fs-4"></i> Add Sub-Cat
               </a>
           </div>
-          <div class="col-6 col-md-3">
+          <div class="col-6 col-sm-4 col-md-2">
               <a href="{% url 'add_subcategory' %}" class="quick-action-btn">
                   <i class="fas fa-cart-plus d-block mb-1 fs-4"></i> Add Product
               </a>
           </div>
-          <div class="col-6 col-md-3">
+          <div class="col-6 col-sm-4 col-md-2">
               <a href="{% url 'add_blog' %}" class="quick-action-btn">
                   <i class="fas fa-pen-nib d-block mb-1 fs-4"></i> Add Blog
+              </a>
+          </div>
+          <div class="col-6 col-sm-4 col-md-2">
+              <a href="{% url 'add_product_enquiry' %}" class="quick-action-btn">
+                  <i class="fas fa-file-invoice-dollar d-block mb-1 fs-4"></i> Add Enquiry
               </a>
           </div>
       </div>
@@ -207,7 +227,7 @@
 
       <div class="row g-4 justify-content-center">
         <!-- Card 1 -->
-        <div class="col-12 col-sm-6 col-lg-4">
+        <div class="col-12 col-sm-6 col-md-4 col-lg">
           <a href="{% url 'category_list' %}" class="dashboard-card blog-card">
             <div class="card-content">
               <div class="card-icon"><i class="fas fa-box"></i></div>
@@ -217,7 +237,7 @@
         </div>
 
         <!-- Card 2 -->
-        <div class="col-12 col-sm-6 col-lg-4">
+        <div class="col-12 col-sm-6 col-md-4 col-lg">
           <a href="{% url 'blogs' %}" class="dashboard-card blog-card">
             <div class="card-content">
               <div class="card-icon"><i class="fas fa-blog"></i></div>
@@ -227,11 +247,31 @@
         </div>
 
         <!-- Card 3 -->
-        <div class="col-12 col-sm-6 col-lg-4">
+        <div class="col-12 col-sm-6 col-md-4 col-lg">
           <a href="{% url 'enquiry_list' %}" class="dashboard-card visitor-card">
             <div class="card-content">
-              <div class="card-icon"><i class="fas fa-users"></i></div>
-              <h3 class="card-title">Visitor Submissions</h3>
+              <div class="card-icon"><i class="fas fa-envelope-open-text"></i></div>
+              <h3 class="card-title">Visitor Enquiries</h3>
+            </div>
+          </a>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="col-12 col-sm-6 col-md-4 col-lg">
+          <a href="{% url 'supplier_list' %}" class="dashboard-card visitor-card">
+            <div class="card-content">
+              <div class="card-icon"><i class="fas fa-handshake"></i></div>
+              <h3 class="card-title">Supplier Registrations</h3>
+            </div>
+          </a>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="col-12 col-sm-6 col-md-4 col-lg">
+          <a href="{% url 'product_enquiry_list' %}" class="dashboard-card visitor-card" style="background-image: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);">
+            <div class="card-content text-white">
+              <div class="card-icon text-white"><i class="fas fa-file-invoice-dollar"></i></div>
+              <h3 class="card-title text-white">Product Enquiries</h3>
             </div>
           </a>
         </div>
@@ -509,8 +549,13 @@
             </a>
           </li>
           <li class="nav-item mx-lg-2">
-            <a class="nav-link text-white" href="#">
-              <i class="fas fa-envelope-open-text me-1"></i> Enquiries
+            <a class="nav-link text-white" href="{% url 'enquiry_list' %}">
+              <i class="fas fa-envelope-open-text me-1"></i> Contact Enquiries
+            </a>
+          </li>
+          <li class="nav-item mx-lg-2">
+            <a class="nav-link text-white" href="{% url 'product_enquiry_list' %}">
+              <i class="fas fa-file-invoice-dollar me-1"></i> Product Enquiries
             </a>
           </li>
         </ul>

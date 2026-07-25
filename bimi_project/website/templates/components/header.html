@@ -2,6 +2,7 @@
 {% url 'home' as home_url %}
 {% url 'about' as about_url %}
 {% url 'products_category' as products_url %}
+{% url 'become_supplier' as become_supplier_url %}
 {% url 'blog_list' as blogs_url %}
 {% url 'contact_form' as contact_url %}
 {% url 'why_us' as why_us_url %}
@@ -29,6 +30,8 @@
 
 <a href="{{ products_url }}" class="{% if request.path == products_url or '/products-list/' in request.path or '/subcategory-products/' in request.path or '/product-detail/' in request.path %}active{% endif %}">Products</a>
 
+<a href="{{ become_supplier_url }}" class="{% if request.path == become_supplier_url %}active{% endif %}">Become a Supplier</a>
+
 <a href="{{ blogs_url }}" class="{% if request.path == blogs_url or '/blog/' in request.path %}active{% endif %}">Blogs</a>
 
 <a href="{{ contact_url }}" class="{% if request.path == contact_url %}active{% endif %}">Contact Us</a>
@@ -55,6 +58,8 @@
 <b><a href="{{ why_us_url }}" class="{% if request.path == why_us_url %}active{% endif %}">Why Us</a></b>
 
 <b><a href="{{ products_url }}" class="{% if request.path == products_url or '/products-list/' in request.path or '/subcategory-products/' in request.path or '/product-detail/' in request.path %}active{% endif %}">Products</a></b>
+
+<b><a href="{{ become_supplier_url }}" class="{% if request.path == become_supplier_url %}active{% endif %}">Become a Supplier</a></b>
 
 <b><a href="{{ blogs_url }}" class="{% if request.path == blogs_url or '/blog/' in request.path %}active{% endif %}">Blogs</a></b>
 

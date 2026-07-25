@@ -4,7 +4,7 @@
 {% block title %}Why Choose Us | BiMi Worldwide{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/why_us.css' %}?v=2.0">
+<link rel="stylesheet" href="{% static 'css/why_us.css' %}?v=2.5">
 {% endblock %}
 
 {% block content %}
@@ -30,83 +30,89 @@
         
         <div class="features-grid">
             
-            <!-- FEATURE 01 -->
-            <div class="feature-card">
-                <div class="card-header">
-                    <div class="header-main">
-                        <span class="card-num">01</span>
-                        <h3>Verified Global Supplier Network</h3>
+            <!-- COLUMN 1: Box 01 and Box 03 -->
+            <div class="features-column">
+                <!-- FEATURE 01 -->
+                <div class="feature-card sticky-card-1">
+                    <div class="card-header">
+                        <div class="header-main">
+                            <span class="card-num">01</span>
+                            <h3>Verified Global Supplier Network</h3>
+                        </div>
+                        <div class="icon-box">
+                            <svg class="feature-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                <path d="m9 11 2 2 4-4"/>
+                            </svg>
+                        </div>
                     </div>
-                    <div class="icon-box">
-                        <svg class="feature-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                            <path d="m9 11 2 2 4-4"/>
-                        </svg>
-                    </div>
+                    <p>
+                        We work with carefully vetted manufacturers and suppliers across multiple industries, ensuring consistent quality, competitive pricing, and dependable supply for every order.
+                    </p>
                 </div>
-                <p>
-                    We work with carefully vetted manufacturers and suppliers across multiple industries, ensuring consistent quality, competitive pricing, and dependable supply for every order.
-                </p>
+
+                <!-- FEATURE 03 -->
+                <div class="feature-card sticky-card-2">
+                    <div class="card-header">
+                        <div class="header-main">
+                            <span class="card-num">03</span>
+                            <h3>Quality & Compliance First</h3>
+                        </div>
+                        <div class="icon-box">
+                            <svg class="feature-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="m9 12 2 2 4-4"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <p>
+                        Every product is sourced with strict attention to quality standards, certifications, compliance requirements, and customer specifications to minimize risks and ensure reliability.
+                    </p>
+                </div>
             </div>
 
-            <!-- FEATURE 02 -->
-            <div class="feature-card">
-                <div class="card-header">
-                    <div class="header-main">
-                        <span class="card-num">02</span>
-                        <h3>End-to-End Trade Solutions</h3>
+            <!-- COLUMN 2: Box 02 and Box 04 -->
+            <div class="features-column">
+                <!-- FEATURE 02 -->
+                <div class="feature-card sticky-card-1">
+                    <div class="card-header">
+                        <div class="header-main">
+                            <span class="card-num">02</span>
+                            <h3>End-to-End Trade Solutions</h3>
+                        </div>
+                        <div class="icon-box">
+                            <svg class="feature-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M2 12h20"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                        </div>
                     </div>
-                    <div class="icon-box">
-                        <svg class="feature-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M2 12h20"/>
-                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                        </svg>
-                    </div>
+                    <p>
+                        From product sourcing and supplier negotiations to quality inspections, documentation, logistics, and customs coordination, BIMI Worldwide manages every stage of the supply chain.
+                    </p>
                 </div>
-                <p>
-                    From product sourcing and supplier negotiations to quality inspections, documentation, logistics, and customs coordination, BIMI Worldwide manages every stage of the supply chain.
-                </p>
-            </div>
 
-            <!-- FEATURE 03 -->
-            <div class="feature-card">
-                <div class="card-header">
-                    <div class="header-main">
-                        <span class="card-num">03</span>
-                        <h3>Quality & Compliance First</h3>
+                <!-- FEATURE 04 -->
+                <div class="feature-card sticky-card-2">
+                    <div class="card-header">
+                        <div class="header-main">
+                            <span class="card-num">04</span>
+                            <h3>Customer-Focused Partnership</h3>
+                        </div>
+                        <div class="icon-box">
+                            <svg class="feature-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
                     </div>
-                    <div class="icon-box">
-                        <svg class="feature-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="m9 12 2 2 4-4"/>
-                        </svg>
-                    </div>
+                    <p>
+                        We believe every client has unique sourcing needs. Our team provides personalized support, transparent communication, and tailored trade solutions to build long-term business relationships.
+                    </p>
                 </div>
-                <p>
-                    Every product is sourced with strict attention to quality standards, certifications, compliance requirements, and customer specifications to minimize risks and ensure reliability.
-                </p>
-            </div>
-
-            <!-- FEATURE 04 -->
-            <div class="feature-card">
-                <div class="card-header">
-                    <div class="header-main">
-                        <span class="card-num">04</span>
-                        <h3>Customer-Focused Partnership</h3>
-                    </div>
-                    <div class="icon-box">
-                        <svg class="feature-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-                            <circle cx="9" cy="7" r="4"/>
-                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                        </svg>
-                    </div>
-                </div>
-                <p>
-                    We believe every client has unique sourcing needs. Our team provides personalized support, transparent communication, and tailored trade solutions to build long-term business relationships.
-                </p>
             </div>
 
         </div>

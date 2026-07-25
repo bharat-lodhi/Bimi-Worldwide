@@ -4,7 +4,7 @@
 {% block title %}About Us | BiMi Worldwide{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/about.css' %}?v=2.0">
+<link rel="stylesheet" href="{% static 'css/about.css' %}?v=3.6">
 {% endblock %}
 
 {% block content %}
@@ -30,21 +30,6 @@ operations.
         </div>
     </section>
 
-    <section class="company-intro">
-        <div class="container">
-            <div class="intro-box">
-                <p class="main-desc">
-                    BIMI Worldwide (Bilateral Import Merchandise International Worldwide) was established in 2025 as the evolution of a legacy built over nearly two decades in global trade and logistics. While the brand is new, the expertise behind it is deeply rooted in
-                    industry experience dating back to 2012, shaped through years of operational excellence, strategic partnerships, and international market engagement.
-                </p>
-                <p class="sub-desc">
-                    BIMI Worldwide was created with a singular vision: to redefine how businesses source, trade, and expand across borders - through precision, intelligence, and uncompromising standards.
-                </p>
-
-            </div>
-        </div>
-    </section>
-
     <section class="architects-callout">
         <div class="container">
             <div class="dark-card">
@@ -61,124 +46,228 @@ operations.
                 <h2>Our expertise spans:</h2>
             </div>
             <div class="approach-grid">
-                <div class="approach-card">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                            <path d="M2 12h20"/>
-                        </svg>
+                
+                <!-- Card 1 -->
+                <div class="gradient-card-wrapper">
+                    <div class="gradient-card orange">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                                <path d="M2 12h20"/>
+                            </svg>
+                        </div>
+                        <div class="card-content-wrapper">
+                            <div class="card-number">01</div>
+                            <h3>Strategic Global Sourcing & Merchandising</h3>
+                        </div>
                     </div>
-                    <div class="card-number">01</div>
-                    <h3>Strategic Global Sourcing & Merchandising</h3>
                 </div>
-                <div class="approach-card">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                            <path d="m9 11 2 2 4-4"/>
-                        </svg>
+
+                <!-- Card 2 -->
+                <div class="gradient-card-wrapper">
+                    <div class="gradient-card green">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                <path d="m9 11 2 2 4-4"/>
+                            </svg>
+                        </div>
+                        <div class="card-content-wrapper">
+                            <div class="card-number">02</div>
+                            <h3>Quality Assurance & International Compliance</h3>
+                        </div>
                     </div>
-                    <div class="card-number">02</div>
-                    <h3>Quality Assurance & International Compliance</h3>
                 </div>
-                <div class="approach-card">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                            <polyline points="14 2 14 8 20 8"/>
-                            <line x1="16" y1="13" x2="8" y2="13"/>
-                            <line x1="16" y1="17" x2="8" y2="17"/>
-                            <polyline points="10 9 9 9 8 9"/>
-                        </svg>
+
+                <!-- Card 3 -->
+                <div class="gradient-card-wrapper">
+                    <div class="gradient-card gray">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                                <polyline points="10 9 9 9 8 9"/>
+                            </svg>
+                        </div>
+                        <div class="card-content-wrapper">
+                            <div class="card-number">03</div>
+                            <h3>Customs Advisory & Regulatory Management</h3>
+                        </div>
                     </div>
-                    <div class="card-number">03</div>
-                    <h3>Customs Advisory & Regulatory Management</h3>
                 </div>
-                <div class="approach-card">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M2 20h20"/>
-                            <path d="M20 18v-2a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v2"/>
-                            <path d="M7 10h10"/>
-                            <path d="M12 4v6"/>
-                            <path d="M10 6h4"/>
-                            <path d="m3 18 2 2h14l2-2"/>
-                        </svg>
+
+                <!-- Card 4 -->
+                <div class="gradient-card-wrapper">
+                    <div class="gradient-card purple">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 20h20"/>
+                                <path d="M20 18v-2a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v2"/>
+                                <path d="M7 10h10"/>
+                                <path d="M12 4v6"/>
+                                <path d="M10 6h4"/>
+                                <path d="m3 18 2 2h14l2-2"/>
+                            </svg>
+                        </div>
+                        <div class="card-content-wrapper">
+                            <div class="card-number">04</div>
+                            <h3>International Freight Forwarding</h3>
+                        </div>
                     </div>
-                    <div class="card-number">04</div>
-                    <h3>International Freight Forwarding</h3>
                 </div>
-                <div class="approach-card">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="1" y="3" width="15" height="13" rx="2" ry="2"/>
-                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
-                            <circle cx="5.5" cy="18.5" r="2.5"/>
-                            <circle cx="18.5" cy="18.5" r="2.5"/>
-                        </svg>
+
+                <!-- Card 5 -->
+                <div class="gradient-card-wrapper">
+                    <div class="gradient-card blue">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="1" y="3" width="15" height="13" rx="2" ry="2"/>
+                                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                                <circle cx="5.5" cy="18.5" r="2.5"/>
+                                <circle cx="18.5" cy="18.5" r="2.5"/>
+                            </svg>
+                        </div>
+                        <div class="card-content-wrapper">
+                            <div class="card-number">05</div>
+                            <h3>Dedicated Inland Transportation</h3>
+                        </div>
                     </div>
-                    <div class="card-number">05</div>
-                    <h3>Dedicated Inland Transportation</h3>
                 </div>
-                <div class="approach-card">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-                            <line x1="12" y1="22.08" x2="12" y2="12"/>
-                        </svg>
+
+                <!-- Card 6 -->
+                <div class="gradient-card-wrapper">
+                    <div class="gradient-card rose">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                                <line x1="12" y1="22.08" x2="12" y2="12"/>
+                            </svg>
+                        </div>
+                        <div class="card-content-wrapper">
+                            <div class="card-number">06</div>
+                            <h3>Warehousing & Supply Chain Integration</h3>
+                        </div>
                     </div>
-                    <div class="card-number">06</div>
-                    <h3>Warehousing & Supply Chain Integration</h3>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!--================ BIMI ADVANTAGE SECTION =================-->
-    <section class="bimi-advantage">
-        <div class="container">
-            <div class="approach-head">
-                <h2>The <img src="{% static 'images/logo-2.png' %}" alt="BIMI" class="heading-logo"> Advantage</h2>
-                <p class="advantage-desc">At BIMI Worldwide, we combine decades of industry expertise with a modern, customer-centric approach to global trade. Our commitment extends beyond sourcing and logistics—we deliver confidence, quality, and long-term value through every partnership.</p>
+    <!--================ OUR GLOBAL SOURCING PROCESS SECTION =================-->
+    <section class="global-sourcing-process" id="sourcing-process">
+        <div class="container process-layout-grid">
+            
+            <!-- Sticky Left Column -->
+            <div class="process-left-sticky">
+                <span class="process-badge">OUR GLOBAL SOURCING PROCESS</span>
+                <h2>From Requirement to Global Delivery</h2>
+                <p class="process-subtitle">At BIMI Worldwide, we manage every stage of international sourcing—from understanding your requirements to delivering quality products at your destination.</p>
             </div>
-            <div class="advantage-grid">
-                <div class="advantage-card">
-                    <div class="adv-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
-                    <h3>1. A Legacy of Experience</h3>
-                    <p>Founded in 2025 and backed by industry expertise dating back to 2012, BIMI Worldwide combines years of practical knowledge with a forward-looking approach to international trade, helping businesses navigate global markets with confidence.</p>
+
+            <!-- Scrolling Right Column with Sticky Cards -->
+            <div class="process-scroll-container">
+                
+                <!-- Step 1 -->
+                <div class="process-sticky-card" style="--index: 1;">
+                    <div class="card-header-flex">
+                        <div class="process-icon-box">
+                            <i class="fa-solid fa-handshake"></i>
+                        </div>
+                        <span class="process-number">01</span>
+                    </div>
+                    <h3 class="step-title">Understanding Your Requirement</h3>
+                    <p class="step-desc">We begin by understanding your exact product specifications, quality standards, quantity requirements, destination, and delivery timeline to ensure the right sourcing strategy.</p>
                 </div>
-                <div class="advantage-card">
-                    <div class="adv-icon"><i class="fa-solid fa-globe"></i></div>
-                    <h3>2. Global Trade Network</h3>
-                    <p>Our growing network of trusted suppliers, manufacturers, logistics partners, and buyers enables us to source quality products and deliver comprehensive trade solutions across international markets.</p>
+
+                <!-- Step 2 -->
+                <div class="process-sticky-card" style="--index: 2;">
+                    <div class="card-header-flex">
+                        <div class="process-icon-box">
+                            <i class="fa-solid fa-globe"></i>
+                        </div>
+                        <span class="process-number">02</span>
+                    </div>
+                    <h3 class="step-title">Global Supplier Sourcing</h3>
+                    <p class="step-desc">Using our international supplier network, we identify reliable manufacturers, exporters, and producers capable of meeting your business requirements.</p>
                 </div>
-                <div class="advantage-card">
-                    <div class="adv-icon"><i class="fa-solid fa-award"></i></div>
-                    <h3>3. Industry Expertise</h3>
-                    <p>Our experienced team brings extensive knowledge across sourcing, merchandising, quality assurance, customs compliance, freight forwarding, and supply chain management. Every project is handled with professionalism, technical understanding, and attention to detail.</p>
+
+                <!-- Step 3 -->
+                <div class="process-sticky-card" style="--index: 3;">
+                    <div class="card-header-flex">
+                        <div class="process-icon-box">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <span class="process-number">03</span>
+                    </div>
+                    <h3 class="step-title">Supplier Verification</h3>
+                    <p class="step-desc">Every supplier is evaluated based on manufacturing capability, certifications, production capacity, export experience, and business credibility before selection.</p>
                 </div>
-                <div class="advantage-card">
-                    <div class="adv-icon"><i class="fa-solid fa-bolt"></i></div>
-                    <h3>4. Flexible & Responsive Solutions</h3>
-                    <p>Global trade is dynamic, and so are we. Whether it's urgent sourcing requirements, last-minute shipments, or customized procurement solutions, our team responds quickly to keep your business moving without interruption.</p>
+
+                <!-- Step 4 -->
+                <div class="process-sticky-card" style="--index: 4;">
+                    <div class="card-header-flex">
+                        <div class="process-icon-box">
+                            <i class="fa-solid fa-list-check"></i>
+                        </div>
+                        <span class="process-number">04</span>
+                    </div>
+                    <h3 class="step-title">Quality Inspection</h3>
+                    <p class="step-desc">Products undergo quality inspections during production and before shipment to ensure they comply with your specifications and international standards.</p>
                 </div>
-                <div class="advantage-card">
-                    <div class="adv-icon"><i class="fa-solid fa-handshake"></i></div>
-                    <h3>5. Transparency & Timely Communication</h3>
-                    <p>We believe that trust is built through transparency. From supplier evaluation to shipment tracking and documentation, our clients receive clear communication, timely updates, and complete visibility throughout every stage of the process.</p>
+
+                <!-- Step 5 -->
+                <div class="process-sticky-card" style="--index: 5;">
+                    <div class="card-header-flex">
+                        <div class="process-icon-box">
+                            <i class="fa-solid fa-box"></i>
+                        </div>
+                        <span class="process-number">05</span>
+                    </div>
+                    <h3 class="step-title">Packaging & Labeling</h3>
+                    <p class="step-desc">We coordinate export-standard packaging, customized labeling, palletization, and container loading to protect products throughout transit.</p>
                 </div>
-                <div class="advantage-card">
-                    <div class="adv-icon"><i class="fa-solid fa-user-tie"></i></div>
-                    <h3>6. Dedicated Client Partnership</h3>
-                    <p>Every client is assigned a dedicated relationship manager who understands their business objectives and provides personalized support, ensuring a seamless experience from inquiry to final delivery.</p>
+
+                <!-- Step 6 -->
+                <div class="process-sticky-card" style="--index: 6;">
+                    <div class="card-header-flex">
+                        <div class="process-icon-box">
+                            <i class="fa-solid fa-file-invoice-dollar"></i>
+                        </div>
+                        <span class="process-number">06</span>
+                    </div>
+                    <h3 class="step-title">Documentation & Compliance</h3>
+                    <p class="step-desc">Our team manages export documentation including Commercial Invoice, Packing List, Certificate of Origin, Phytosanitary Certificate, Fumigation Certificate, Inspection Certificates, Bill of Lading, and other country-specific compliance requirements.</p>
                 </div>
-                <div class="advantage-card">
-                    <div class="adv-icon"><i class="fa-solid fa-chart-line"></i></div>
-                    <h3>7. Scalable Global Solutions</h3>
-                    <p>Whether you're placing your first international order or managing high-volume procurement across multiple markets, BIMI Worldwide has the expertise, network, and operational capabilities to scale alongside your business.</p>
+
+                <!-- Step 7 -->
+                <div class="process-sticky-card" style="--index: 7;">
+                    <div class="card-header-flex">
+                        <div class="process-icon-box">
+                            <i class="fa-solid fa-ship"></i>
+                        </div>
+                        <span class="process-number">07</span>
+                    </div>
+                    <h3 class="step-title">International Logistics</h3>
+                    <p class="step-desc">We arrange sea freight, air freight, customs clearance, inland transportation, shipment tracking, and logistics coordination through our global network.</p>
                 </div>
+
+                <!-- Step 8 -->
+                <div class="process-sticky-card" style="--index: 8;">
+                    <div class="card-header-flex">
+                        <div class="process-icon-box">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <span class="process-number">08</span>
+                    </div>
+                    <h3 class="step-title">Delivery & After-Sales Support</h3>
+                    <p class="step-desc">Your shipment reaches its destination safely and on time. Our team continues to provide shipment updates, documentation support, and post-delivery assistance whenever required.</p>
+                </div>
+
             </div>
         </div>
     </section>
@@ -186,16 +275,31 @@ operations.
     <!--================ VISION & MISSION SECTION =================-->
     <section class="vision-mission" id="vision-mission">
         <div class="container vision-mission-grid">
-            <div class="vm-card vision">
-                <div class="vm-icon"><i class="fa-solid fa-eye"></i></div>
-                <h2>Our Vision</h2>
-                <p>To be the world's most trusted global trade partner, connecting premium products with international markets through innovation, integrity, and excellence.</p>
+            
+            <!-- OUR VISION -->
+            <div class="vm-card vision-card">
+                <div class="vm-icon-box">
+                    <i class="fa-solid fa-eye"></i>
+                </div>
+                <span class="vm-badge">OUR VISION</span>
+                <h2 class="vm-heading">Our Vision</h2>
+                <div class="vm-body-text">
+                    <p>To be the world's most trusted global trade partner, connecting premium products with international markets through innovation, integrity, and excellence.</p>
+                </div>
             </div>
-            <div class="vm-card mission">
-                <div class="vm-icon"><i class="fa-solid fa-bullseye"></i></div>
-                <h2>Our Mission</h2>
-                <p>To empower businesses with reliable sourcing, seamless logistics, and end-to-end trade solutions that deliver quality, transparency, and sustainable growth.</p>
+
+            <!-- OUR MISSION -->
+            <div class="vm-card mission-card">
+                <div class="vm-icon-box">
+                    <i class="fa-solid fa-bullseye"></i>
+                </div>
+                <span class="vm-badge">OUR MISSION</span>
+                <h2 class="vm-heading">Our Mission</h2>
+                <div class="vm-body-text">
+                    <p>To empower businesses with reliable sourcing, seamless logistics, and end-to-end trade solutions that deliver quality, transparency, and sustainable growth.</p>
+                </div>
             </div>
+
         </div>
     </section>
 

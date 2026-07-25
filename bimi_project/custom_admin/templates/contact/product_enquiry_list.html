@@ -1,0 +1,488 @@
+{% extends 'custom_admin/dashboard.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+  .enq-page { padding: 28px 24px 60px; max-width: 1350px; margin: 0 auto; }
+  
+  .enq-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1a1a2e;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+  }
+  
+  .enq-title::before {
+    content: '';
+    width: 4px;
+    height: 24px;
+    background: var(--primary-color, #D6882A);
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  /* ── STATISTICS CARDS ── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+
+  .stat-card {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 16px;
+    padding: 20px 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    text-align: center;
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.06);
+  }
+
+  .stat-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: transparent;
+  }
+
+  .stat-card.stat-all::after { background: #6c757d; }
+  .stat-card.stat-pending::after { background: var(--primary-color, #D6882A); }
+  .stat-card.stat-contacted::after { background: #0dcaf0; }
+  .stat-card.stat-quotation::after { background: #0d6efd; }
+  .stat-card.stat-follow-up::after { background: #6c757d; }
+  .stat-card.stat-closed::after { background: #198754; }
+  .stat-card.stat-rejected::after { background: #dc3545; }
+
+  .stat-card.active {
+    border-color: rgba(214,136,42,0.4);
+    background: #fffdfb;
+    box-shadow: 0 4px 18px rgba(214,136,42,0.08);
+  }
+
+  .stat-val {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #1a1a2e;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── FILTER TABS ── */
+  .status-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #ebebeb;
+    padding-bottom: 12px;
+  }
+
+  .status-tab-btn {
+    border: none;
+    background: transparent;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #666;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .status-tab-btn:hover {
+    background: #f5f5f5;
+    color: #333;
+  }
+
+  .status-tab-btn.active {
+    background: var(--primary-color, #D6882A);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(214,136,42,0.25);
+  }
+
+  /* ── FILTER & SEARCH PANEL ── */
+  .enq-filters-panel {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.015);
+  }
+
+  .search-input-group {
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    border: 1.5px solid #eaeaea;
+    border-radius: 10px;
+    padding: 0 14px;
+    gap: 10px;
+    transition: border-color 0.2s, background-color 0.2s;
+  }
+
+  .search-input-group:focus-within {
+    border-color: var(--primary-color, #D6882A);
+    background-color: #fff;
+  }
+
+  .search-input-group i { color: #888; }
+  .search-input-group input {
+    border: none;
+    background: transparent;
+    outline: none;
+    padding: 10px 0;
+    font-size: 0.9rem;
+    width: 100%;
+    color: #333;
+  }
+
+  .no-caret::after {
+    display: none !important;
+  }
+</style>
+
+<div class="enq-page">
+    <!-- Messages Block -->
+    {% if messages %}
+    <div class="row mb-4">
+        <div class="col-12">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show border-0 shadow-sm rounded-3" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Title Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+        <div class="enq-title">Product Enquiry Management</div>
+        <div class="d-inline-flex gap-2">
+            <a href="{% url 'add_product_enquiry' %}" class="btn text-white px-3 fw-bold rounded-3 shadow-sm border-0" style="background-color: var(--primary-color, #D6882A);">
+                <i class="fa-solid fa-plus me-1"></i> Add Enquiry Manually
+            </a>
+            <a href="{% url 'export_product_enquiries_csv' %}" class="btn btn-outline-secondary px-3 fw-bold rounded-3 shadow-sm">
+                <i class="fa-solid fa-file-csv me-1"></i> Export CSV
+            </a>
+            <a href="{% url 'export_product_enquiries_excel' %}" class="btn btn-outline-success px-3 fw-bold rounded-3 shadow-sm">
+                <i class="fa-solid fa-file-excel me-1"></i> Export Excel
+            </a>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="stats-grid">
+        <div class="stat-card stat-all active" data-status="All">
+            <div class="stat-val">{{ stats.total }}</div>
+            <div class="stat-label">All Enquiries</div>
+        </div>
+        <div class="stat-card stat-pending" data-status="Pending">
+            <div class="stat-val text-warning">{{ stats.pending }}</div>
+            <div class="stat-label">Pending</div>
+        </div>
+        <div class="stat-card stat-contacted" data-status="Contacted">
+            <div class="stat-val text-info">{{ stats.contacted }}</div>
+            <div class="stat-label">Contacted</div>
+        </div>
+        <div class="stat-card stat-quotation" data-status="Quotation Sent">
+            <div class="stat-val text-primary">{{ stats.quotation }}</div>
+            <div class="stat-label">Quotation Sent</div>
+        </div>
+        <div class="stat-card stat-follow-up" data-status="Follow Up">
+            <div class="stat-val text-secondary">{{ stats.follow_up }}</div>
+            <div class="stat-label">Follow Up</div>
+        </div>
+        <div class="stat-card stat-closed" data-status="Closed">
+            <div class="stat-val text-success">{{ stats.closed }}</div>
+            <div class="stat-label">Closed</div>
+        </div>
+        <div class="stat-card stat-rejected" data-status="Rejected">
+            <div class="stat-val text-danger">{{ stats.rejected }}</div>
+            <div class="stat-label">Rejected</div>
+        </div>
+    </div>
+
+    <!-- Status Tabs -->
+    <div class="status-tabs d-none d-md-flex">
+        <button class="status-tab-btn active" data-status="All">All Status ({{ stats.total }})</button>
+        <button class="status-tab-btn" data-status="Pending">Pending ({{ stats.pending }})</button>
+        <button class="status-tab-btn" data-status="Contacted">Contacted ({{ stats.contacted }})</button>
+        <button class="status-tab-btn" data-status="Quotation Sent">Quotation Sent ({{ stats.quotation }})</button>
+        <button class="status-tab-btn" data-status="Follow Up">Follow Up ({{ stats.follow_up }})</button>
+        <button class="status-tab-btn" data-status="Closed">Closed ({{ stats.closed }})</button>
+        <button class="status-tab-btn" data-status="Rejected">Rejected ({{ stats.rejected }})</button>
+    </div>
+
+    <!-- Filters Panel -->
+    <div class="enq-filters-panel">
+        <div class="row g-3 align-items-center">
+            <!-- Search bar -->
+            <div class="col-lg-5 col-md-6">
+                <div class="search-input-group">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="searchInput" placeholder="Search by customer name, mobile, email, product, category, or ID...">
+                </div>
+            </div>
+            
+            <!-- Mobile status filter (alternative to tabs) -->
+            <div class="col-md-3 d-md-none">
+                <select id="statusSelect" class="form-select bg-light border-0 py-2.5 rounded-3">
+                    <option value="All">All Status</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Contacted">Contacted</option>
+                    <option value="Quotation Sent">Quotation Sent</option>
+                    <option value="Follow Up">Follow Up</option>
+                    <option value="Closed">Closed</option>
+                    <option value="Rejected">Rejected</option>
+                </select>
+            </div>
+
+            <!-- Sorting -->
+            <div class="col-md-3 col-6 col-lg-3 ms-md-auto">
+                <select id="sortSelect" class="form-select bg-light border-0 py-2.5 rounded-3">
+                    <option value="newest">Sort: Newest First</option>
+                    <option value="oldest">Sort: Oldest First</option>
+                </select>
+            </div>
+
+            <!-- Items per page -->
+            <div class="col-md-2 col-6 col-lg-2">
+                <select id="perPageSelect" class="form-select bg-light border-0 py-2.5 rounded-3">
+                    <option value="10">10 per page</option>
+                    <option value="25">25 per page</option>
+                    <option value="50">50 per page</option>
+                    <option value="100">100 per page</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table Container -->
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4">
+        <div id="tableContainer">
+            {% include "contact/product_enquiry_table.html" %}
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow rounded-4">
+            <div class="modal-header border-0 py-3 bg-danger text-white">
+                <h5 class="modal-title fw-bold" id="deleteConfirmModalLabel">
+                    <i class="fa-solid fa-triangle-exclamation me-1"></i> Delete Enquiry?
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4 text-center">
+                <div class="mb-3 text-danger"><i class="fa-solid fa-trash-can" style="font-size: 3.5rem;"></i></div>
+                <h5 class="fw-bold">Are you sure?</h5>
+                <p class="text-muted">You are about to delete product enquiry <strong id="deleteEnquiryNo"></strong>. This action is permanent and cannot be undone.</p>
+            </div>
+            <div class="modal-footer border-0 p-3 justify-content-center">
+                <button type="button" class="btn btn-light px-4 rounded-3 fw-bold" data-bs-dismiss="modal">Cancel</button>
+                <a id="btnConfirmDelete" href="#" class="btn btn-danger px-4 rounded-3 fw-bold">Delete Record</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterForm = {
+        search: '',
+        status: 'All',
+        sort: 'newest',
+        per_page: 10,
+        page: 1
+    };
+
+    const tableContainer = document.getElementById('tableContainer');
+    const searchInput = document.getElementById('searchInput');
+    const statusSelect = document.getElementById('statusSelect');
+    const sortSelect = document.getElementById('sortSelect');
+    const perPageSelect = document.getElementById('perPageSelect');
+    const statCards = document.querySelectorAll('.stat-card');
+    const statusTabBtns = document.querySelectorAll('.status-tab-btn');
+
+    // Debounce search input
+    let searchTimeout;
+    searchInput.addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            filterForm.search = this.value;
+            filterForm.page = 1;
+            updateTable();
+        }, 300);
+    });
+
+    // Dropdowns
+    if (statusSelect) {
+        statusSelect.addEventListener('change', function() {
+            filterForm.status = this.value;
+            filterForm.page = 1;
+            syncActiveFilters(this.value);
+            updateTable();
+        });
+    }
+
+    sortSelect.addEventListener('change', function() {
+        filterForm.sort = this.value;
+        filterForm.page = 1;
+        updateTable();
+    });
+
+    perPageSelect.addEventListener('change', function() {
+        filterForm.per_page = this.value;
+        filterForm.page = 1;
+        updateTable();
+    });
+
+    // Stats Cards Click
+    statCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const status = this.getAttribute('data-status');
+            filterForm.status = status;
+            filterForm.page = 1;
+            syncActiveFilters(status);
+            updateTable();
+        });
+    });
+
+    // Status Tabs Click
+    statusTabBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const status = this.getAttribute('data-status');
+            filterForm.status = status;
+            filterForm.page = 1;
+            syncActiveFilters(status);
+            updateTable();
+        });
+    });
+
+    function syncActiveFilters(status) {
+        // Stats Cards Active class
+        statCards.forEach(c => {
+            if (c.getAttribute('data-status') === status) {
+                c.classList.add('active');
+            } else {
+                c.classList.remove('active');
+            }
+        });
+
+        // Tabs active class
+        statusTabBtns.forEach(b => {
+            if (b.getAttribute('data-status') === status) {
+                b.classList.add('active');
+            } else {
+                b.classList.remove('active');
+            }
+        });
+
+        // Sync dropdown
+        if (statusSelect) {
+            statusSelect.value = status;
+        }
+    }
+
+    function updateTable() {
+        tableContainer.style.opacity = '0.5';
+        
+        const params = new URLSearchParams({
+            search: filterForm.search,
+            status: filterForm.status,
+            sort: filterForm.sort,
+            per_page: filterForm.per_page,
+            page: filterForm.page,
+            ajax: 1
+        });
+        
+        fetch(`?${params.toString()}`, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.text())
+        .then(html => {
+            tableContainer.innerHTML = html;
+            tableContainer.style.opacity = '1';
+            
+            // Re-attach pagination link listeners
+            tableContainer.querySelectorAll('.pagination a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    filterForm.page = this.getAttribute('data-page');
+                    updateTable();
+                });
+            });
+            
+            attachDeleteListeners();
+        })
+        .catch(err => {
+            console.error("Failed to load table:", err);
+            tableContainer.style.opacity = '1';
+        });
+    }
+
+    // Modal Delete Confirmation Logic
+    const deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+    const deleteEnquiryNo = document.getElementById('deleteEnquiryNo');
+    const btnConfirmDelete = document.getElementById('btnConfirmDelete');
+
+    function attachDeleteListeners() {
+        document.querySelectorAll('.btn-delete-enquiry').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const url = this.getAttribute('data-url');
+                const name = this.getAttribute('data-no');
+                
+                deleteEnquiryNo.textContent = name;
+                btnConfirmDelete.setAttribute('href', url);
+                
+                deleteModal.show();
+            });
+        });
+    }
+
+    // Initial page load pagination & delete attachments
+    tableContainer.querySelectorAll('.pagination a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            filterForm.page = this.getAttribute('data-page');
+            updateTable();
+        });
+    });
+    
+    attachDeleteListeners();
+});
+</script>
+{% endblock %}

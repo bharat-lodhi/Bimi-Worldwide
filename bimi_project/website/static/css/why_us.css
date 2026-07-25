@@ -20,6 +20,8 @@
 /* Badge styling */
 .why-hero-inner .badge-wrap {
     margin-bottom: 12px;
+    display: flex;
+    justify-content: center;
 }
 
 .why-hero-inner .badge {
@@ -87,39 +89,34 @@
 
 /* Feature card styles (Rounded Blue Cards) */
 .feature-card {
-    background: var(--ink); /* #1f1f3b - Brand dark navy blue card */
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: transparent;
     padding: clamp(25px, 4vw, 35px);
     border-radius: 20px; /* Highly rounded corners */
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     position: relative;
     overflow: hidden;
+    
+    /* Transparent border with a subtle gradient default state */
+    border: 3px solid transparent;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    background-image: 
+        linear-gradient(var(--ink), var(--ink)), 
+        linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));
+        
+    transition: box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-/* Accent lighting glow on hover */
+/* Accent lighting glow disabled in favor of rotating gradient border */
 .feature-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background: linear-gradient(to bottom, var(--orange), #fcd34d); /* Golden gradient accent line */
-    transform: scaleY(0);
-    transition: transform 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
-    transform-origin: bottom;
+    display: none;
 }
 
 .feature-card:hover {
     transform: translateY(-8px);
-    border-color: rgba(214, 136, 42, 0.45); /* Highlight with orange on hover */
-    background: #252549; /* Slightly lighter navy blue on hover */
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), 0 0 20px rgba(31, 79, 255, 0.1);
-}
-
-.feature-card:hover::before {
-    transform: scaleY(1);
-    transform-origin: top;
+    background-image: 
+        linear-gradient(#252549, #252549), 
+        conic-gradient(from var(--rotation, 0deg), #D6882A, #FF5613, #2196F3, #9F4EFF, #D6882A);
+    box-shadow: 0 15px 35px rgba(214, 136, 42, 0.25);
 }
 
 /* Card Header */
@@ -197,6 +194,27 @@
     .features-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 40px;
+        align-items: start;
+    }
+    
+    .features-column {
+        display: flex;
+        flex-direction: column;
+        gap: 40px; /* Reduced vertical gap between stacked boxes */
+        position: relative;
+        padding-bottom: 50px;
+    }
+    
+    .sticky-card-1 {
+        position: sticky;
+        top: 100px;
+        z-index: 1;
+    }
+    
+    .sticky-card-2 {
+        position: sticky;
+        top: 150px; /* Layers on top of card-1, slightly offsetted */
+        z-index: 2;
     }
 }
 
@@ -261,22 +279,30 @@
     }
 }
 
-/* Step Card Styles */
 .step-card {
-    background: rgba(255, 255, 255, 0.025);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 16px;
+    background: transparent;
     padding: 24px 20px;
-    transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border-radius: 16px;
     display: flex;
     flex-direction: column;
+    
+    /* Transparent border with a subtle gradient default state */
+    border: 3px solid transparent;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.025)), 
+        linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.06));
+        
+    transition: box-shadow 0.4s ease, transform 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .step-card:hover {
     transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.045);
-    border-color: var(--orange);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.045)), 
+        linear-gradient(135deg, #D6882A, #FF9F43);
+    box-shadow: 0 10px 25px rgba(214, 136, 42, 0.15);
 }
 
 .step-card-top {
@@ -793,4 +819,47 @@
     font-size: 0.98rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.85);
+}
+
+/* ================= ADDITIONAL RESPONSIVE ADJUSTMENTS ================= */
+
+@media (max-width: 991px) {
+    .why-details {
+        padding: 50px 15px;
+    }
+    .details-head {
+        margin-bottom: 35px;
+    }
+    .features-grid {
+        gap: 20px;
+    }
+    .feature-card {
+        padding: 24px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .promise-watermark {
+        letter-spacing: 6px;
+        font-size: clamp(3rem, 10vw, 5rem);
+    }
+    .why-promise {
+        padding: 60px 15px;
+    }
+    .promise-grid {
+        gap: 20px;
+    }
+    .promise-card {
+        padding: 24px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .standard-bar {
+        padding: 12px 16px;
+        gap: 12px;
+    }
+    .standard-bar p {
+        font-size: 0.9rem;
+    }
 }

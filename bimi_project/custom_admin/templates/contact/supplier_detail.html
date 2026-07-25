@@ -1,0 +1,356 @@
+{% extends 'custom_admin/dashboard.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+  .ed-page { padding: 28px 24px 60px; max-width: 800px; margin: 0 auto; }
+
+  .ed-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .ed-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+  }
+
+  .ed-title::before {
+    content: '';
+    width: 4px;
+    height: 22px;
+    background: var(--primary-color);
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  .ed-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #6b6b80;
+    text-decoration: none;
+    padding: 7px 14px;
+    border: 1.5px solid #ebebeb;
+    border-radius: 8px;
+    background: #fff;
+    transition: border-color 0.18s, color 0.18s;
+  }
+
+  .ed-back:hover { border-color: var(--primary-color); color: var(--primary-color); text-decoration: none; }
+
+  /* Info card */
+  .ed-card {
+    background: #fff;
+    border: 1.5px solid #ebebeb;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .ed-card-head {
+    padding: 16px 22px;
+    border-bottom: 1px solid #f2f2f2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fdfdfd;
+  }
+
+  .ed-card-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    color: #8a8aaa;
+  }
+
+  .ed-item {
+    padding: 14px 22px;
+    border-bottom: 1px solid #f8f8f8;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    align-items: start;
+    gap: 15px;
+  }
+
+  .ed-item:last-child { border-bottom: none; }
+
+  .ed-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #8a8aaa;
+    margin-top: 2px;
+  }
+
+  .ed-val {
+    font-size: 0.92rem;
+    color: #1a1a2e;
+    line-height: 1.5;
+    word-break: break-all;
+  }
+
+  .ed-val-text {
+    white-space: pre-line;
+    background: #fafafc;
+    border: 1px solid #eef2f6;
+    padding: 12px 16px;
+    border-radius: 10px;
+    color: #2b2b3a;
+    font-size: 0.9rem;
+    margin: 5px 0 0 0;
+  }
+
+  .file-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: #f0f7ff;
+    color: #0066cc;
+    border: 1px solid #c2e0ff;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .file-btn:hover {
+    background: #0066cc;
+    color: #fff;
+    border-color: #0066cc;
+    text-decoration: none;
+  }
+
+  .ed-delete {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all 0.2s;
+    background: #fff;
+    color: #c0392b;
+    border: 1.5px solid rgba(192,57,43,0.25);
+  }
+
+  .ed-delete:hover {
+    background: #c0392b;
+    color: #fff;
+    border-color: #c0392b;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(192,57,43,0.15);
+  }
+
+  @media (max-width: 600px) {
+    .ed-item {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+  }
+</style>
+
+<div class="ed-page">
+
+  <div class="ed-header">
+    <h1 class="ed-title">Supplier Application Details</h1>
+    <a href="{% url 'supplier_list' %}" class="ed-back">
+      <i class="fas fa-arrow-left"></i> Back to list
+    </a>
+  </div>
+
+  <div class="ed-card">
+    <div class="ed-card-head">
+      <span class="ed-card-label">Basic Information</span>
+      <span class="badge bg-warning text-white fw-bold px-3 py-1 rounded-pill" style="font-size: 0.75rem;">PENDING REVIEW</span>
+    </div>
+
+    <!-- Company Name -->
+    <div class="ed-item">
+      <div class="ed-label">Company Name</div>
+      <div class="ed-val fw-bold" style="font-size: 1.05rem;">{{ supplier.company_name }}</div>
+    </div>
+
+    <!-- Contact Person -->
+    <div class="ed-item">
+      <div class="ed-label">Contact Person</div>
+      <div class="ed-val fw-semibold">{{ supplier.contact_person }}</div>
+    </div>
+
+    <!-- Email -->
+    <div class="ed-item">
+      <div class="ed-label">Email</div>
+      <div class="ed-val"><a href="mailto:{{ supplier.email }}" style="color: var(--primary-color); font-weight: 600; text-decoration: underline;">{{ supplier.email }}</a></div>
+    </div>
+
+    <!-- Phone Number -->
+    <div class="ed-item">
+      <div class="ed-label">Phone / WhatsApp</div>
+      <div class="ed-val">{{ supplier.phone_number }}</div>
+    </div>
+
+    <!-- Country -->
+    <div class="ed-item">
+      <div class="ed-label">Country</div>
+      <div class="ed-val">{{ supplier.country }}</div>
+    </div>
+
+    <!-- Product Category -->
+    <div class="ed-item">
+      <div class="ed-label">Product Category</div>
+      <div class="ed-val fw-semibold">{{ supplier.product_category }}</div>
+    </div>
+
+    <!-- Export Experience -->
+    <div class="ed-item">
+      <div class="ed-label">Export Experience</div>
+      <div class="ed-val">{{ supplier.export_experience }}</div>
+    </div>
+
+    <!-- Website -->
+    <div class="ed-item">
+      <div class="ed-label">Website</div>
+      <div class="ed-val">
+        {% if supplier.website %}
+          <a href="{{ supplier.website }}" target="_blank" style="color: #0066cc; text-decoration: underline;">{{ supplier.website }}</a>
+        {% else %}
+          <span class="text-muted">Not Provided</span>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Submitted Date -->
+    <div class="ed-item">
+      <div class="ed-label">Submitted At</div>
+      <div class="ed-val">{{ supplier.submitted_at|date:"d F Y, h:i A" }}</div>
+    </div>
+  </div>
+
+  <div class="ed-card">
+    <div class="ed-card-head">
+      <span class="ed-card-label">Capabilities & Details</span>
+    </div>
+
+    <!-- Products You Supply -->
+    <div class="ed-item">
+      <div class="ed-label">Products Supplied</div>
+      <div class="ed-val">
+        <div class="ed-val-text">{{ supplier.products_you_supply }}</div>
+      </div>
+    </div>
+
+    <!-- Manufacturing Capacity -->
+    <div class="ed-item">
+      <div class="ed-label">Manufacturing Capacity</div>
+      <div class="ed-val">
+        <div class="ed-val-text">{{ supplier.manufacturing_capacity }}</div>
+      </div>
+    </div>
+
+    <!-- Monthly Supply Capacity -->
+    <div class="ed-item">
+      <div class="ed-label">Monthly Supply Capacity</div>
+      <div class="ed-val">
+        {% if supplier.monthly_supply_capacity %}
+          <div class="ed-val fw-semibold">{{ supplier.monthly_supply_capacity }}</div>
+        {% else %}
+          <span class="text-muted">Not Provided</span>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- MOQ -->
+    <div class="ed-item">
+      <div class="ed-label">Minimum Order Qty (MOQ)</div>
+      <div class="ed-val">
+        {% if supplier.minimum_order_quantity %}
+          <div class="ed-val fw-semibold">{{ supplier.minimum_order_quantity }}</div>
+        {% else %}
+          <span class="text-muted">Not Provided</span>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Certifications -->
+    <div class="ed-item">
+      <div class="ed-label">Certifications</div>
+      <div class="ed-val">
+        <div class="ed-val fw-semibold">{{ supplier.certifications }}</div>
+      </div>
+    </div>
+
+    <!-- Message -->
+    <div class="ed-item">
+      <div class="ed-label">Additional Message</div>
+      <div class="ed-val">
+        {% if supplier.message %}
+          <div class="ed-val-text">{{ supplier.message }}</div>
+        {% else %}
+          <span class="text-muted">No message provided.</span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="ed-card">
+    <div class="ed-card-head">
+      <span class="ed-card-label">Uploaded Files</span>
+    </div>
+
+    <!-- Company Profile -->
+    <div class="ed-item">
+      <div class="ed-label">Company Profile</div>
+      <div class="ed-val">
+        {% if supplier.company_profile %}
+          <a href="{{ supplier.company_profile.url }}" target="_blank" class="file-btn">
+            <i class="fas fa-file-download"></i> Download Profile
+          </a>
+        {% else %}
+          <span class="text-muted">Not Uploaded</span>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Certifications File -->
+    <div class="ed-item">
+      <div class="ed-label">Certifications File</div>
+      <div class="ed-val">
+        {% if supplier.certifications_file %}
+          <a href="{{ supplier.certifications_file.url }}" target="_blank" class="file-btn">
+            <i class="fas fa-file-download"></i> Download Certifications
+          </a>
+        {% else %}
+          <span class="text-muted">Not Uploaded</span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete -->
+  <a href="{% url 'delete_supplier' supplier.id %}" class="ed-delete" onclick="return confirm('Are you sure you want to delete this supplier application?');">
+    <i class="fas fa-trash"></i> Delete Application
+  </a>
+
+</div>
+{% endblock content %}

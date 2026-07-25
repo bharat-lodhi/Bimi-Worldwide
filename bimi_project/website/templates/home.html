@@ -4,7 +4,7 @@
 {% block title %}Home | BiMi{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/home.css' %}?v=2.1">
+<link rel="stylesheet" href="{% static 'css/home.css' %}?v=2.6">
 <style>
 
 /* Document modal popup */
@@ -187,6 +187,108 @@
     padding: 0 16px;
   }
 }
+
+/* Brand Story Box */
+.brand-story-box {
+  margin-top: 80px;
+  padding: 60px 40px;
+  background: #fdfdfd;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  position: relative;
+}
+
+.brand-story-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+@media(min-width: 992px) {
+  .brand-story-grid {
+    grid-template-columns: 1fr 1.4fr;
+    gap: 60px;
+  }
+}
+
+.brand-story-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.story-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.story-badge-line {
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  background: var(--orange);
+}
+
+.story-badge-text {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--orange);
+  text-transform: uppercase;
+}
+
+.story-title {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.25;
+  margin: 0;
+}
+
+.brand-story-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left;
+}
+
+.story-text-main {
+  font-size: clamp(0.98rem, 2vw, 1.08rem);
+  color: #333333;
+  line-height: 1.7;
+}
+
+.story-text-main strong {
+  color: var(--orange);
+  font-weight: 700;
+}
+
+.story-text-sub {
+  font-size: clamp(0.92rem, 2vw, 1rem);
+  color: #666666;
+  line-height: 1.7;
+  border-left: 3px solid var(--orange);
+  padding-left: 18px;
+  margin: 0;
+}
+
+@media(max-width: 768px) {
+  .brand-story-box {
+    margin-top: 50px;
+    padding: 40px 16px;
+  }
+  .brand-story-grid {
+    gap: 30px;
+  }
+  .story-text-sub {
+    padding-left: 12px;
+  }
+}
 </style>
 {% endblock %}
 
@@ -225,7 +327,10 @@ and deliver goods worldwide through a complete end-to-end trade solution.
 
 <!--================section-3==================================-->
 <section class="full-image-section">
-    <img src="{% static "images/graph.png"%}" alt="Showcase Image">
+    <video class="graph-bg-video" autoplay muted loop playsinline>
+        <source src="{% static 'videos/img2.mp4' %}" type="video/mp4">
+    </video>
+    <img src="{% static 'images/graph.png' %}?v=1.4" alt="Showcase Image">
 </section>
 
 <!--================section-3==================================-->
@@ -384,16 +489,16 @@ international trade solutions.
         <div class="logos-row scroll-right">
           <div class="logos-track">
             <!-- Set 1 -->
-            <img src="{% static 'images/cli-1.webp' %}" alt="Client">
-            <img src="{% static 'images/cli-2.svg' %}" alt="Client">
-            <img src="{% static 'images/cli-3.png' %}" alt="Client">
-            <img src="{% static 'images/cli-4.webp' %}" alt="Client">
+            <img src="{% static 'images/cli-1.png' %}?v=1.1" alt="Lithium Power Logo">
+            <img src="{% static 'images/cli-2.png' %}?v=1.1" alt="ICAR Logo">
+            <img src="{% static 'images/cli-3.png' %}?v=1.1" alt="Aditya Birla Group Logo">
+            <img src="{% static 'images/cli-4.png' %}?v=1.1" alt="Jindal Steel Logo">
             
             <!-- Duplicated Set 2 (for seamless infinite loop) -->
-            <img src="{% static 'images/cli-1.webp' %}" alt="Client">
-            <img src="{% static 'images/cli-2.svg' %}" alt="Client">
-            <img src="{% static 'images/cli-3.png' %}" alt="Client">
-            <img src="{% static 'images/cli-4.webp' %}" alt="Client">
+            <img src="{% static 'images/cli-1.png' %}?v=1.1" alt="Lithium Power Logo">
+            <img src="{% static 'images/cli-2.png' %}?v=1.1" alt="ICAR Logo">
+            <img src="{% static 'images/cli-3.png' %}?v=1.1" alt="Aditya Birla Group Logo">
+            <img src="{% static 'images/cli-4.png' %}?v=1.1" alt="Jindal Steel Logo">
           </div>
         </div>
 
@@ -411,9 +516,30 @@ international trade solutions.
     </div> 
 
     <!-- Center aligned Become Our Next Partner Button at the bottom -->
-    <div style="text-align: center; margin-top: 50px; width: 100%;">
+    <div style="text-align: center; margin-top: 50px; margin-bottom: 60px; width: 100%;">
       <p class="partner-subheading">Ready to scale your business internationally? Let's build a reliable trade journey together.</p>
       <a href="{% url 'contact_form' %}" class="btn-partner">Become Our Next Partner &rarr;</a>
+    </div>
+
+    <!-- Brand Story Section -->
+    <div class="brand-story-box">
+      <div class="brand-story-grid">
+        <div class="brand-story-left">
+          <div class="story-badge">
+            <span class="story-badge-line"></span>
+            <span class="story-badge-text">Who We Are</span>
+          </div>
+          <h3 class="story-title">Redefining Global Trade with a Legacy of Trust</h3>
+        </div>
+        <div class="brand-story-right">
+          <p class="story-text-main">
+            <strong>BIMI Worldwide</strong> (Bilateral Import Merchandise International Worldwide) was established in 2025 as the evolution of a legacy built over nearly two decades in global trade and logistics. While the brand is new, the expertise behind it is deeply rooted in industry experience dating back to 2012, shaped through years of operational excellence, strategic partnerships, and international market engagement.
+          </p>
+          <p class="story-text-sub">
+            BIMI Worldwide was created with a singular vision: to redefine how businesses source, trade, and expand across borders — through precision, intelligence, and uncompromising standards.
+          </p>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -437,10 +563,69 @@ international trade solutions.
       Whether you're sourcing premium products, expanding into new markets, or looking for a reliable international trade partner, BIMI Worldwide is ready to help you grow with confidence.
     </p>
 
-    <div class="cta-actions">
-      <a href="#" class="cta-btn primary doc-btn" >IEC</a>
-      <a href="#" class="cta-btn outline doc-btn" >MSME</a>
-      <a href="#" class="cta-btn outline doc-btn" >GST</a>
+    <!-- Trust Slider (Horizontal scrolling cards) -->
+    <div class="trust-slider">
+      <div class="trust-track">
+        <!-- Set 1 -->
+        <a href="#" class="trust-card doc-btn" data-doc="{% static 'images/iec.png' %}?v=1.3" data-type="image">
+          <img src="{% static 'images/iec.png' %}?v=1.3" alt="IEC Certificate">
+        </a>
+        <a href="#" class="trust-card doc-btn" data-doc="{% static 'images/msme.png' %}?v=1.3" data-type="image">
+          <img src="{% static 'images/msme.png' %}?v=1.3" alt="MSME Certificate">
+        </a>
+        <a href="#" class="trust-card doc-btn" data-doc="{% static 'images/fssai.png' %}?v=1.3" data-type="image">
+          <img src="{% static 'images/fssai.png' %}?v=1.3" alt="FSSAI Certificate">
+        </a>
+        <a href="#" class="trust-card doc-btn" data-doc="{% static 'images/apeda.png' %}?v=1.3" data-type="image">
+          <img src="{% static 'images/apeda.png' %}?v=1.3" alt="APEDA Certificate">
+        </a>
+        <a href="#" class="trust-card doc-btn" data-doc="{% static 'images/digital_india.png' %}?v=2.4" data-type="image">
+          <img src="{% static 'images/digital_india.png' %}?v=2.4" alt="Digital India Logo">
+        </a>
+        <a href="#" class="trust-card doc-btn" data-doc="{% static 'images/startup_india.png' %}?v=2.4" data-type="image">
+          <img src="{% static 'images/startup_india.png' %}?v=2.4" alt="Startup India Logo">
+        </a>
+        
+        <!-- Set 2 -->
+        <a href="#" class="trust-card doc-btn" data-doc="{% static 'images/iec.png' %}?v=1.3" data-type="image">
+          <img src="{% static 'images/iec.png' %}?v=1.3" alt="IEC Certificate">
+        </a>
+        <a href="#" class="trust-card doc-btn" data-doc="{% static 'images/msme.png' %}?v=1.3" data-type="image">
+          <img src="{% static 'images/msme.png' %}?v=1.3" alt="MSME Certificate">
+        </a>
+        <a href="#" class="trust-card doc-btn" data-doc="{% static 'images/fssai.png' %}?v=1.3" data-type="image">
+          <img src="{% static 'images/fssai.png' %}?v=1.3" alt="FSSAI Certificate">
+        </a>
+        <a href="#" class="trust-card doc-btn" data-doc="{% static 'images/apeda.png' %}?v=1.3" data-type="image">
+          <img src="{% static 'images/apeda.png' %}?v=1.3" alt="APEDA Certificate">
+        </a>
+        <a href="#" class="trust-card doc-btn" data-doc="{% static 'images/digital_india.png' %}?v=2.4" data-type="image">
+          <img src="{% static 'images/digital_india.png' %}?v=2.4" alt="Digital India Logo">
+        </a>
+        <a href="#" class="trust-card doc-btn" data-doc="{% static 'images/startup_india.png' %}?v=2.4" data-type="image">
+          <img src="{% static 'images/startup_india.png' %}?v=2.4" alt="Startup India Logo">
+        </a>
+        
+        <!-- Set 3 -->
+        <a href="#" class="trust-card doc-btn" data-doc="{% static 'images/iec.png' %}?v=1.3" data-type="image">
+          <img src="{% static 'images/iec.png' %}?v=1.3" alt="IEC Certificate">
+        </a>
+        <a href="#" class="trust-card doc-btn" data-doc="{% static 'images/msme.png' %}?v=1.3" data-type="image">
+          <img src="{% static 'images/msme.png' %}?v=1.3" alt="MSME Certificate">
+        </a>
+        <a href="#" class="trust-card doc-btn" data-doc="{% static 'images/fssai.png' %}?v=1.3" data-type="image">
+          <img src="{% static 'images/fssai.png' %}?v=1.3" alt="FSSAI Certificate">
+        </a>
+        <a href="#" class="trust-card doc-btn" data-doc="{% static 'images/apeda.png' %}?v=1.3" data-type="image">
+          <img src="{% static 'images/apeda.png' %}?v=1.3" alt="APEDA Certificate">
+        </a>
+        <a href="#" class="trust-card doc-btn" data-doc="{% static 'images/digital_india.png' %}?v=2.4" data-type="image">
+          <img src="{% static 'images/digital_india.png' %}?v=2.4" alt="Digital India Logo">
+        </a>
+        <a href="#" class="trust-card doc-btn" data-doc="{% static 'images/startup_india.png' %}?v=2.4" data-type="image">
+          <img src="{% static 'images/startup_india.png' %}?v=2.4" alt="Startup India Logo">
+        </a>
+      </div>
     </div>
 
   </div>

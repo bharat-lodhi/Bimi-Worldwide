@@ -44,5 +44,7 @@ path(
     #==================================================================
     path('contact/',views.contact_form,name='contact_form'),
     path('why-choose-us/', views.why_us, name='why_us'),
+    path('become-supplier/', views.become_supplier, name='become_supplier'),
+    path('submit-product-enquiry/', views.submit_product_enquiry, name='submit_product_enquiry'),
 ]
 

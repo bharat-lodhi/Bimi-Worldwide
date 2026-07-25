@@ -279,13 +279,39 @@ body {
 .full-image-section {
     width: 100%;
     background: #fff;
+    overflow: hidden;
+    position: relative; /* Setup positioning context for background video */
+}
+
+.full-image-section .graph-bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    opacity: 0.28; /* Soft watermarked background video opacity */
+    z-index: 1;
+    pointer-events: none; /* Ensure no overlay issues for click elements */
 }
 
 .full-image-section img {
-    width: 100%;
+    position: relative;
+    z-index: 2;
+    width: 98%;
+    margin-left: 0.7%;
     height: auto;
-    /* पूरी image दिखेगी */
     display: block;
+    /* Removed mix-blend-mode since we are now using a real transparent PNG */
+    transition: width 0.3s ease, margin-left 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .full-image-section img {
+        width: 98%;
+        margin-left: 0.7%;
+    }
 }
 
 
@@ -1022,8 +1048,9 @@ body {
 .stat-info {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    font-size: 0.95rem;
+    align-items: flex-start;
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
+    gap: 12px;
 }
 
 .stat-name {
@@ -1081,7 +1108,7 @@ body {
 
 /* Right Column (Map) */
 .reach-right {
-    background: #f2f4ef; /* Matches the map image background */
+    background: #b9e1fa; /* Matches the map image background (HD sky blue) */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1092,8 +1119,9 @@ body {
 .reach-right img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
+    padding: 20px;
 }
 
 /* RESPONSIVE LAYOUT FOR DESKTOP */
@@ -1115,5 +1143,123 @@ body {
     .reach-left {
         padding-top: 110px;
         padding-bottom: 110px;
+    }
+}
+
+
+/* ================= TRUST CERTIFICATE SLIDER ================= */
+.trust-slider {
+    width: 100%;
+    overflow: hidden;
+    padding: 24px 0;
+    margin-top: 40px;
+    position: relative;
+    z-index: 5;
+    /* Soft horizontal fading edges */
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.trust-track {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    width: max-content;
+    animation: scrollTrust 25s linear infinite;
+}
+
+/* Pause the animation on hover for interactive feel */
+.trust-slider:hover .trust-track {
+    animation-play-state: paused;
+}
+
+.trust-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 2px 5px;
+    width: 240px;
+    height: 120px;
+    flex-shrink: 0;
+    box-shadow: none;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    cursor: pointer;
+}
+
+.trust-card:hover {
+    transform: scale(1.1);
+}
+
+.trust-card img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    opacity: 0.98;
+    transition: opacity 0.3s ease;
+}
+
+.trust-card:hover img {
+    opacity: 1;
+}
+
+@keyframes scrollTrust {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-33.3333%);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .trust-card {
+        width: 170px;
+        height: 90px;
+        padding: 2px 4px;
+        border-radius: 0;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+    }
+    .trust-slider {
+        padding: 15px 0;
+        margin-top: 25px;
+        mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    }
+    .trust-track {
+        gap: 20px;
+    }
+    .reach-right {
+        min-height: 250px;
+        padding: 10px;
+    }
+    .reach-right img {
+        padding: 10px;
+    }
+    .full-image-section img {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn-reach {
+        padding: 12px 20px;
+        font-size: 0.88rem;
+        align-self: stretch;
+        text-align: center;
+    }
+    .btn-partner {
+        padding: 12px 18px;
+        font-size: 0.88rem;
+        width: 100%;
+        max-width: 290px;
+        box-sizing: border-box;
     }
 }

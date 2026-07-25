@@ -1,0 +1,264 @@
+{% extends 'custom_admin/dashboard.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+  .enq-page { padding: 28px 24px 60px; max-width: 1200px; margin: 0 auto; }
+
+  .enq-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .enq-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+  }
+
+  .enq-title::before {
+    content: '';
+    width: 4px;
+    height: 22px;
+    background: var(--primary-color);
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  .enq-count {
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: #fff5e8;
+    color: var(--primary-color);
+    border: 1.5px solid rgba(214,136,42,0.25);
+    border-radius: 20px;
+    padding: 3px 12px;
+  }
+
+  /* ── FILTERS BAR ── */
+  .enq-filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .enq-search-wrap {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1.5px solid #ebebeb;
+    border-radius: 10px;
+    padding: 0 14px;
+    gap: 8px;
+    flex: 1;
+    min-width: 250px;
+    transition: border-color 0.18s;
+  }
+
+  .enq-search-wrap:focus-within {
+    border-color: var(--primary-color);
+  }
+
+  .enq-search-wrap i {
+    color: #aaa;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  .enq-search-input {
+    border: none;
+    outline: none;
+    font-size: 0.88rem;
+    font-family: inherit;
+    color: #1a1a2e;
+    background: transparent;
+    padding: 10px 0;
+    width: 100%;
+  }
+
+  .enq-search-input::placeholder { color: #bbb; }
+
+  .enq-table-wrap {
+    background: #fff;
+    border: 1.5px solid #ebebeb;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .enq-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+
+  .enq-table thead {
+    background: #f8f7f5;
+    border-bottom: 1.5px solid #ebebeb;
+  }
+
+  .enq-table thead th {
+    padding: 12px 18px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #6b6b80;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  .enq-table tbody tr {
+    border-bottom: 1px solid #f2f2f2;
+    transition: background 0.15s;
+  }
+
+  .enq-table tbody tr:last-child { border-bottom: none; }
+  .enq-table tbody tr:hover { background: #fafaf8; }
+
+  .enq-table tbody td {
+    padding: 14px 18px;
+    color: #1a1a2e;
+    vertical-align: middle;
+  }
+
+  .enq-id {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #aaa;
+    font-family: monospace;
+  }
+
+  .enq-name { font-weight: 600; }
+  .enq-email { color: #6b6b80; font-size: 0.83rem; }
+
+  .action-wrap { display: flex; align-items: center; gap: 8px; }
+
+  .act-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.18s, color 0.18s;
+    white-space: nowrap;
+  }
+
+  .act-view {
+    background: #fff5e8;
+    color: var(--primary-color);
+    border: 1px solid rgba(214,136,42,0.25);
+  }
+  .act-view:hover { background: var(--primary-color); color: #fff; text-decoration: none; }
+
+  .act-delete {
+    background: #fef0f0;
+    color: #c0392b;
+    border: 1px solid rgba(192,57,43,0.2);
+  }
+  .act-delete:hover { background: #c0392b; color: #fff; text-decoration: none; }
+
+  .enq-empty {
+    text-align: center;
+    padding: 64px 20px;
+    color: #6b6b80;
+  }
+  .enq-empty i { font-size: 2.5rem; margin-bottom: 12px; display: block; color: #d0d0d8; }
+
+  @media (max-width: 991px) {
+    .enq-table thead th:nth-child(5),
+    .enq-table tbody td:nth-child(5),
+    .enq-table thead th:nth-child(6),
+    .enq-table tbody td:nth-child(6) { display: none; }
+  }
+
+  @media (max-width: 576px) {
+    .enq-table thead th:nth-child(4),
+    .enq-table tbody td:nth-child(4) { display: none; }
+    .enq-page { padding: 20px 14px 48px; }
+  }
+</style>
+
+<div class="enq-page">
+
+  <div class="enq-header">
+    <h1 class="enq-title">
+      Supplier Applications
+      <span class="enq-count">{{ suppliers|length }} total</span>
+    </h1>
+  </div>
+
+  <!-- Search Filter -->
+  <form method="GET" class="enq-filters">
+    <div class="enq-search-wrap">
+      <i class="fas fa-search"></i>
+      <input type="text" name="search" class="enq-search-input" placeholder="Search by company, person, email, country..." value="{{ search|default:'' }}">
+    </div>
+    <button type="submit" class="btn btn-warning btn-sm px-4 rounded-pill fw-semibold text-white" style="background: var(--primary-color); border: none; height: 42px;">Search</button>
+    {% if search %}
+      <a href="{% url 'supplier_list' %}" class="btn btn-outline-secondary btn-sm px-3 rounded-pill d-flex align-items-center justify-content-center" style="height: 42px;">Clear</a>
+    {% endif %}
+  </form>
+
+  <div class="enq-table-wrap">
+    {% if suppliers %}
+    <table class="enq-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Company Name</th>
+          <th>Contact Person</th>
+          <th>Email</th>
+          <th>Country</th>
+          <th>Category</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for supplier in suppliers %}
+        <tr>
+          <td><span class="enq-id">#{{ supplier.id }}</span></td>
+          <td><span class="enq-name">{{ supplier.company_name }}</span></td>
+          <td>{{ supplier.contact_person }}</td>
+          <td><span class="enq-email">{{ supplier.email }}</span></td>
+          <td>{{ supplier.country }}</td>
+          <td>{{ supplier.product_category }}</td>
+          <td>{{ supplier.submitted_at|date:"d M Y" }}</td>
+          <td>
+            <div class="action-wrap">
+              <a href="{% url 'supplier_detail' supplier.id %}" class="act-btn act-view">
+                <i class="fas fa-eye"></i> View
+              </a>
+              <a href="{% url 'delete_supplier' supplier.id %}" class="act-btn act-delete" onclick="return confirm('Are you sure you want to delete this supplier registration?');">
+                <i class="fas fa-trash"></i> Delete
+              </a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="enq-empty">
+      <i class="fas fa-inbox"></i>
+      <p style="font-weight:600;color:#1a1a2e;margin-bottom:4px;">No supplier applications yet</p>
+      <p style="font-size:0.85rem;">Submissions from become-supplier page will appear here.</p>
+    </div>
+    {% endif %}
+  </div>
+
+</div>
+{% endblock content %}

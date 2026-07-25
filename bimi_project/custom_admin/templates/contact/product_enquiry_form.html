@@ -1,0 +1,221 @@
+{% extends 'custom_admin/dashboard.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .form-container {
+        padding: 30px;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    .form-card {
+        background: #fff;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 16px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        padding: 30px;
+    }
+    
+    .form-title {
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: #1a1a2e;
+        border-bottom: 2px solid var(--primary-color, #D6882A);
+        padding-bottom: 10px;
+        margin-bottom: 25px;
+    }
+
+    .form-group-title {
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #888;
+        letter-spacing: 0.5px;
+        margin-top: 25px;
+        margin-bottom: 15px;
+        border-bottom: 1px dashed #eee;
+        padding-bottom: 4px;
+    }
+</style>
+
+<div class="form-container">
+    <div class="mb-4">
+        <a href="{% if enquiry %}{% url 'view_product_enquiry' enquiry.id %}{% else %}{% url 'product_enquiry_list' %}{% endif %}" class="btn btn-outline-secondary btn-sm px-3 rounded-pill fw-bold">
+            <i class="fa-solid fa-arrow-left me-1"></i> Cancel
+        </a>
+    </div>
+
+    <div class="form-card">
+        <div class="form-title">{{ title }}</div>
+        
+        <form method="post" novalidate>
+            {% csrf_token %}
+            
+            {% if form.non_field_errors %}
+            <div class="alert alert-danger rounded-3">
+                {% for error in form.non_field_errors %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="row g-3">
+                <!-- Sourcing links -->
+                <div class="col-12"><h6 class="form-group-title m-0">Sourcing & Product Mapping</h6></div>
+                
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold" for="{{ form.category.id_for_label }}">Category *</label>
+                    {{ form.category }}
+                    {% if form.category.errors %}
+                        <div class="text-danger small mt-1">{{ form.category.errors.0 }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold" for="{{ form.sub_category.id_for_label }}">Sub Category</label>
+                    {{ form.sub_category }}
+                    {% if form.sub_category.errors %}
+                        <div class="text-danger small mt-1">{{ form.sub_category.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold" for="{{ form.product.id_for_label }}">Product *</label>
+                    {{ form.product }}
+                    {% if form.product.errors %}
+                        <div class="text-danger small mt-1">{{ form.product.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Customer info -->
+                <div class="col-12"><h6 class="form-group-title mb-0">Customer Details</h6></div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold" for="{{ form.customer_name.id_for_label }}">Customer Name *</label>
+                    {{ form.customer_name }}
+                    {% if form.customer_name.errors %}
+                        <div class="text-danger small mt-1">{{ form.customer_name.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold" for="{{ form.company_name.id_for_label }}">Company Name</label>
+                    {{ form.company_name }}
+                    {% if form.company_name.errors %}
+                        <div class="text-danger small mt-1">{{ form.company_name.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold" for="{{ form.mobile.id_for_label }}">Mobile Number *</label>
+                    {{ form.mobile }}
+                    {% if form.mobile.errors %}
+                        <div class="text-danger small mt-1">{{ form.mobile.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold" for="{{ form.email.id_for_label }}">Email Address *</label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <div class="text-danger small mt-1">{{ form.email.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Location details -->
+                <div class="col-12"><h6 class="form-group-title mb-0">Location & Delivery Details</h6></div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold" for="{{ form.country.id_for_label }}">Country</label>
+                    {{ form.country }}
+                    {% if form.country.errors %}
+                        <div class="text-danger small mt-1">{{ form.country.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold" for="{{ form.state.id_for_label }}">State</label>
+                    {{ form.state }}
+                    {% if form.state.errors %}
+                        <div class="text-danger small mt-1">{{ form.state.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold" for="{{ form.city.id_for_label }}">City</label>
+                    {{ form.city }}
+                    {% if form.city.errors %}
+                        <div class="text-danger small mt-1">{{ form.city.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold" for="{{ form.pincode.id_for_label }}">Pin Code</label>
+                    {{ form.pincode }}
+                    {% if form.pincode.errors %}
+                        <div class="text-danger small mt-1">{{ form.pincode.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label fw-semibold" for="{{ form.address.id_for_label }}">Full Address</label>
+                    {{ form.address }}
+                    {% if form.address.errors %}
+                        <div class="text-danger small mt-1">{{ form.address.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Requirements & Management -->
+                <div class="col-12"><h6 class="form-group-title mb-0">Enquiry Management</h6></div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold" for="{{ form.quantity.id_for_label }}">Quantity Required</label>
+                    {{ form.quantity }}
+                    {% if form.quantity.errors %}
+                        <div class="text-danger small mt-1">{{ form.quantity.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold" for="{{ form.suitable_call_time.id_for_label }}">Suitable Time to Call</label>
+                    {{ form.suitable_call_time }}
+                    {% if form.suitable_call_time.errors %}
+                        <div class="text-danger small mt-1">{{ form.suitable_call_time.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label fw-semibold" for="{{ form.requirements.id_for_label }}">Specific Requirements</label>
+                    {{ form.requirements }}
+                    {% if form.requirements.errors %}
+                        <div class="text-danger small mt-1">{{ form.requirements.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold" for="{{ form.status.id_for_label }}">Enquiry Status</label>
+                    {{ form.status }}
+                    {% if form.status.errors %}
+                        <div class="text-danger small mt-1">{{ form.status.errors.0 }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label fw-semibold" for="{{ form.admin_notes.id_for_label }}">Admin Notes (Internal)</label>
+                    {{ form.admin_notes }}
+                    {% if form.admin_notes.errors %}
+                        <div class="text-danger small mt-1">{{ form.admin_notes.errors.0 }}</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end mt-4 gap-2">
+                <button type="submit" class="btn text-white px-5 py-2.5 fw-bold rounded-3 border-0 shadow-sm" style="background-color: var(--primary-color, #D6882A);">
+                    Save Enquiry
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

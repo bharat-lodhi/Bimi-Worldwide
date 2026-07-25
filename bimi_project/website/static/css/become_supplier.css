@@ -1,0 +1,833 @@
+/* website/static/css/become_supplier.css */
+
+:root {
+    --primary-orange: #D6882A;
+    --ink: #1F1F3B;
+    --white: #ffffff;
+    --dark-bg: #11111e;
+    --card-bg: rgba(255, 255, 255, 0.015);
+    --card-border: rgba(255, 255, 255, 0.05);
+}
+
+/* =========================================================
+   HERO SECTION
+   ========================================================= */
+/* HERO SECTION */
+.become-hero {
+    padding: clamp(60px, 8vw, 80px) 16px clamp(60px, 8vw, 80px);
+    background: var(--primary-orange);
+    color: var(--ink);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.become-hero-inner {
+    max-width: 850px;
+    margin: auto;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Badge styling */
+.become-hero-inner .badge-wrap {
+    margin-bottom: 20px;
+}
+
+.become-hero-inner .badge {
+    background: #fff;
+    color: #000;
+    font-weight: 700;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    display: inline-block;
+}
+
+/* Hero Heading */
+.become-hero-inner h1 {
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin: 0 0 16px 0;
+    letter-spacing: -1px;
+    color: var(--ink);
+}
+
+.become-hero-inner .hero-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    font-weight: 700;
+    color: rgba(31, 31, 59, 0.85);
+    margin: 0 0 20px 0;
+    line-height: 1.3;
+}
+
+.become-hero-inner .hero-desc {
+    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+    line-height: 1.65;
+    color: rgba(31, 31, 59, 0.80);
+    margin: 0 0 35px 0;
+    max-width: 760px;
+}
+
+/* CTA Button */
+.btn-hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--ink);
+    color: var(--white);
+    padding: 15px 36px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 8px 25px rgba(31, 31, 59, 0.2);
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-hero-cta:hover {
+    background: #2b2b52;
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(31, 31, 59, 0.3);
+}
+
+/* =========================================================
+   SECTION 2: WHY PARTNER WITH BIMI
+   ========================================================= */
+.why-partner {
+    padding: clamp(60px, 8vw, 100px) 0;
+    background-color: #fcfdfe;
+}
+
+.section-head {
+    max-width: 800px;
+    margin: 0 auto clamp(40px, 6vw, 60px) auto;
+    text-align: center;
+}
+
+.section-head h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 12px;
+}
+
+.section-head h2 span {
+    color: var(--primary-orange);
+}
+
+.section-head p {
+    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+    color: #666;
+    line-height: 1.6;
+}
+
+.partner-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.partner-card {
+    background: var(--white);
+    border: 1px solid #f0f0f0;
+    border-radius: 20px;
+    padding: 35px 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.partner-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 1.5px;
+    background: linear-gradient(135deg, var(--primary-orange), transparent 40%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.partner-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.06), 0 0 25px rgba(214, 136, 42, 0.03);
+}
+
+.partner-card:hover::before {
+    opacity: 1;
+}
+
+.partner-icon-box {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    background: rgba(214, 136, 42, 0.08);
+    color: var(--primary-orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin-bottom: 24px;
+    transition: all 0.4s ease;
+}
+
+.partner-card:hover .partner-icon-box {
+    background: var(--primary-orange);
+    color: var(--white);
+    transform: scale(1.08) rotate(5deg);
+}
+
+.partner-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 12px;
+}
+
+.partner-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #555;
+    margin: 0;
+}
+
+/* =========================================================
+   SECTION 3: HOW IT WORKS (CARDS STACK / SCROLL)
+   ========================================================= */
+.how-it-works {
+    padding: clamp(60px, 8vw, 100px) 0;
+    background-color: #f7f9fc;
+    position: relative;
+}
+
+.process-layout-grid {
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Right side scroll/stack container */
+.process-scroll-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Space between cards as they flow */
+    position: relative;
+    padding-bottom: 50px;
+}
+
+.process-sticky-card {
+    position: sticky;
+    top: 140px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 24px;
+    padding: 30px;
+    min-height: 260px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    z-index: var(--index);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.process-sticky-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(214, 136, 42, 0.06);
+    border-color: rgba(214, 136, 42, 0.25);
+}
+
+.card-header-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.process-sticky-card .process-icon-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    background: rgba(214, 136, 42, 0.08);
+    color: var(--primary-orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 0;
+    transition: all 0.3s ease;
+}
+
+.process-sticky-card:hover .process-icon-box {
+    background: var(--primary-orange);
+    color: #ffffff;
+}
+
+.process-sticky-card .process-number {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: rgba(214, 136, 42, 0.25);
+}
+
+.process-sticky-card .step-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 12px 0;
+    line-height: 1.4;
+}
+
+.process-sticky-card .step-desc {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: #555;
+    margin: 0;
+}
+
+/* Document Checklist inside Step 4 */
+.doc-checklist {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+    padding: 0;
+    list-style: none;
+}
+
+.doc-checklist li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--ink);
+    font-weight: 600;
+}
+
+.doc-checklist li i {
+    color: var(--primary-orange);
+    font-size: 1rem;
+}
+
+/* Responsive styles */
+@media (max-width: 991px) {
+    .process-layout-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .process-left-sticky {
+        position: static;
+        padding-bottom: 0;
+        text-align: center;
+    }
+    
+    .process-scroll-container {
+        gap: 20px;
+    }
+    
+    .process-sticky-card {
+        position: sticky;
+        top: calc(80px + var(--index) * 15px);
+        padding: 25px 20px;
+        min-height: auto;
+    }
+}
+
+/* =========================================================
+   SECTION 4: BENEFITS SLIDER (CAROUSEL)
+   ========================================================= */
+.benefits-section {
+    padding: clamp(60px, 8vw, 100px) 0;
+    background-color: var(--dark-bg);
+    color: var(--white);
+    position: relative;
+}
+
+.benefits-section .section-head h2 {
+    color: var(--white);
+}
+
+.benefits-section .section-head p {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Slider Component UI */
+.slider-outer-wrapper {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 60px;
+}
+
+.benefits-slider-container {
+    overflow: hidden;
+    width: 100%;
+}
+
+.benefits-slider-track {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    width: 100%;
+}
+
+.benefit-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.benefit-card {
+    background: rgba(17, 17, 30, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: clamp(35px, 6vw, 50px);
+    text-align: center;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit-card:hover {
+    border-color: #D6882A; /* Simple theme border change */
+}
+
+.benefit-card .benefit-icon-box {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(214, 136, 42, 0.15) 0%, rgba(214, 136, 42, 0.02) 100%);
+    border: 1px solid rgba(214, 136, 42, 0.25);
+    color: var(--primary-orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin: 0 auto 24px auto;
+    transition: all 0.4s ease;
+}
+
+.benefit-card:hover .benefit-icon-box {
+    background: var(--primary-orange);
+    color: var(--white);
+    transform: scale(1.08) rotate(5deg);
+}
+
+.benefit-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 16px;
+}
+
+.benefit-card p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.65);
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+/* Navigation Arrows */
+.slider-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.slider-nav-btn:hover {
+    background: var(--primary-orange);
+    border-color: var(--primary-orange);
+    box-shadow: 0 4px 15px rgba(214, 136, 42, 0.4);
+}
+
+.slider-nav-btn.prev-btn {
+    left: 0;
+}
+
+.slider-nav-btn.next-btn {
+    right: 0;
+}
+
+/* Dots Indicator */
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 30px;
+}
+
+.slider-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.slider-dot.active {
+    background: var(--primary-orange);
+    transform: scale(1.2);
+    width: 20px;
+    border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+    .slider-outer-wrapper {
+        padding: 0;
+    }
+    .slider-nav-btn {
+        display: none; /* Hide arrows on mobile for better space usage, rely on swipe/dots */
+    }
+}
+
+/* =========================================================
+   SECTION 5: CALL TO ACTION (CTA)
+   ========================================================= */
+.become-cta-section {
+    padding: clamp(60px, 8vw, 100px) 0;
+    background-color: #fcfdfe;
+}
+
+.cta-premium-card {
+    background: transparent;
+    border-radius: 30px;
+    padding: clamp(40px, 6vw, 70px) clamp(20px, 4vw, 50px);
+    text-align: center;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+    max-width: 1000px;
+    margin: 0 auto;
+    
+    /* Transparent border with a subtle gradient default state */
+    border: 3px solid transparent;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    background-image: 
+        linear-gradient(var(--ink), var(--ink)), 
+        linear-gradient(135deg, rgba(214, 136, 42, 0.15), rgba(33, 150, 243, 0.15));
+        
+    transition: box-shadow 0.4s ease, transform 0.3s ease;
+}
+
+.cta-premium-card:hover {
+    background-image: 
+        linear-gradient(var(--ink), var(--ink)), 
+        conic-gradient(from var(--rotation, 0deg), #D6882A, #FF5613, #2196F3, #9F4EFF, #D6882A);
+    box-shadow: 0 12px 35px rgba(214, 136, 42, 0.25);
+    transform: translateY(-2px);
+}
+
+.cta-premium-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(214, 136, 42, 0.1) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.cta-premium-card h2 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 800;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+    position: relative;
+    z-index: 2;
+}
+
+.cta-premium-card p {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 600px;
+    margin: 0 auto 35px auto;
+    position: relative;
+    z-index: 2;
+}
+
+.cta-buttons-wrap {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+}
+
+.btn-secondary-outline {
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    padding: 14px 34px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary-outline:hover {
+    border-color: var(--white);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--white);
+}
+
+/* =========================================================
+   SECTION 6: SUPPLIER REGISTRATION FORM
+   ========================================================= */
+.supplier-form-section {
+    padding: clamp(60px, 8vw, 100px) 0;
+    background-color: #f7f9fc;
+}
+
+.form-premium-card {
+    background: var(--white);
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.03);
+    border: 1px solid #f0f0f0;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: clamp(30px, 5vw, 60px);
+}
+
+.form-premium-card h3 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 8px;
+}
+
+.form-premium-card .form-subtitle {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 40px;
+}
+
+.supplier-form label {
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.supplier-form .form-control, 
+.supplier-form .form-select {
+    border-radius: 10px;
+    border: 1.5px solid #eef2f6;
+    background-color: #fcfdfe;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    color: var(--ink);
+    transition: all 0.3s ease;
+}
+
+.supplier-form .form-control:focus, 
+.supplier-form .form-select:focus {
+    border-color: var(--primary-orange);
+    background-color: var(--white);
+    box-shadow: 0 0 0 4px rgba(214, 136, 42, 0.08);
+    outline: none;
+}
+
+/* File Upload Custom styling */
+.file-upload-wrapper {
+    position: relative;
+    border: 2px dashed #d1dbec;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    background-color: #fcfdfe;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.file-upload-wrapper:hover {
+    border-color: var(--primary-orange);
+    background-color: rgba(214, 136, 42, 0.01);
+}
+
+.file-upload-wrapper input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+.file-upload-icon {
+    font-size: 1.8rem;
+    color: #a0aec0;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+.file-upload-wrapper:hover .file-upload-icon {
+    color: var(--primary-orange);
+}
+
+.file-upload-text {
+    font-size: 0.85rem;
+    color: #4a5568;
+    font-weight: 600;
+}
+
+.file-upload-subtext {
+    font-size: 0.75rem;
+    color: #718096;
+    margin-top: 4px;
+}
+
+.btn-form-submit {
+    background: var(--primary-orange);
+    color: var(--white);
+    border: none;
+    padding: 15px 36px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(214, 136, 42, 0.2);
+}
+
+.btn-form-submit:hover {
+    background: #b46f1e;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(214, 136, 42, 0.3);
+}
+
+.alert-success-custom {
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #15803d;
+    border-radius: 12px;
+    padding: 18px 24px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+/* Custom Multi-select dropdown styles */
+.custom-multiselect {
+    position: relative;
+    width: 100%;
+}
+
+.custom-multiselect .select-box {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    border: 1.5px solid #eef2f6;
+    border-radius: 10px;
+    background-color: #fcfdfe;
+    cursor: pointer;
+    color: #a0aec0;
+    user-select: none;
+    transition: all 0.3s ease;
+}
+
+.custom-multiselect .select-box:hover {
+    border-color: var(--primary-orange);
+}
+
+.custom-multiselect .checkboxes-area {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    border: 1.5px solid #eef2f6;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    z-index: 100;
+    padding: 12px;
+    max-height: 250px;
+    overflow-y: auto;
+    margin-top: 4px;
+}
+
+.custom-multiselect.open .checkboxes-area {
+    display: block !important;
+}
+
+.custom-multiselect.open .select-box {
+    border-color: var(--primary-orange);
+    box-shadow: 0 0 0 4px rgba(214, 136, 42, 0.08);
+}
+
+.custom-multiselect .select-box i {
+    transition: transform 0.3s ease;
+}
+
+.custom-multiselect.open .select-box i {
+    transform: rotate(180deg);
+}
+
+.custom-multiselect .check-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    color: var(--ink);
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+    margin-bottom: 2px;
+}
+
+.custom-multiselect .check-item:hover {
+    background-color: #fafbfc;
+}
+
+.custom-multiselect .check-item input[type="checkbox"] {
+    accent-color: var(--primary-orange);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+

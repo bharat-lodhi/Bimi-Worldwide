@@ -77,10 +77,40 @@ ClassicEditor
                            class="form-control">
                 </div>
 
+                <div class="mb-3">
+                    <label>Category Video (Optional)</label>
+                    <input type="file"
+                           name="category_video"
+                           id="videoInput"
+                           accept="video/mp4,video/webm,video/ogg"
+                           class="form-control">
+                    <small class="text-muted">Only .mp4, .webm, and .ogg files up to 100MB are allowed.</small>
+                    <div id="videoPreviewContainer" class="mt-2 d-none">
+                        <video id="videoPreview" controls class="img-fluid rounded" style="max-height: 200px; width: 100%; object-fit: cover;"></video>
+                    </div>
+                </div>
+
                 <button type="submit"
                         class="btn btn-dark w-100">
                     Add Category
                 </button>
+
+                <script>
+                document.getElementById('videoInput').addEventListener('change', function(event) {
+                    const file = event.target.files[0];
+                    const previewContainer = document.getElementById('videoPreviewContainer');
+                    const previewVideo = document.getElementById('videoPreview');
+                    
+                    if (file) {
+                        const fileURL = URL.createObjectURL(file);
+                        previewVideo.src = fileURL;
+                        previewContainer.classList.remove('d-none');
+                    } else {
+                        previewVideo.src = '';
+                        previewContainer.classList.add('d-none');
+                    }
+                });
+                </script>
 
             </form>
 

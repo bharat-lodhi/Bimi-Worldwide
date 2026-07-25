@@ -39,3 +39,20 @@ window.addEventListener("click", (e) => {
         popup.classList.remove("active");
     }
 });
+
+// Rotating border effect on hover for .dark-card, .philosophy-wrapper, .worldwide-card, .feature-card, and .cta-premium-card
+document.addEventListener("DOMContentLoaded", () => {
+    const darkCards = document.querySelectorAll(".dark-card, .philosophy-wrapper, .worldwide-card, .feature-card, .cta-premium-card");
+    darkCards.forEach(card => {
+        card.addEventListener("mousemove", (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            const angle = Math.atan2(y, x);
+            card.style.setProperty("--rotation", `${angle}rad`);
+        });
+        card.addEventListener("mouseleave", () => {
+            card.style.setProperty("--rotation", "0deg");
+        });
+    });
+});

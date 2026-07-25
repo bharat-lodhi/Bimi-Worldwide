@@ -1,9 +1,11 @@
 from django.shortcuts import render,get_object_or_404
 from django.core.paginator import Paginator
-from custom_admin.models import ProductCategory,ProductSubCategory,Blog,SubCategory
+from custom_admin.models import ProductCategory,ProductSubCategory,Blog,SubCategory,SupplierRegistration,ProductEnquiry
 from django.db.models import Q
 from django.utils import timezone
 from datetime import timedelta
+from django.http import JsonResponse
+import json
 
 def home(request):
     return render(request,'home.html')
@@ -727,3 +729,148 @@ def contact_form(request):
 
 def why_us(request):
     return render(request, "why_us.html")
+
+def become_supplier(request):
+    if request.method == "POST":
+        company_name = request.POST.get("company_name")
+        contact_person = request.POST.get("contact_person")
+        email = request.POST.get("email")
+        phone_number = request.POST.get("phone_number")
+        country = request.POST.get("country")
+        product_category = request.POST.get("product_category")
+        manufacturing_capacity = request.POST.get("manufacturing_capacity")
+        export_experience = request.POST.get("export_experience")
+        
+        # Get list of checked certifications and join them
+        certifications_list = request.POST.getlist("certifications")
+        certifications = ", ".join(certifications_list)
+        other_certification = request.POST.get("other_certification")
+        if other_certification and "Other" in certifications_list:
+            certifications += f" (Other: {other_certification})"
+            
+        products_you_supply = request.POST.get("products_you_supply")
+        custom_product = request.POST.get("custom_product")
+        if products_you_supply == "Other" and custom_product:
+            products_you_supply = custom_product
+            
+        monthly_supply_capacity = request.POST.get("monthly_supply_capacity")
+        minimum_order_quantity = request.POST.get("minimum_order_quantity")
+        
+        website = request.POST.get("website")
+        message = request.POST.get("message")
+        
+        company_profile = request.FILES.get("company_profile")
+        certifications_file = request.FILES.get("certifications_file")
+
+        SupplierRegistration.objects.create(
+            company_name=company_name,
+            contact_person=contact_person,
+            email=email,
+            phone_number=phone_number,
+            country=country,
+            product_category=product_category,
+            manufacturing_capacity=manufacturing_capacity,
+            export_experience=export_experience,
+            certifications=certifications,
+            products_you_supply=products_you_supply,
+            monthly_supply_capacity=monthly_supply_capacity,
+            minimum_order_quantity=minimum_order_quantity,
+            website=website,
+            message=message,
+            company_profile=company_profile,
+            certifications_file=certifications_file
+        )
+        
+        messages.success(request, "Your application has been submitted successfully. Our sourcing team will review it and get back to you soon.")
+        return redirect("become_supplier")
+        
+    return render(request, "become_supplier.html")
+
+
+def submit_product_enquiry(request):
+    if request.method != 'POST':
+        return JsonResponse({"status": "error", "message": "Invalid request method."}, status=405)
+
+    # Support JSON or form-encoded POST
+    if request.content_type == 'application/json':
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return JsonResponse({"status": "error", "message": "Invalid JSON data."}, status=400)
+    else:
+        data = request.POST
+
+    customer_name = data.get("customer_name")
+    mobile = data.get("mobile")
+    email = data.get("email")
+    company_name = data.get("company_name", "")
+    category_id = data.get("category_id")
+    sub_category_id = data.get("sub_category_id")
+    product_id = data.get("product_id")
+    suitable_call_time = data.get("suitable_call_time", "")
+    address = data.get("address", "")
+    country = data.get("country", "")
+    state = data.get("state", "")
+    city = data.get("city", "")
+    pincode = data.get("pincode", "")
+    quantity = data.get("quantity", "")
+    requirements = data.get("requirements", "")
+
+    # Validate required fields
+    if not all([customer_name, mobile, email, product_id, category_id]):
+        return JsonResponse({"status": "error", "message": "Please fill in all required fields marked with *."}, status=400)
+
+    # Basic validations
+    if "@" not in email or "." not in email:
+        return JsonResponse({"status": "error", "message": "Please enter a valid email address."}, status=400)
+
+    clean_mobile = "".join(filter(str.isdigit, mobile))
+    if len(clean_mobile) < 7:
+        return JsonResponse({"status": "error", "message": "Please enter a valid mobile number."}, status=400)
+
+    # Fetch referenced models
+    category = get_object_or_404(ProductCategory, id=category_id)
+    product = get_object_or_404(ProductSubCategory, id=product_id)
+    sub_category = None
+    if sub_category_id:
+        sub_category = get_object_or_404(SubCategory, id=sub_category_id)
+
+    # Spam Protection (within last 5 minutes)
+    time_threshold = timezone.now() - timedelta(minutes=5)
+    recent_enquiry = ProductEnquiry.objects.filter(
+        email=email,
+        mobile=mobile,
+        product=product,
+        created_at__gte=time_threshold
+    ).exists()
+
+    if recent_enquiry:
+        return JsonResponse({
+            "status": "error", 
+            "message": "We have already received an enquiry from you for this product recently. Please try again after 5 minutes."
+        }, status=429)
+
+    # Create Product Enquiry
+    ProductEnquiry.objects.create(
+        category=category,
+        sub_category=sub_category,
+        product=product,
+        customer_name=customer_name,
+        mobile=mobile,
+        email=email,
+        company_name=company_name,
+        address=address,
+        country=country,
+        state=state,
+        city=city,
+        pincode=pincode,
+        quantity=quantity,
+        suitable_call_time=suitable_call_time,
+        requirements=requirements,
+        status="Pending"
+    )
+
+    return JsonResponse({
+        "status": "success", 
+        "message": "Your product enquiry has been submitted successfully! Our sales team will get back to you soon."
+    })

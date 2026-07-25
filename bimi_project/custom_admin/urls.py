@@ -135,4 +135,20 @@ urlpatterns = [
         name='delete_enquiry'
     ),
     
+    # Supplier urls
+    path('suppliers/', views.supplier_list, name='supplier_list'),
+    path('supplier/<int:supplier_id>/', views.supplier_detail, name='supplier_detail'),
+    path('supplier-delete/<int:supplier_id>/', views.delete_supplier, name='delete_supplier'),
+
+    # Product Enquiry urls
+    path('product-enquiries/', views.product_enquiry_list, name='product_enquiry_list'),
+    path('product-enquiry/add/', views.add_product_enquiry, name='add_product_enquiry'),
+    path('product-enquiry/<int:pk>/', views.view_product_enquiry, name='view_product_enquiry'),
+    path('product-enquiry/<int:pk>/edit/', views.edit_product_enquiry, name='edit_product_enquiry'),
+    path('product-enquiry/<int:pk>/delete/', views.delete_product_enquiry, name='delete_product_enquiry'),
+    path('product-enquiry/<int:pk>/status/', views.update_product_enquiry_status, name='update_product_enquiry_status'),
+    path('product-enquiry/<int:pk>/add-note/', views.add_product_enquiry_note, name='add_product_enquiry_note'),
+    path('product-enquiry/<int:pk>/print/', views.print_product_enquiry, name='print_product_enquiry'),
+    path('product-enquiries/export/csv/', views.export_product_enquiries_csv, name='export_product_enquiries_csv'),
+    path('product-enquiries/export/excel/', views.export_product_enquiries_excel, name='export_product_enquiries_excel'),
 ]

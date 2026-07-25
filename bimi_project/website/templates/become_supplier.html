@@ -1,0 +1,681 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Become a Supplier | BiMi Worldwide{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/become_supplier.css' %}?v=2.2">
+{% endblock %}
+
+{% block content %}
+
+<!-- ================= HERO SECTION ================= -->
+<section class="become-hero">
+    <div class="container become-hero-inner">
+        <div class="badge-wrap">
+            <span class="badge">Grow Your Business with BIMI Worldwide</span>
+        </div>
+        <h1>Become a Supplier</h1>
+        <p class="hero-subtitle">Partner With a Global Sourcing & Trade Network</p>
+        <p class="hero-desc">
+            Join BIMI Worldwide's trusted supplier network and connect with international buyers looking for reliable manufacturers, exporters, and producers. We build long-term partnerships based on quality, transparency, and consistent business growth.
+        </p>
+        <a href="#registration-form" class="btn-hero-cta">
+            Become a Supplier <i class="fa-solid fa-arrow-right"></i>
+        </a>
+    </div>
+</section>
+
+
+<!-- ================= SECTION 2: WHY PARTNER WITH BIMI ================= -->
+<section class="why-partner">
+    <div class="container">
+        <div class="section-head">
+            <h2>Why Partner with <span>BIMI?</span></h2>
+            <p>Join our network to accelerate your global trade operations and establish stable revenue streams.</p>
+        </div>
+        
+        <div class="partner-grid">
+            <!-- Card 1 -->
+            <div class="partner-card">
+                <div class="partner-icon-box">
+                    <i class="fa-solid fa-earth-americas"></i>
+                </div>
+                <h3>Global Market Access</h3>
+                <p>Reach verified buyers across international markets and expand your export opportunities.</p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="partner-card">
+                <div class="partner-icon-box">
+                    <i class="fa-solid fa-handshake"></i>
+                </div>
+                <h3>Long-Term Relationships</h3>
+                <p>We focus on building lasting partnerships rather than one-time transactions.</p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="partner-card">
+                <div class="partner-icon-box">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3>Quality & Compliance</h3>
+                <p>Our team helps ensure your products meet international quality and documentation standards.</p>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="partner-card">
+                <div class="partner-icon-box">
+                    <i class="fa-solid fa-ship"></i>
+                </div>
+                <h3>Complete Trade Assistance</h3>
+                <p>From buyer coordination to logistics and export documentation, we support you throughout the process.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================= SECTION 3: HOW IT WORKS ================= -->
+<section class="how-it-works" id="how-it-works">
+    <div class="container">
+        <!-- Centered Header -->
+        <div class="section-head text-center mb-5">
+            <h2>How It <span>Works</span></h2>
+            <p>Step-by-step onboarding process to join the BIMI Worldwide supplier network.</p>
+        </div>
+        
+        <div class="process-layout-grid">
+            <!-- Scrolling Right Column with Sticky Cards (Full Width) -->
+            <div class="process-scroll-container">
+                
+                <!-- Step 1 -->
+                <div class="process-sticky-card" style="--index: 1;">
+                    <div class="card-header-flex">
+                        <div class="process-icon-box">
+                            <i class="fa-solid fa-file-pen"></i>
+                        </div>
+                        <span class="process-number">01</span>
+                    </div>
+                    <h3 class="step-title">Submit Your Application</h3>
+                    <p class="step-desc">Complete the supplier registration form with your company information, product categories, certifications, and manufacturing capabilities.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="process-sticky-card" style="--index: 2;">
+                    <div class="card-header-flex">
+                        <div class="process-icon-box">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <span class="process-number">02</span>
+                    </div>
+                    <h3 class="step-title">Profile Review</h3>
+                    <p class="step-desc">Our sourcing team reviews your business profile, production capacity, export experience, and product portfolio.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="process-sticky-card" style="--index: 3;">
+                    <div class="card-header-flex">
+                        <div class="process-icon-box">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <span class="process-number">03</span>
+                    </div>
+                    <h3 class="step-title">Verification Process</h3>
+                    <p class="step-desc">We may conduct a virtual meeting or factory verification to understand your quality systems, manufacturing standards, and operational capabilities.</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="process-sticky-card" style="--index: 4;">
+                    <div class="card-header-flex">
+                        <div class="process-icon-box">
+                            <i class="fa-solid fa-file-shield"></i>
+                        </div>
+                        <span class="process-number">04</span>
+                    </div>
+                    <h3 class="step-title">Documentation Review</h3>
+                    <p class="step-desc">Our compliance team verifies the following required documents:</p>
+                    <ul class="doc-checklist">
+                        <li><i class="fa-solid fa-circle-check"></i> Company Registration</li>
+                        <li><i class="fa-solid fa-circle-check"></i> GST / VAT Registration</li>
+                        <li><i class="fa-solid fa-circle-check"></i> IEC (If Applicable)</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Product Certifications</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Factory Profile</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Quality Certificates</li>
+                    </ul>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="process-sticky-card" style="--index: 5;">
+                    <div class="card-header-flex">
+                        <div class="process-icon-box">
+                            <i class="fa-solid fa-handshake"></i>
+                        </div>
+                        <span class="process-number">05</span>
+                    </div>
+                    <h3 class="step-title">Supplier Approval</h3>
+                    <p class="step-desc">Once approved, your company becomes part of the BIMI Worldwide Supplier Network and may receive sourcing inquiries from our international buyers.</p>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="process-sticky-card" style="--index: 6;">
+                    <div class="card-header-flex">
+                        <div class="process-icon-box">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <span class="process-number">06</span>
+                    </div>
+                    <h3 class="step-title">Start Growing Together</h3>
+                    <p class="step-desc">Receive business inquiries, collaborate with our sourcing specialists, and build long-term export partnerships with clients worldwide.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================= SECTION 4: SUPPLIER BENEFITS SLIDER ================= -->
+<section class="benefits-section">
+    <div class="container">
+        <div class="section-head">
+            <h2>Supplier <span>Benefits</span></h2>
+            <p>What you gain by becoming an active supplier with BIMI Worldwide.</p>
+        </div>
+        
+        <div class="slider-outer-wrapper">
+            <!-- Navigation Buttons -->
+            <button class="slider-nav-btn prev-btn" id="prevSlide" aria-label="Previous Slide">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            
+            <div class="benefits-slider-container">
+                <div class="benefits-slider-track" id="sliderTrack">
+                    
+                    <!-- Slide 1 -->
+                    <div class="benefit-slide">
+                        <div class="benefit-card">
+                            <div class="benefit-icon-box">
+                                <i class="fa-solid fa-users"></i>
+                            </div>
+                            <h3>Global Buyer Network</h3>
+                            <p>Connect with verified international buyers actively sourcing quality products.</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="benefit-slide">
+                        <div class="benefit-card">
+                            <div class="benefit-icon-box">
+                                <i class="fa-solid fa-user-tie"></i>
+                            </div>
+                            <h3>Dedicated Account Support</h3>
+                            <p>Work closely with our sourcing specialists throughout every opportunity.</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="benefit-slide">
+                        <div class="benefit-card">
+                            <div class="benefit-icon-box">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            <h3>Export Growth</h3>
+                            <p>Expand your international presence with long-term sourcing partnerships.</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4 -->
+                    <div class="benefit-slide">
+                        <div class="benefit-card">
+                            <div class="benefit-icon-box">
+                                <i class="fa-solid fa-comments"></i>
+                            </div>
+                            <h3>Transparent Communication</h3>
+                            <p>Receive regular updates and proactive communication during every sourcing process.</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide 5 -->
+                    <div class="benefit-slide">
+                        <div class="benefit-card">
+                            <div class="benefit-icon-box">
+                                <i class="fa-solid fa-award"></i>
+                            </div>
+                            <h3>Quality First</h3>
+                            <p>We prioritize suppliers committed to international quality standards.</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide 6 -->
+                    <div class="benefit-slide">
+                        <div class="benefit-card">
+                            <div class="benefit-icon-box">
+                                <i class="fa-solid fa-handshake-angle"></i>
+                            </div>
+                            <h3>Long-Term Partnership</h3>
+                            <p>Build sustainable business relationships instead of one-time orders.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            <button class="slider-nav-btn next-btn" id="nextSlide" aria-label="Next Slide">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+        
+        <!-- Dots Indicator -->
+        <div class="slider-dots" id="sliderDots"></div>
+    </div>
+</section>
+
+
+<!-- ================= SECTION 5: CALL TO ACTION ================= -->
+<section class="become-cta-section">
+    <div class="container">
+        <div class="cta-premium-card">
+            <h2>Ready to Supply Globally?</h2>
+            <p>Join BIMI Worldwide today and become part of a trusted international supplier network.</p>
+            <div class="cta-buttons-wrap">
+                <a href="#registration-form" class="btn-hero-cta">Become a Supplier</a>
+                <a href="{% url 'contact_form' %}" class="btn-secondary-outline">Contact Our Team</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================= SECTION 6: SUPPLIER REGISTRATION FORM ================= -->
+<section class="supplier-form-section" id="registration-form">
+    <div class="container">
+        <div class="form-premium-card">
+            <h3>Supplier Registration</h3>
+            <p class="form-subtitle">Fill out the form below to apply. Our compliance and sourcing team will verify your details.</p>
+            
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert-success-custom">
+                        <i class="fa-solid fa-circle-check"></i> {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            
+            <form method="POST" enctype="multipart/form-data" class="supplier-form" id="supplierForm">
+                {% csrf_token %}
+                
+                <div class="row g-4">
+                    <!-- Company Name -->
+                    <div class="col-md-6">
+                        <label for="company_name">Company Name *</label>
+                        <input type="text" id="company_name" name="company_name" class="form-control" placeholder="E.g. ABC Exports Pvt Ltd" required>
+                    </div>
+
+                    <!-- Contact Person -->
+                    <div class="col-md-6">
+                        <label for="contact_person">Contact Person *</label>
+                        <input type="text" id="contact_person" name="contact_person" class="form-control" placeholder="E.g. Mr. John Doe" required>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="col-md-6">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="E.g. sales@abcexports.com" required>
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="col-md-6">
+                        <label for="phone_number">Phone Number / WhatsApp *</label>
+                        <input type="text" id="phone_number" name="phone_number" class="form-control" placeholder="E.g. +91 99999 99999" required>
+                    </div>
+
+                    <!-- Country -->
+                    <div class="col-md-6">
+                        <label for="country">Country *</label>
+                        <input type="text" id="country" name="country" class="form-control" placeholder="E.g. India" required>
+                    </div>
+
+                    <!-- Product Category -->
+                    <div class="col-md-6">
+                        <label for="product_category">Product Category *</label>
+                        <select id="product_category" name="product_category" class="form-select" required>
+                            <option value="">Select Category</option>
+                            <option value="Agriculture">Agriculture</option>
+                            <option value="Fresh Fruits">Fresh Fruits</option>
+                            <option value="Fresh Vegetables">Fresh Vegetables</option>
+                            <option value="Spices">Spices</option>
+                            <option value="Metal Scrap">Metal Scrap</option>
+                            <option value="Solar Panels & Batteries">Solar Panels & Batteries</option>
+                            <option value="Furniture">Furniture</option>
+                            <option value="Rugs">Rugs</option>
+                            <option value="Handicrafts">Handicrafts</option>
+                            <option value="Packaging">Packaging</option>
+                            <option value="Chemicals">Chemicals</option>
+                            <option value="Machinery">Machinery</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <!-- Export Experience -->
+                    <div class="col-md-6">
+                        <label for="export_experience">Export Experience *</label>
+                        <select id="export_experience" name="export_experience" class="form-select" required>
+                            <option value="">Select Export Experience</option>
+                            <option value="No Experience">No Experience</option>
+                            <option value="1-3 Years">1-3 Years</option>
+                            <option value="3-5 Years">3-5 Years</option>
+                            <option value="5+ Years">5+ Years</option>
+                        </select>
+                    </div>
+
+                    <!-- Website -->
+                    <div class="col-md-6">
+                        <label for="website">Company Website (Optional)</label>
+                        <input type="url" id="website" name="website" class="form-control" placeholder="E.g. https://www.abcexports.com">
+                    </div>
+
+                    <!-- Products You Supply Dropdown -->
+                    <div class="col-md-6">
+                        <label for="products_you_supply">Products You Supply *</label>
+                        <select id="products_you_supply" name="products_you_supply" class="form-select" required>
+                            <option value="">Select Product</option>
+                            <option value="Aluminium UBC Scrap (ISRI TALDON)">Aluminium UBC Scrap (ISRI TALDON)</option>
+                            <option value="Fresh Pomegranates">Fresh Pomegranates</option>
+                            <option value="Handmade Wool Rugs">Handmade Wool Rugs</option>
+                            <option value="Solar Panels 550W">Solar Panels 550W</option>
+                            <option value="Other">Other (Please Specify)</option>
+                        </select>
+                    </div>
+
+                    <!-- Specify Custom Product (Hidden initially) -->
+                    <div class="col-md-6" id="customProductGroup" style="display: none;">
+                        <label for="custom_product">Specify Product Name *</label>
+                        <input type="text" id="custom_product" name="custom_product" class="form-control" placeholder="Enter the product you supply">
+                    </div>
+
+                    <!-- Manufacturing Capacity -->
+                    <div class="col-12">
+                        <label for="manufacturing_capacity">Manufacturing Capacity *</label>
+                        <textarea id="manufacturing_capacity" name="manufacturing_capacity" class="form-control" rows="2" placeholder="Describe your daily/monthly production capacity, factory size, or machinery..." required></textarea>
+                    </div>
+
+                    <!-- Monthly Supply Capacity & MOQ -->
+                    <div class="col-md-6">
+                        <label for="monthly_supply_capacity">Monthly Supply Capacity</label>
+                        <input type="text" id="monthly_supply_capacity" name="monthly_supply_capacity" class="form-control" placeholder="E.g. 50 Tons / Month or 5,000 units / Month">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="minimum_order_quantity">Minimum Order Quantity (MOQ)</label>
+                        <input type="text" id="minimum_order_quantity" name="minimum_order_quantity" class="form-control" placeholder="E.g. 1 Container or 100 Pieces">
+                    </div>
+
+                    <!-- Certifications (Optional) Custom Dropdown -->
+                    <div class="col-12">
+                        <label>Certifications (Optional)</label>
+                        <div class="custom-multiselect" id="certMultiselect">
+                            <div class="select-box" id="certSelectBox">
+                                <span id="multiselectPlaceholder">Select Certifications</span>
+                                <i class="fa-solid fa-chevron-down ms-auto"></i>
+                            </div>
+                            <div class="checkboxes-area" id="checkboxesArea">
+                                <label class="check-item"><input type="checkbox" name="certifications" value="ISO 9001"> ISO 9001</label>
+                                <label class="check-item"><input type="checkbox" name="certifications" value="CE"> CE</label>
+                                <label class="check-item"><input type="checkbox" name="certifications" value="FSC"> FSC</label>
+                                <label class="check-item"><input type="checkbox" name="certifications" value="HACCP"> HACCP</label>
+                                <label class="check-item"><input type="checkbox" name="certifications" value="Organic"> Organic</label>
+                                <label class="check-item"><input type="checkbox" name="certifications" value="GMP"> GMP</label>
+                                <label class="check-item"><input type="checkbox" name="certifications" value="SGS Tested"> SGS Tested</label>
+                                <label class="check-item"><input type="checkbox" name="certifications" value="Other" id="certOtherCheckbox"> Other</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other Certification Specify (Hidden initially) -->
+                    <div class="col-12 mt-2" id="otherCertInputGroup" style="display: none;">
+                        <label for="other_certification">Specify Other Certification</label>
+                        <input type="text" id="other_certification" name="other_certification" class="form-control" placeholder="E.g. Halal, Kosher, FSSAI...">
+                    </div>
+
+                    <!-- Additional Message -->
+                    <div class="col-12">
+                        <label for="message">Additional Message (Optional)</label>
+                        <textarea id="message" name="message" class="form-control" rows="3" placeholder="Any specific message or details you would like to share..."></textarea>
+                    </div>
+
+                    <!-- Upload Company Profile -->
+                    <div class="col-md-6">
+                        <label>Upload Company Profile *</label>
+                        <div class="file-upload-wrapper" id="profileWrapper">
+                            <i class="fa-solid fa-file-pdf file-upload-icon"></i>
+                            <div class="file-upload-text" id="profileText">Choose PDF or Doc file</div>
+                            <div class="file-upload-subtext">Max size: 10MB</div>
+                            <input type="file" id="company_profile" name="company_profile" accept=".pdf,.doc,.docx" required>
+                        </div>
+                    </div>
+
+                    <!-- Upload Certifications -->
+                    <div class="col-md-6">
+                        <label>Upload Certifications (Optional)</label>
+                        <div class="file-upload-wrapper" id="certWrapper">
+                            <i class="fa-solid fa-file-shield file-upload-icon"></i>
+                            <div class="file-upload-text" id="certText">Choose PDF, ZIP, or Image</div>
+                            <div class="file-upload-subtext">Max size: 10MB</div>
+                            <input type="file" id="certifications_file" name="certifications_file" accept=".pdf,.zip,.jpg,.jpeg,.png">
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="col-12 mt-5">
+                        <button type="submit" class="btn-form-submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- ================= CAROUSEL SCRIPT ================= -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const track = document.getElementById("sliderTrack");
+        const slides = Array.from(track.children);
+        const nextButton = document.getElementById("nextSlide");
+        const prevButton = document.getElementById("prevSlide");
+        const dotsContainer = document.getElementById("sliderDots");
+        
+        let currentIndex = 0;
+        let slideWidth = slides[0].getBoundingClientRect().width;
+        let autoplayInterval;
+        
+        // Handle window resize dynamically
+        window.addEventListener('resize', () => {
+            slideWidth = slides[0].getBoundingClientRect().width;
+            updateSlidePosition();
+        });
+        
+        // Create Dots
+        slides.forEach((_, index) => {
+            const dot = document.createElement("div");
+            dot.classList.add("slider-dot");
+            if (index === 0) dot.classList.add("active");
+            dot.addEventListener("click", () => {
+                goToSlide(index);
+                resetAutoplay();
+            });
+            dotsContainer.appendChild(dot);
+        });
+        
+        const dots = Array.from(dotsContainer.children);
+        
+        function updateSlidePosition() {
+            track.style.transform = 'translateX(-' + (currentIndex * slideWidth) + 'px)';
+            dots.forEach((dot, index) => {
+                dot.classList.toggle("active", index === currentIndex);
+            });
+        }
+        
+        function goToSlide(index) {
+            currentIndex = index;
+            updateSlidePosition();
+        }
+        
+        function nextSlide() {
+            if (currentIndex === slides.length - 1) {
+                currentIndex = 0;
+            } else {
+                currentIndex++;
+            }
+            updateSlidePosition();
+        }
+        
+        function prevSlide() {
+            if (currentIndex === 0) {
+                currentIndex = slides.length - 1;
+            } else {
+                currentIndex--;
+            }
+            updateSlidePosition();
+        }
+        
+        nextButton.addEventListener("click", () => {
+            nextSlide();
+            resetAutoplay();
+        });
+        
+        prevButton.addEventListener("click", () => {
+            prevSlide();
+            resetAutoplay();
+        });
+        
+        // Autoplay
+        function startAutoplay() {
+            autoplayInterval = setInterval(nextSlide, 4500); // 4.5 seconds autoplay cycle
+        }
+        
+        function resetAutoplay() {
+            clearInterval(autoplayInterval);
+            startAutoplay();
+        }
+        
+        startAutoplay();
+        
+        // Custom Multiselect Checkbox Dropdown logic
+        const certMultiselect = document.getElementById("certMultiselect");
+        const certSelectBox = document.getElementById("certSelectBox");
+        const checkboxesArea = document.getElementById("checkboxesArea");
+        const checkboxes = checkboxesArea.querySelectorAll('input[type="checkbox"]');
+        const placeholder = document.getElementById("multiselectPlaceholder");
+        const otherCheckbox = document.getElementById("certOtherCheckbox");
+        const otherGroup = document.getElementById("otherCertInputGroup");
+        const otherInput = document.getElementById("other_certification");
+
+        certSelectBox.addEventListener("click", function (e) {
+            e.stopPropagation();
+            certMultiselect.classList.toggle("open");
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener("click", function (e) {
+            if (certMultiselect && !certMultiselect.contains(e.target)) {
+                certMultiselect.classList.remove("open");
+            }
+        });
+
+        function updatePlaceholder() {
+            const selected = [];
+            checkboxes.forEach(cb => {
+                if (cb.checked) {
+                    selected.push(cb.value);
+                }
+            });
+            if (selected.length > 0) {
+                placeholder.textContent = selected.join(", ");
+                placeholder.style.color = "var(--ink)";
+            } else {
+                placeholder.textContent = "Select Certifications";
+                placeholder.style.color = "#a0aec0";
+            }
+        }
+
+        checkboxes.forEach(cb => {
+            cb.addEventListener("change", function () {
+                updatePlaceholder();
+                
+                // Show/hide other specify input group
+                if (cb === otherCheckbox) {
+                    if (cb.checked) {
+                        otherGroup.style.display = "block";
+                        otherInput.setAttribute("required", "required");
+                    } else {
+                        otherGroup.style.display = "none";
+                        otherInput.removeAttribute("required");
+                        otherInput.value = "";
+                    }
+                }
+            });
+        });
+
+        // Products You Supply dropdown logic
+        const productsDropdown = document.getElementById("products_you_supply");
+        const customProductGroup = document.getElementById("customProductGroup");
+        const customProductInput = document.getElementById("custom_product");
+
+        if (productsDropdown) {
+            productsDropdown.addEventListener("change", function () {
+                if (this.value === "Other") {
+                    customProductGroup.style.display = "block";
+                    customProductInput.setAttribute("required", "required");
+                } else {
+                    customProductGroup.style.display = "none";
+                    customProductInput.removeAttribute("required");
+                    customProductInput.value = "";
+                }
+            });
+        }
+
+        // File upload UI interactions
+        const profileInput = document.getElementById("company_profile");
+        const profileText = document.getElementById("profileText");
+        
+        profileInput.addEventListener("change", function(e) {
+            if (this.files && this.files[0]) {
+                const name = this.files[0].name;
+                profileText.textContent = name.length > 25 ? name.substring(0, 22) + "..." : name;
+                document.getElementById("profileWrapper").style.borderColor = "var(--primary-orange)";
+            }
+        });
+
+        const certInput = document.getElementById("certifications_file");
+        const certText = document.getElementById("certText");
+        
+        certInput.addEventListener("change", function(e) {
+            if (this.files && this.files[0]) {
+                const name = this.files[0].name;
+                certText.textContent = name.length > 25 ? name.substring(0, 22) + "..." : name;
+                document.getElementById("certWrapper").style.borderColor = "var(--primary-orange)";
+            }
+        });
+        
+        // Client-side validation for file uploads (size limit 10MB)
+        const form = document.getElementById("supplierForm");
+        form.addEventListener("submit", function(e) {
+            const limit = 10 * 1024 * 1024; // 10MB
+            
+            if (profileInput.files && profileInput.files[0] && profileInput.files[0].size > limit) {
+                alert("Company Profile file size must be less than 10MB.");
+                e.preventDefault();
+                return false;
+            }
+            
+            if (certInput.files && certInput.files[0] && certInput.files[0].size > limit) {
+                alert("Certifications file size must be less than 10MB.");
+                e.preventDefault();
+                return false;
+            }
+        });
+    });
+</script>
+
+{% endblock %}
