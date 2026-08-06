@@ -299,18 +299,35 @@ body {
 .full-image-section img {
     position: relative;
     z-index: 2;
-    width: 98%;
-    margin-left: 0.7%;
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
     height: auto;
     display: block;
-    /* Removed mix-blend-mode since we are now using a real transparent PNG */
-    transition: width 0.3s ease, margin-left 0.3s ease;
+    mix-blend-mode: multiply;
+    transition: all 0.3s ease;
+}
+
+.full-image-section .graph-video {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    margin-left: 0;
+    height: clamp(340px, 48vw, 550px); /* Height increased for better visibility */
+    object-fit: cover; /* Crops top and bottom details slightly */
+    display: block;
+    /* Removed mix-blend-mode for a clean native white display on white background */
 }
 
 @media (max-width: 768px) {
     .full-image-section img {
-        width: 98%;
-        margin-left: 0.7%;
+        width: 95%;
+        margin: 0 auto;
+    }
+    .full-image-section .graph-video {
+        width: 100%;
+        margin-left: 0;
+        height: 350px; /* Height increased on mobile */
     }
 }
 
@@ -408,7 +425,7 @@ body {
 .product-item i {
     font-size: clamp(2.5rem, 7.5vw, 3.28rem);
     /* RESPONSIVE FIX: Fluid icon sizing (Increased by 25%) */
-    color: #1a1a2e;
+    color: #ffffff; /* Make icons white */
 }
 
 .product-item p {
@@ -764,20 +781,17 @@ body {
 
 .premium-cta {
     padding: 40px 20px;
-    /* MOBILE FIX: Responsive padding */
     margin: 60px auto;
-    /* MOBILE FIX: Center the container with auto margins */
-    background: var(--ink);
+    background: #ffffff; /* White background theme card */
     text-align: center;
-    color: #fff;
+    color: var(--ink); /* Dark blue/navy text color */
+    border: 1px solid rgba(0, 0, 0, 0.08); /* Clean card border */
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.04); /* Soft premium drop shadow */
     position: relative;
     overflow: hidden;
     border-radius: 20px;
-    /* MOBILE FIX: Reduced from 28px */
     width: 90%;
-    /* MOBILE FIX: Match general container width */
     max-width: 1250px;
-    /* MOBILE FIX: Match general container max-width */
 }
 
 
@@ -791,7 +805,7 @@ body {
     width: 400px;
     height: 400px;
     background: #D6882A;
-    opacity: .08;
+    opacity: .04; /* Softened glow for white background */
     border-radius: 50%;
     filter: blur(80px);
 }
@@ -804,7 +818,7 @@ body {
     width: 400px;
     height: 400px;
     background: #D6882A;
-    opacity: .06;
+    opacity: .03; /* Softened glow for white background */
     border-radius: 50%;
     filter: blur(80px);
 }
@@ -815,12 +829,10 @@ body {
     position: relative;
     z-index: 2;
     padding: 0 20px;
-    /* MOBILE FIX: Added padding */
 }
 
 .cta-title {
     font-size: clamp(1.5rem, 5vw, 2.6rem);
-    /* RESPONSIVE FIX: Fluid title sizing */
     font-weight: 700;
     letter-spacing: -.5px;
     margin-bottom: 22px;
@@ -828,13 +840,11 @@ body {
 
 .cta-subtitle {
     font-size: clamp(0.95rem, 2vw, 1.05rem);
-    /* RESPONSIVE FIX: Fluid subtitle sizing */
     line-height: 1.8;
-    color: #d6d6d6;
+    color: #555566; /* Muted dark grey/blue text for readability */
     max-width: 700px;
     margin: 0 auto 40px;
     width: 100%;
-    /* MOBILE FIX: Explicit 100% width */
 }
 
 
@@ -977,7 +987,7 @@ body {
 }
 
 .reach-left {
-    padding: 60px 20px;
+    padding: 20px 20px 30px 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1106,13 +1116,12 @@ body {
     box-shadow: 0 12px 30px rgba(255, 255, 255, 0.2);
 }
 
-/* Right Column (Map) */
 .reach-right {
-    background: #b9e1fa; /* Matches the map image background (HD sky blue) */
+    background: #ffffff; /* Solid white background matching website theme */
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 380px;
+    min-height: 300px;
     position: relative;
 }
 
@@ -1131,7 +1140,7 @@ body {
     }
     
     .reach-left {
-        padding: 90px 60px 90px calc((100vw - min(90vw, 1250px)) / 2 + 10px);
+        padding: 30px 60px 40px 60px;
     }
     
     .reach-right {
@@ -1180,13 +1189,13 @@ body {
     background: transparent;
     border: none;
     border-radius: 0;
-    padding: 2px 5px;
-    width: 240px;
-    height: 120px;
+    padding: 2px 10px;
+    width: 280px; /* Increased width */
+    height: 140px; /* Increased height */
     flex-shrink: 0;
     box-shadow: none;
     transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    cursor: pointer;
+    cursor: default; /* Set to default cursor since it is non-clickable */
 }
 
 .trust-card:hover {
@@ -1218,9 +1227,9 @@ body {
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .trust-card {
-        width: 170px;
-        height: 90px;
-        padding: 2px 4px;
+        width: 200px; /* Increased responsive width */
+        height: 100px; /* Increased responsive height */
+        padding: 2px 5px;
         border-radius: 0;
         background: transparent;
         border: none;
@@ -1242,7 +1251,8 @@ body {
     .reach-right img {
         padding: 10px;
     }
-    .full-image-section img {
+    .full-image-section img,
+    .full-image-section .graph-video {
         width: 100%;
         margin-left: 0;
     }

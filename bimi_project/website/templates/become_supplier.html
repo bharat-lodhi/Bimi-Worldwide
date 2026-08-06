@@ -4,25 +4,32 @@
 {% block title %}Become a Supplier | BiMi Worldwide{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/become_supplier.css' %}?v=2.2">
+<link rel="stylesheet" href="{% static 'css/become_supplier.css' %}?v=2.5">
 {% endblock %}
 
 {% block content %}
 
 <!-- ================= HERO SECTION ================= -->
 <section class="become-hero">
-    <div class="container become-hero-inner">
-        <div class="badge-wrap">
-            <span class="badge">Grow Your Business with BIMI Worldwide</span>
+    <div class="container become-hero-grid">
+        <div class="become-hero-content">
+            <div class="badge-wrap">
+                <span class="badge">Grow Your Business with BIMI Worldwide</span>
+            </div>
+            <h1>Become a Supplier</h1>
+            <p class="hero-subtitle">Partner With a Global Sourcing & Trade Network</p>
+            <p class="hero-desc">
+                Join BIMI Worldwide's trusted supplier network and connect with international buyers looking for reliable manufacturers, exporters, and producers. We build long-term partnerships based on quality, transparency, and consistent business growth.
+            </p>
+            <a href="#registration-form" class="btn-hero-cta">
+                Become a Supplier <i class="fa-solid fa-arrow-right"></i>
+            </a>
         </div>
-        <h1>Become a Supplier</h1>
-        <p class="hero-subtitle">Partner With a Global Sourcing & Trade Network</p>
-        <p class="hero-desc">
-            Join BIMI Worldwide's trusted supplier network and connect with international buyers looking for reliable manufacturers, exporters, and producers. We build long-term partnerships based on quality, transparency, and consistent business growth.
-        </p>
-        <a href="#registration-form" class="btn-hero-cta">
-            Become a Supplier <i class="fa-solid fa-arrow-right"></i>
-        </a>
+        <div class="become-hero-media">
+            <div class="image-frame">
+                <img src="{% static 'images/handshake-transparent.png' %}" alt="Become a Supplier Partnership">
+            </div>
+        </div>
     </div>
 </section>
 
@@ -220,7 +227,7 @@
                             <div class="benefit-icon-box">
                                 <i class="fa-solid fa-chart-line"></i>
                             </div>
-                            <h3>Export Growth</h3>
+                            <h3>Export Import Growth</h3>
                             <p>Expand your international presence with long-term sourcing partnerships.</p>
                         </div>
                     </div>

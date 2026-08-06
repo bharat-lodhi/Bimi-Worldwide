@@ -1,12 +1,21 @@
 /* website/static/css/become_supplier.css */
 
 :root {
-    --primary-orange: #D6882A;
+    --primary-orange: #d6882a; /* Updated to match standard theme primary orange */
     --ink: #1F1F3B;
     --white: #ffffff;
     --dark-bg: #11111e;
     --card-bg: rgba(255, 255, 255, 0.015);
     --card-border: rgba(255, 255, 255, 0.05);
+}
+
+/* Page and Header overrides to match theme background color */
+body {
+    background: #d6882a !important;
+}
+
+.header:not(.scrolled) {
+    background: #d6882a !important;
 }
 
 /* =========================================================
@@ -17,27 +26,35 @@
     padding: clamp(60px, 8vw, 80px) 16px clamp(60px, 8vw, 80px);
     background: var(--primary-orange);
     color: var(--ink);
-    text-align: center;
     position: relative;
     overflow: hidden;
 }
 
-.become-hero-inner {
-    max-width: 850px;
-    margin: auto;
+.become-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: clamp(30px, 5vw, 60px);
+    align-items: center;
     position: relative;
     z-index: 2;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.become-hero-content {
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    text-align: left;
 }
 
 /* Badge styling */
-.become-hero-inner .badge-wrap {
+.become-hero-content .badge-wrap {
     margin-bottom: 20px;
 }
 
-.become-hero-inner .badge {
+.become-hero-content .badge {
     background: #fff;
     color: #000;
     font-weight: 700;
@@ -51,7 +68,7 @@
 }
 
 /* Hero Heading */
-.become-hero-inner h1 {
+.become-hero-content h1 {
     font-size: clamp(2.2rem, 5vw, 3.8rem);
     font-weight: 800;
     line-height: 1.15;
@@ -60,7 +77,7 @@
     color: var(--ink);
 }
 
-.become-hero-inner .hero-subtitle {
+.become-hero-content .hero-subtitle {
     font-size: clamp(1.1rem, 2vw, 1.35rem);
     font-weight: 700;
     color: rgba(31, 31, 59, 0.85);
@@ -68,12 +85,39 @@
     line-height: 1.3;
 }
 
-.become-hero-inner .hero-desc {
+.become-hero-content .hero-desc {
     font-size: clamp(0.95rem, 1.8vw, 1.1rem);
     line-height: 1.65;
     color: rgba(31, 31, 59, 0.80);
     margin: 0 0 35px 0;
     max-width: 760px;
+}
+
+.become-hero-media {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.become-hero-media .image-frame {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    overflow: hidden;
+    /* Removed border, background, and shadows so that the image background (#d98233) blends seamlessly with the page background */
+    transition: transform 0.3s ease;
+}
+
+.become-hero-media .image-frame:hover {
+    transform: translateY(-5px);
+}
+
+.become-hero-media .image-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* CTA Button */
@@ -324,6 +368,22 @@
 
 /* Responsive styles */
 @media (max-width: 991px) {
+    .become-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+
+    .become-hero-content {
+        align-items: center;
+        text-align: center;
+    }
+
+    .become-hero-media .image-frame {
+        max-width: 400px;
+        margin: auto;
+    }
+
     .process-layout-grid {
         grid-template-columns: 1fr;
         gap: 40px;
