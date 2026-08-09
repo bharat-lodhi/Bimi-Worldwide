@@ -60,18 +60,20 @@ img {
 }
 
 .inline-map2-logo {
-    height: 1.8em;
+    height: 1.4em;
     width: auto;
     vertical-align: middle;
-    margin-top: -0.15em;
+    margin-top: -0.13em;
+    margin-left: 0.12em;
+    margin-right: 0.12em;
     display: inline-block;
 }
 
 .inline-logo3 {
-    height: 2.3em;
+    height: 1.8em;
     width: auto;
     vertical-align: middle;
-    margin-top: -0.22em;
+    margin-top: -0.18em;
     display: inline-block;
 }
 
