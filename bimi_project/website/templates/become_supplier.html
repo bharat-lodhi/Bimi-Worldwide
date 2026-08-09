@@ -4,7 +4,7 @@
 {% block title %}Become a Supplier | BiMi Worldwide{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/become_supplier.css' %}?v=2.5">
+<link rel="stylesheet" href="{% static 'css/become_supplier.css' %}?v=2.6">
 {% endblock %}
 
 {% block content %}
@@ -38,7 +38,7 @@
 <section class="why-partner">
     <div class="container">
         <div class="section-head">
-            <h2>Why Partner with <span>BIMI?</span></h2>
+            <h2>Why Partner with <img src="{% static 'images/map2.png' %}?v=1.4" alt="BIMI" class="inline-map2-logo">?</h2>
             <p>Join our network to accelerate your global trade operations and establish stable revenue streams.</p>
         </div>
         
@@ -348,28 +348,18 @@
                         <label for="product_category">Product Category *</label>
                         <select id="product_category" name="product_category" class="form-select" required>
                             <option value="">Select Category</option>
-                            <option value="Agriculture">Agriculture</option>
-                            <option value="Fresh Fruits">Fresh Fruits</option>
-                            <option value="Fresh Vegetables">Fresh Vegetables</option>
-                            <option value="Spices">Spices</option>
-                            <option value="Metal Scrap">Metal Scrap</option>
-                            <option value="Solar Panels & Batteries">Solar Panels & Batteries</option>
-                            <option value="Furniture">Furniture</option>
-                            <option value="Rugs">Rugs</option>
-                            <option value="Handicrafts">Handicrafts</option>
-                            <option value="Packaging">Packaging</option>
-                            <option value="Chemicals">Chemicals</option>
-                            <option value="Machinery">Machinery</option>
-                            <option value="Other">Other</option>
+                            {% for cat in categories %}
+                                <option value="{{ cat.name }}" data-id="{{ cat.id }}">{{ cat.name }}</option>
+                            {% endfor %}
                         </select>
                     </div>
 
                     <!-- Export Experience -->
                     <div class="col-md-6">
-                        <label for="export_experience">Export Experience *</label>
+                        <label for="export_experience"> Import Export Experience *</label>
                         <select id="export_experience" name="export_experience" class="form-select" required>
                             <option value="">Select Export Experience</option>
-                            <option value="No Experience">No Experience</option>
+                           
                             <option value="1-3 Years">1-3 Years</option>
                             <option value="3-5 Years">3-5 Years</option>
                             <option value="5+ Years">5+ Years</option>
@@ -387,10 +377,6 @@
                         <label for="products_you_supply">Products You Supply *</label>
                         <select id="products_you_supply" name="products_you_supply" class="form-select" required>
                             <option value="">Select Product</option>
-                            <option value="Aluminium UBC Scrap (ISRI TALDON)">Aluminium UBC Scrap (ISRI TALDON)</option>
-                            <option value="Fresh Pomegranates">Fresh Pomegranates</option>
-                            <option value="Handmade Wool Rugs">Handmade Wool Rugs</option>
-                            <option value="Solar Panels 550W">Solar Panels 550W</option>
                             <option value="Other">Other (Please Specify)</option>
                         </select>
                     </div>
@@ -456,9 +442,9 @@
                         <label>Upload Company Profile *</label>
                         <div class="file-upload-wrapper" id="profileWrapper">
                             <i class="fa-solid fa-file-pdf file-upload-icon"></i>
-                            <div class="file-upload-text" id="profileText">Choose PDF or Doc file</div>
+                            <div class="file-upload-text" id="profileText">Choose PDF, Doc, or Image</div>
                             <div class="file-upload-subtext">Max size: 10MB</div>
-                            <input type="file" id="company_profile" name="company_profile" accept=".pdf,.doc,.docx" required>
+                            <input type="file" id="company_profile" name="company_profile" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
                         </div>
                     </div>
 
@@ -624,11 +610,58 @@
             });
         });
 
-        // Products You Supply dropdown logic
+        // Products You Supply dynamic cascading logic
+        const allProducts = [
+            {% for product in products %}
+            {
+                id: "{{ product.id }}",
+                name: "{{ product.name }}",
+                categoryId: "{{ product.category.id }}"
+            },
+            {% endfor %}
+        ];
+
+        const categoryDropdown = document.getElementById("product_category");
         const productsDropdown = document.getElementById("products_you_supply");
         const customProductGroup = document.getElementById("customProductGroup");
         const customProductInput = document.getElementById("custom_product");
 
+        if (categoryDropdown && productsDropdown) {
+            categoryDropdown.addEventListener("change", function () {
+                const selectedOption = this.options[this.selectedIndex];
+                const categoryId = selectedOption ? selectedOption.getAttribute("data-id") : null;
+
+                // Reset products dropdown
+                productsDropdown.innerHTML = '<option value="">Select Product</option>';
+                
+                // Hide custom input group initially
+                if (customProductGroup) {
+                    customProductGroup.style.display = "none";
+                    customProductInput.removeAttribute("required");
+                    customProductInput.value = "";
+                }
+
+                if (categoryId) {
+                    // Filter products by selected category's database ID
+                    const filtered = allProducts.filter(p => p.categoryId === categoryId);
+                    
+                    filtered.forEach(p => {
+                        const opt = document.createElement("option");
+                        opt.value = p.name;
+                        opt.textContent = p.name;
+                        productsDropdown.appendChild(opt);
+                    });
+                }
+                
+                // Append Other option
+                const otherOpt = document.createElement("option");
+                otherOpt.value = "Other";
+                otherOpt.textContent = "Other (Please Specify)";
+                productsDropdown.appendChild(otherOpt);
+            });
+        }
+
+        // Toggle custom product specify input when 'Other' is selected
         if (productsDropdown) {
             productsDropdown.addEventListener("change", function () {
                 if (this.value === "Other") {

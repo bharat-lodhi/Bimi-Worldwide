@@ -4,7 +4,7 @@
 {% block title %}Home | BiMi{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/home.css' %}?v=2.9">
+<link rel="stylesheet" href="{% static 'css/home.css' %}?v=3.6">
 <style>
 
 /* Document modal popup */
@@ -318,18 +318,52 @@ and deliver goods worldwide through a complete end-to-end trade solution.
 
 <div class="hero-right">
 <div class="video-wrapper">
-<video src="{% static 'videos/home-hero-1.mp4' %}" autoplay muted playsinline></video>
+<video src="{% static 'videos/home-hero-1.mp4' %}" autoplay muted loop playsinline></video>
 </div>
 </div>
 
 </div>
 </section>
 
-<!--================section-3==================================-->
+<!--================second-section=============================-->
+<section class="full-video-section">
+    <video class="graph-video" autoplay muted loop playsinline>
+        <source src="{% static 'videos/video1 (3).mp4' %}" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+    <div class="video-overlay-content">
+        <h2 class="video-title">
+            Redefining Global <span>Sourcing</span>
+        </h2>
+        <div class="title-underline"></div>
+        <p class="video-subtitle">
+            Where trusted partnerships, strategic procurement, and seamless logistics come together to drive international business success.
+        </p>
+    </div>
+    
+    <!-- Bottom Features Bar (Transparent Overlay) -->
+    <div class="video-features-bar">
+        <div class="feature-item">
+            <i class="fa-solid fa-handshake"></i>
+            <span>Trusted Sourcing</span>
+        </div>
+        <div class="feature-item">
+            <i class="fa-solid fa-clipboard-check"></i>
+            <span>Quality Inspections</span>
+        </div>
+        <div class="feature-item">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Trade Compliance</span>
+        </div>
+        <div class="feature-item">
+            <i class="fa-solid fa-globe"></i>
+            <span>Worldwide Delivery</span>
+        </div>
+    </div>
+</section>
+
+<!--================third-section==============================-->
 <section class="full-image-section">
-    <!-- <video class="graph-bg-video" autoplay muted loop playsinline>
-        <source src="{% static 'videos/img2.mp4' %}" type="video/mp4">
-    </video> -->
     <img src="{% static 'images/imag5.png' %}" alt="BiMi Process Workflow">
 </section>
 
@@ -516,31 +550,12 @@ international trade solutions.
     </div> 
 
     <!-- Center aligned Become Our Next Partner Button at the bottom -->
-    <div style="text-align: center; margin-top: 50px; margin-bottom: 60px; width: 100%;">
-      <p class="partner-subheading">Ready to scale your business internationally? Let's build a reliable trade journey together.</p>
-      <a href="{% url 'contact_form' %}" class="btn-partner">Become Our Next Partner &rarr;</a>
+    <div style="text-align: center; margin-top: 25px; margin-bottom: 15px; width: 100%;">
+      <p class="partner-subheading">Ready to scale your business internationally? Let's build a successful global trade partnership together.</p>
+      <a href="{% url 'become_supplier' %}#registration-form" class="btn-partner">Become Our Next Partner &rarr;</a>
     </div>
 
-    <!-- Brand Story Section -->
-    <div class="brand-story-box">
-      <div class="brand-story-grid">
-        <div class="brand-story-left">
-          <div class="story-badge">
-            <span class="story-badge-line"></span>
-            <span class="story-badge-text">Who We Are</span>
-          </div>
-          <h3 class="story-title">Redefining Global Trade with a Legacy of Trust</h3>
-        </div>
-        <div class="brand-story-right">
-          <p class="story-text-main">
-            <strong>BIMI Worldwide</strong> (Bilateral Import Merchandise International Worldwide) was established in 2025 as the evolution of a legacy built over nearly two decades in global trade and logistics. While the brand is new, the expertise behind it is deeply rooted in industry experience dating back to 2012, shaped through years of operational excellence, strategic partnerships, and international market engagement.
-          </p>
-          <p class="story-text-sub">
-            BIMI Worldwide was created with a singular vision: to redefine how businesses source, trade, and expand across borders — through precision, intelligence, and uncompromising standards.
-          </p>
-        </div>
-      </div>
-    </div>
+
 
   </div>
 </section>
@@ -552,7 +567,7 @@ international trade solutions.
   <div class="cta-container">
     
     <h2 class="cta-title" style="margin-bottom: 12px;">
-      Why should I trust BIMI Worldwide?
+      Why should I trust <img src="{% static 'images/map2.png' %}?v=1.3" alt="BIMI Worldwide" class="inline-map2-logo">?
     </h2>
 
     <p class="cta-lead" style="font-size: clamp(1.1rem, 2.5vw, 1.35rem); font-weight: 600; color: var(--orange); margin-bottom: 24px; line-height: 1.3; max-width: 800px; margin-left: auto; margin-right: auto;">
@@ -562,73 +577,73 @@ international trade solutions.
     <p class="cta-subtitle" style="margin-bottom: 35px;">
       Whether you're sourcing premium products, expanding into new markets, or looking for a reliable international trade partner, BIMI Worldwide is ready to help you grow with confidence.
     </p>
+  </div>
 
-    <!-- Trust Slider (Horizontal scrolling cards) -->
-    <div class="trust-slider">
-      <div class="trust-track">
-        <!-- Set 1 -->
-        <div class="trust-card">
-          <img src="{% static 'images/iec.png' %}?v=1.4" alt="IEC Certificate">
-        </div>
-        <div class="trust-card">
-          <img src="{% static 'images/msme.png' %}?v=1.4" alt="MSME Certificate">
-        </div>
-        <div class="trust-card">
-          <img src="{% static 'images/fssai.png' %}?v=1.4" alt="FSSAI Certificate">
-        </div>
-        <div class="trust-card">
-          <img src="{% static 'images/apeda.png' %}?v=1.4" alt="APEDA Certificate">
-        </div>
-        <div class="trust-card">
-          <img src="{% static 'images/digital_india.png' %}?v=2.5" alt="Digital India Logo">
-        </div>
-        <div class="trust-card">
-          <img src="{% static 'images/startup_india.png' %}?v=2.5" alt="Startup India Logo">
-        </div>
-        
-        <!-- Set 2 -->
-        <div class="trust-card">
-          <img src="{% static 'images/iec.png' %}?v=1.4" alt="IEC Certificate">
-        </div>
-        <div class="trust-card">
-          <img src="{% static 'images/msme.png' %}?v=1.4" alt="MSME Certificate">
-        </div>
-        <div class="trust-card">
-          <img src="{% static 'images/fssai.png' %}?v=1.4" alt="FSSAI Certificate">
-        </div>
-        <div class="trust-card">
-          <img src="{% static 'images/apeda.png' %}?v=1.4" alt="APEDA Certificate">
-        </div>
-        <div class="trust-card">
-          <img src="{% static 'images/digital_india.png' %}?v=2.5" alt="Digital India Logo">
-        </div>
-        <div class="trust-card">
-          <img src="{% static 'images/startup_india.png' %}?v=2.5" alt="Startup India Logo">
-        </div>
-        
-        <!-- Set 3 -->
-        <div class="trust-card">
-          <img src="{% static 'images/iec.png' %}?v=1.4" alt="IEC Certificate">
-        </div>
-        <div class="trust-card">
-          <img src="{% static 'images/msme.png' %}?v=1.4" alt="MSME Certificate">
-        </div>
-        <div class="trust-card">
-          <img src="{% static 'images/fssai.png' %}?v=1.4" alt="FSSAI Certificate">
-        </div>
-        <div class="trust-card">
-          <img src="{% static 'images/apeda.png' %}?v=1.4" alt="APEDA Certificate">
-        </div>
-        <div class="trust-card">
-          <img src="{% static 'images/digital_india.png' %}?v=2.5" alt="Digital India Logo">
-        </div>
-        <div class="trust-card">
-          <img src="{% static 'images/startup_india.png' %}?v=2.5" alt="Startup India Logo">
-        </div>
+  <!-- Trust Slider (Horizontal scrolling cards) -->
+  <div class="trust-slider">
+    <div class="trust-track">
+      <!-- Set 1 -->
+      <div class="trust-card">
+        <img src="{% static 'images/iec.png' %}?v=1.4" alt="IEC Certificate">
+      </div>
+      <div class="trust-card">
+        <img src="{% static 'images/msme.png' %}?v=1.4" alt="MSME Certificate">
+      </div>
+      <div class="trust-card">
+        <img src="{% static 'images/fssai.png' %}?v=1.4" alt="FSSAI Certificate">
+      </div>
+      <div class="trust-card">
+        <img src="{% static 'images/apeda.png' %}?v=1.4" alt="APEDA Certificate">
+      </div>
+      <div class="trust-card">
+        <img src="{% static 'images/digital_india.png' %}?v=2.5" alt="Digital India Logo">
+      </div>
+      <div class="trust-card">
+        <img src="{% static 'images/startup_india.png' %}?v=2.5" alt="Startup India Logo">
+      </div>
+      
+      <!-- Set 2 -->
+      <div class="trust-card">
+        <img src="{% static 'images/iec.png' %}?v=1.4" alt="IEC Certificate">
+      </div>
+      <div class="trust-card">
+        <img src="{% static 'images/msme.png' %}?v=1.4" alt="MSME Certificate">
+      </div>
+      <div class="trust-card">
+        <img src="{% static 'images/fssai.png' %}?v=1.4" alt="FSSAI Certificate">
+      </div>
+      <div class="trust-card">
+        <img src="{% static 'images/apeda.png' %}?v=1.4" alt="APEDA Certificate">
+      </div>
+      <div class="trust-card">
+        <img src="{% static 'images/digital_india.png' %}?v=2.5" alt="Digital India Logo">
+      </div>
+      <div class="trust-card">
+        <img src="{% static 'images/startup_india.png' %}?v=2.5" alt="Startup India Logo">
+      </div>
+      
+      <!-- Set 3 -->
+      <div class="trust-card">
+        <img src="{% static 'images/iec.png' %}?v=1.4" alt="IEC Certificate">
+      </div>
+      <div class="trust-card">
+        <img src="{% static 'images/msme.png' %}?v=1.4" alt="MSME Certificate">
+      </div>
+      <div class="trust-card">
+        <img src="{% static 'images/fssai.png' %}?v=1.4" alt="FSSAI Certificate">
+      </div>
+      <div class="trust-card">
+        <img src="{% static 'images/apeda.png' %}?v=1.4" alt="APEDA Certificate">
+      </div>
+      <div class="trust-card">
+        <img src="{% static 'images/digital_india.png' %}?v=2.5" alt="Digital India Logo">
+      </div>
+      <div class="trust-card">
+        <img src="{% static 'images/startup_india.png' %}?v=2.5" alt="Startup India Logo">
       </div>
     </div>
-
   </div>
+
 </section>
 
 <!-- ================= GLOBAL CONNECTIONS SECTION ================= -->
@@ -696,11 +711,11 @@ international trade solutions.
       </div>
     </div>
 
-    <a href="{% url 'contact_form' %}" class="btn-reach">Start Exporting Importing with Us &rarr;</a>
+    <a href="{% url 'become_supplier' %}#registration-form" class="btn-reach">Start Exporting Importing with Us &rarr;</a>
   </div>
   
   <div class="reach-right">
-    <img src="{% static 'images/world-map.png' %}?v=3.1" alt="Bimi Worldwide Global Reach Map">
+    <img src="{% static 'images/map1.png' %}?v=1.0" alt="Bimi Worldwide Global Reach Map">
   </div>
 </section>
 
@@ -766,6 +781,26 @@ international trade solutions.
       }
     });
   })();
+
+  // Force autoplay for all background videos on mobile/safari
+  document.addEventListener("DOMContentLoaded", function() {
+    var autoplayVideos = document.querySelectorAll('video[autoplay]');
+    autoplayVideos.forEach(function(video) {
+      var playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(function(error) {
+          console.log("Autoplay prevented, adding interaction listener.");
+          var startVideo = function() {
+            video.play();
+            document.removeEventListener('touchstart', startVideo);
+            document.removeEventListener('click', startVideo);
+          };
+          document.addEventListener('touchstart', startVideo);
+          document.addEventListener('click', startVideo);
+        });
+      }
+    });
+  });
 </script>
 
 {% endblock %}

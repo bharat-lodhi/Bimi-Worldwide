@@ -276,6 +276,8 @@ body {
 
 /* ================Graph section========================== */
 
+/* ================Graph section========================== */
+
 .full-image-section {
     width: 100%;
     background: #fff;
@@ -283,17 +285,224 @@ body {
     position: relative; /* Setup positioning context for background video */
 }
 
-.full-image-section .graph-bg-video {
+.full-video-section {
+    width: 100%;
+    height: auto; /* Height is determined by the video aspect ratio */
+    background: #000;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Semi-transparent dark overlay for legibility */
+.full-video-section .video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45); /* 45% black overlay */
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* Overlay content container centered vertically and horizontally */
+.video-overlay-content {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: translate(-50%, -50%);
-    opacity: 0.28; /* Soft watermarked background video opacity */
-    z-index: 1;
-    pointer-events: none; /* Ensure no overlay issues for click elements */
+    transform: translate(-50%, -50%); /* Centered by default */
+    z-index: 4;
+    text-align: center;
+    width: 90%;
+    max-width: 950px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-badge {
+    font-size: clamp(0.72rem, 1.5vw, 0.85rem);
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: clamp(12px, 2vw, 20px);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.video-badge .dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--orange); /* Use brand orange color */
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.video-title {
+    font-size: clamp(1.6rem, 4vw, 3.2rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #ffffff;
+    line-height: 1.2;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.video-title span {
+    color: var(--orange); /* Highlight color matching brand theme */
+}
+
+.title-underline {
+    width: 120px;
+    height: 3px;
+    background-color: var(--orange); /* Underline matching theme */
+    margin: clamp(12px, 2vw, 20px) auto;
+}
+
+.video-subtitle {
+    font-size: clamp(0.85rem, 2vw, 1.15rem);
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+    max-width: 780px;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Bottom Features Bar inside the video section (no background, transparent overlay) */
+.full-video-section .video-features-bar {
+    position: absolute;
+    bottom: clamp(15px, 3vw, 40px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
+    z-index: 4;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15); /* Soft divider */
+}
+
+.video-features-bar .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: clamp(0.78rem, 1.8vw, 0.92rem);
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.video-features-bar .feature-item i {
+    color: var(--orange); /* Use brand orange highlight for icons */
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+}
+
+/* Desktop styles for overlay shift */
+@media (min-width: 769px) {
+    .video-overlay-content {
+        transform: translate(-50%, -50%) translateY(-130px); /* Shift further upwards on desktop */
+    }
+}
+
+/* Responsive styles for mobile to prevent overlapping and keep features bar overlaid on video (matching laptop look with glass effect) */
+@media (max-width: 768px) {
+    .full-video-section {
+        position: relative !important;
+        height: 380px !important; /* Fixed height on mobile to contain both text and features bar */
+        overflow: hidden !important; /* Clips the background video correctly */
+        background: #000 !important; /* Pure black background matching laptop */
+    }
+    .full-video-section .graph-video {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important; /* HD cover view without margins/borders */
+        display: block !important;
+        z-index: 1 !important;
+    }
+    .full-video-section .video-overlay {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        background: rgba(0, 0, 0, 0.45) !important; /* Darkening overlay for text visibility */
+        z-index: 2 !important;
+        pointer-events: none !important;
+        display: block !important;
+    }
+    .video-overlay-content {
+        position: absolute !important;
+        top: 38% !important; /* Vertically centered slightly higher to clear the features bar */
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        z-index: 3 !important;
+        width: 92% !important;
+        text-align: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    .video-title {
+        font-size: clamp(1.2rem, 5vw, 1.6rem) !important; /* Scaled title font */
+        font-weight: 800 !important;
+        margin: 0 !important;
+        color: #ffffff !important;
+    }
+    .title-underline {
+        width: 60px !important;
+        height: 2px !important;
+        background-color: var(--orange) !important;
+        margin: 8px auto !important;
+    }
+    .video-subtitle {
+        font-size: clamp(0.72rem, 3vw, 0.85rem) !important; /* Scaled subtitle font */
+        line-height: 1.4 !important;
+        color: rgba(255, 255, 255, 0.9) !important;
+        max-width: 95% !important;
+        margin: 0 !important;
+    }
+    .full-video-section .video-features-bar {
+        position: absolute !important;
+        bottom: 15px !important; /* Absolute positioning at the bottom overlaying the video */
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 92% !important;
+        background: rgba(255, 255, 255, 0.08) !important; /* Frosted glass white tint */
+        backdrop-filter: blur(12px) !important; /* Glassmorphism blur */
+        -webkit-backdrop-filter: blur(12px) !important; /* iOS Safari compatibility */
+        border: 1px solid rgba(255, 255, 255, 0.15) !important; /* Delicate glass border */
+        border-radius: 12px !important; /* Smooth card corners */
+        padding: 14px 10px !important;
+        box-sizing: border-box !important;
+        z-index: 4 !important;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important; /* 2x2 grid for mobile */
+        gap: 10px 8px !important;
+        justify-items: center !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important; /* Deep premium shadow */
+    }
+    .video-features-bar .feature-item {
+        font-size: 0.75rem !important;
+        font-weight: 700 !important;
+        color: #ffffff !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        white-space: nowrap !important;
+    }
 }
 
 .full-image-section img {
@@ -308,26 +517,19 @@ body {
     transition: all 0.3s ease;
 }
 
-.full-image-section .graph-video {
-    position: relative;
-    z-index: 2;
+.full-video-section .graph-video {
+    position: relative; /* Takes up space proportionally */
     width: 100%;
-    margin-left: 0;
-    height: clamp(340px, 48vw, 550px); /* Height increased for better visibility */
-    object-fit: cover; /* Crops top and bottom details slightly */
+    height: auto;
+    object-fit: contain; /* Full video visible without cropping */
+    z-index: 1;
     display: block;
-    /* Removed mix-blend-mode for a clean native white display on white background */
 }
 
 @media (max-width: 768px) {
     .full-image-section img {
         width: 95%;
         margin: 0 auto;
-    }
-    .full-image-section .graph-video {
-        width: 100%;
-        margin-left: 0;
-        height: 350px; /* Height increased on mobile */
     }
 }
 
@@ -505,7 +707,7 @@ body {
 
 .clients-section {
     background: #fdfdfd;
-    padding: 60px 16px;
+    padding: 30px 16px;
     /* MOBILE FIX: Reduced padding and added horizontal padding */
     overflow: hidden;
     width: 100%;
@@ -526,7 +728,7 @@ body {
 
 .clients-head {
     max-width: 750px;
-    margin: 0 auto 60px;
+    margin: 0 auto 25px;
     text-align: center;
     width: 100%;
     /* MOBILE FIX: Explicit 100% width */
@@ -575,7 +777,7 @@ body {
     align-items: center;
     gap: 40px;
     /* MOBILE FIX: Reduced gap for small screens */
-    margin-top: 50px;
+    margin-top: 25px;
     width: 100%;
     /* MOBILE FIX: Explicit 100% width */
     padding: 0 16px;
@@ -706,10 +908,10 @@ body {
 
 @media (min-width: 481px) and (max-width: 768px) {
     .clients-section {
-        padding: 70px 20px;
+        padding: 30px 20px;
     }
     .clients-head {
-        margin-bottom: 50px;
+        margin-bottom: 20px;
         padding: 0;
     }
     .clients-layout {
@@ -729,10 +931,10 @@ body {
 
 @media (min-width: 769px) {
     .clients-section {
-        padding: 90px 0;
+        padding: 35px 0;
     }
     .clients-head {
-        margin-bottom: 60px;
+        margin-bottom: 25px;
         padding: 0;
     }
     .clients-layout {
@@ -765,8 +967,9 @@ body {
         gap: 40px;
     }
     .image-frame img {
-        height: 300px;
-        max-height: 400px;
+        height: auto;
+        aspect-ratio: auto;
+        object-fit: contain;
     }
     .logos-track img {
         height: 45px;
@@ -832,10 +1035,10 @@ body {
 }
 
 .cta-title {
-    font-size: clamp(1.5rem, 5vw, 2.6rem);
+    font-size: clamp(1.35rem, 4.5vw, 2.2rem);
     font-weight: 700;
     letter-spacing: -.5px;
-    margin-bottom: 22px;
+    margin-bottom: 20px;
 }
 
 .cta-subtitle {
@@ -921,8 +1124,8 @@ body {
         border-radius: 20px;
     }
     .cta-title {
-        font-size: 2rem;
-        margin-bottom: 18px;
+        font-size: 1.75rem;
+        margin-bottom: 15px;
     }
     .cta-subtitle {
         font-size: 1rem;
@@ -959,7 +1162,7 @@ body {
         margin: 60px auto;
     }
     .cta-title {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
     }
     .cta-subtitle {
         font-size: .95rem;
@@ -1164,9 +1367,9 @@ body {
     margin-top: 40px;
     position: relative;
     z-index: 5;
-    /* Soft horizontal fading edges */
-    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    /* Soft horizontal fading edges - moved closer to ends */
+    mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
 }
 
 .trust-track {
@@ -1190,8 +1393,8 @@ body {
     border: none;
     border-radius: 0;
     padding: 2px 10px;
-    width: 280px; /* Increased width */
-    height: 140px; /* Increased height */
+    width: 160px; /* Further reduced width */
+    height: 80px; /* Further reduced height */
     flex-shrink: 0;
     box-shadow: none;
     transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
@@ -1227,8 +1430,8 @@ body {
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .trust-card {
-        width: 200px; /* Increased responsive width */
-        height: 100px; /* Increased responsive height */
+        width: 110px; /* Further reduced responsive width */
+        height: 55px; /* Further reduced responsive height */
         padding: 2px 5px;
         border-radius: 0;
         background: transparent;
@@ -1238,8 +1441,8 @@ body {
     .trust-slider {
         padding: 15px 0;
         margin-top: 25px;
-        mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-        -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+        mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
     }
     .trust-track {
         gap: 20px;
@@ -1272,4 +1475,5 @@ body {
         max-width: 290px;
         box-sizing: border-box;
     }
-}
+}
+

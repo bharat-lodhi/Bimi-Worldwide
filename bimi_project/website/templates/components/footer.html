@@ -10,11 +10,11 @@
 
 <a href="https://wa.me/919152199992" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
 
-<a href="#"><i class="fab fa-linkedin-in"></i></a>
+<a href="https://www.linkedin.com/company/bimi-worldwide/about/?viewAsMember=true" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
 
 <a href="https://www.youtube.com/@BIMIWORLDWIDE"target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
 
-<a href="#"><i class="fab fa-instagram"></i></a>
+<a href="https://www.instagram.com/bimi_worldwide_?igsh=MWtsMW5mcWR6dnEzZA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
 
 </div>
 
@@ -28,23 +28,28 @@
 
 <div class="col">
 
-<h4>PRODUCTS</h4>
+<h4>PRODUCT CATEGORIES</h4>
 
-<a href="/products-list/3/">Agriculture</a>
-<a href="/products-list/9/">Furniture</a>
-<a href="/products-list/9/">Handicrafts</a>
-<a href="/products-list/8/">Rugs</a>
-<a href="/products-category/">Packaging</a>
-<a href="/products-list/10/">Battery</a>
+{% for category in footer_categories %}
+    {% if forloop.counter <= 6 %}
+        <a href="{% url 'products_list' category.id %}">{{ category.name }}</a>
+    {% else %}
+        <a href="{% url 'products_list' category.id %}" class="footer-extra-category" style="display: none;">{{ category.name }}</a>
+    {% endif %}
+{% endfor %}
+
+{% if footer_categories|length > 6 %}
+    <button id="toggleCategoriesBtn" class="footer-toggle-btn">+ More Categories</button>
+{% endif %}
 
 </div>
 
 
 <!-- COMPANY -->
 
-<div class="col">
+<div class="col quick-links-col">
 
-<h4>COMPANY</h4>
+<h4>QUICK LINKS</h4>
 
 <a href="/about/">About Us</a>
 <a href="{% url 'why_us' %}">Why Us</a>
@@ -69,11 +74,48 @@
 
 <!-- CONTACT -->
 
-<div class="col">
+<div class="col footer-contact-col">
 
-<h4>CONTACT</h4>
+<div class="footer-brand-section">
+  <img src="{% static 'images/whitelogo.png' %}" alt="Bimi Worldwide" class="footer-logo">
+</div>
 
-<a href="/contact/">Contact Us</a>
+<div class="footer-contact-details">
+  <div class="contact-item">
+    <i class="fas fa-map-marker-alt contact-icon"></i>
+    <div class="contact-text">
+      <p>IWF Campus, Survey No. 192, Whitefield Main Road, B Narayanapura, Mahadevapura, Bengaluru Urban, Karnataka, 560048</p>
+    </div>
+  </div>
+  
+  <div class="contact-item">
+    <i class="fas fa-map-marker-alt contact-icon"></i>
+    <div class="contact-text">
+      <p>A 1669, SHOBHNESH BHAWAN, SECTOR I, LDA COLONY, Aashiana, Lucknow, LUCKNOW, UTTAR PRADESH, 226012</p>
+    </div>
+  </div>
+
+  <div class="contact-item">
+    <i class="fas fa-map-marker-alt contact-icon"></i>
+    <div class="contact-text">
+      <p>Shah Prima, Sector 2, Kharghar, Navi Mumbai, Maharashtra, 410210</p>
+    </div>
+  </div>
+  
+  <div class="contact-item">
+    <i class="fas fa-phone-alt contact-icon"></i>
+    <div class="contact-text">
+      <p><a href="tel:+919675851111">+91 96758 51111</a></p>
+    </div>
+  </div>
+  
+  <div class="contact-item">
+    <i class="fas fa-envelope contact-icon"></i>
+    <div class="contact-text">
+      <p><a href="mailto:hello@bimiworld.com">hello@bimiworld.com</a></p>
+    </div>
+  </div>
+</div>
 
 </div>
 
@@ -87,5 +129,26 @@
 </div>
 
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const toggleBtn = document.getElementById("toggleCategoriesBtn");
+        const extraCats = document.querySelectorAll(".footer-extra-category");
+        
+        if (toggleBtn && extraCats.length > 0) {
+            let isExpanded = false;
+            
+            toggleBtn.addEventListener("click", function() {
+                isExpanded = !isExpanded;
+                
+                extraCats.forEach(cat => {
+                    cat.style.display = isExpanded ? "block" : "none";
+                });
+                
+                toggleBtn.textContent = isExpanded ? "- Show Less" : "+ More Categories";
+            });
+        }
+    });
+</script>
 
 </footer>

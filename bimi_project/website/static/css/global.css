@@ -51,6 +51,38 @@ img {
     display: block;
 }
 
+.inline-bimi-img {
+    height: 1.1em;
+    width: auto;
+    vertical-align: middle;
+    margin-top: -0.15em;
+    display: inline-block;
+}
+
+.inline-map2-logo {
+    height: 1.8em;
+    width: auto;
+    vertical-align: middle;
+    margin-top: -0.15em;
+    display: inline-block;
+}
+
+.inline-logo3 {
+    height: 2.3em;
+    width: auto;
+    vertical-align: middle;
+    margin-top: -0.22em;
+    display: inline-block;
+}
+
+.inline-logo-why {
+    height: 1.7em;
+    width: auto;
+    vertical-align: middle;
+    margin-top: -0.14em;
+    display: inline-block;
+}
+
 
 /* ================= LINKS ================= */
 

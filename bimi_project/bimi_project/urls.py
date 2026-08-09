@@ -9,6 +9,7 @@ from django.urls import re_path # Ye bhi zaroori hai
 urlpatterns = [
     path('',include('website.urls')),
     path('bimi-admin/', include('custom_admin.urls')),
+    path('admin/', admin.site.urls),
 ]
 # Ye block add karein
 if not settings.DEBUG:

@@ -148,13 +148,13 @@ body {
    SECTION 2: WHY PARTNER WITH BIMI
    ========================================================= */
 .why-partner {
-    padding: clamp(60px, 8vw, 100px) 0;
-    background-color: #fcfdfe;
+    padding: clamp(30px, 4vw, 50px) 0;
+    background-color: #ffffff;
 }
 
 .section-head {
     max-width: 800px;
-    margin: 0 auto clamp(40px, 6vw, 60px) auto;
+    margin: 0 auto clamp(20px, 3vw, 30px) auto;
     text-align: center;
 }
 
@@ -889,5 +889,12 @@ body {
     width: 16px;
     height: 16px;
     cursor: pointer;
+}
+
+/* Adjust inline logo size to match homepage exactly */
+.why-partner .inline-map2-logo {
+    height: 1.58em;
+    vertical-align: middle;
+    margin-top: -0.15em;
 }
 

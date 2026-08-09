@@ -715,9 +715,11 @@ def contact_form(request):
 
             return redirect("contact_form")
 
+    products = ProductSubCategory.objects.all().order_by('name')
     context = {
         "show_otp_field": show_otp_field,
         "form_data": form_data,
+        "products": products,
     }
 
     return render(
@@ -784,7 +786,13 @@ def become_supplier(request):
         messages.success(request, "Your application has been submitted successfully. Our sourcing team will review it and get back to you soon.")
         return redirect("become_supplier")
         
-    return render(request, "become_supplier.html")
+    categories = ProductCategory.objects.all().order_by('name')
+    products = ProductSubCategory.objects.all().order_by('name')
+    context = {
+        "categories": categories,
+        "products": products,
+    }
+    return render(request, "become_supplier.html", context)
 
 
 def submit_product_enquiry(request):

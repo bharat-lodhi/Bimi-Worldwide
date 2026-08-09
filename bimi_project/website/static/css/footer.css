@@ -1,5 +1,5 @@
 .footer {
-    background: #0b0b0b;
+    background: #000000;
     color: #cfcfcf;
     padding: 70px 0 40px;
 }
@@ -107,5 +107,119 @@
     }
     .footer-social {
         gap: 30px;
+    }
+    .footer-contact-col {
+        grid-column: span 2;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 25px;
+    }
+}
+
+/* CONTACT COLUMN RICH DESIGN (MATCHING SCREENSHOT) */
+.footer-contact-col {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: -15px; /* Shift slightly upwards to align visually with other columns */
+}
+
+.footer-logo {
+    height: 75px;
+    width: auto;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.footer-tagline {
+    color: #cfcfcf;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin-bottom: 6px;
+}
+
+.footer-quote {
+    color: #D6882A; /* BIMI Brand Orange */
+    font-style: italic;
+    font-size: 0.82rem;
+    margin-bottom: 12px;
+    opacity: 0.95;
+}
+
+.footer-contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 5px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.contact-icon {
+    color: #D6882A; /* BIMI Brand Orange */
+    font-size: 1rem;
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.contact-text {
+    color: #cfcfcf;
+    font-size: 0.88rem;
+    line-height: 1.6;
+}
+
+.contact-text p {
+    margin-bottom: 6px;
+}
+
+.contact-text p:last-child {
+    margin-bottom: 0;
+}
+
+.contact-text a {
+    color: #cfcfcf;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.contact-text a:hover {
+    color: #ffffff;
+}
+
+/* Wider Contact Column on Desktop */
+@media (min-width: 901px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr 1fr 2fr; /* Wider contact column */
+        gap: 50px;
+    }
+}
+
+/* Footer categories show more button */
+.footer-toggle-btn {
+    display: block;
+    background: none;
+    border: none;
+    color: #D6882A; /* Brand Orange */
+    font-size: .9rem;
+    font-weight: 600;
+    padding: 0;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    text-align: left;
+    transition: color 0.2s ease;
+}
+
+.footer-toggle-btn:hover {
+    color: #ffffff;
+}
+
+/* Shift Quick Links column slightly to the right on desktop */
+@media (min-width: 901px) {
+    .quick-links-col {
+        padding-left: 45px;
     }
 }

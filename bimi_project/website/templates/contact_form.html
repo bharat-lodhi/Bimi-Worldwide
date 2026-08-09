@@ -168,10 +168,9 @@
                                 <label class="form-label">Interested Product</label>
                                 <select name="interested_product" class="form-select" required>
                                     <option value="">Select Product</option>
-                                    <option value="Paper Cups" {% if form_data.interested_product == "Paper Cups" %}selected{% endif %}>Paper Cups</option>
-                                    <option value="Paper Plates" {% if form_data.interested_product == "Paper Plates" %}selected{% endif %}>Paper Plates</option>
-                                    <option value="Food Packaging" {% if form_data.interested_product == "Food Packaging" %}selected{% endif %}>Food Packaging</option>
-                                    <option value="Carry Bags" {% if form_data.interested_product == "Carry Bags" %}selected{% endif %}>Carry Bags</option>
+                                    {% for product in products %}
+                                        <option value="{{ product.name }}" {% if form_data.interested_product == product.name %}selected{% endif %}>{{ product.name }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
 
